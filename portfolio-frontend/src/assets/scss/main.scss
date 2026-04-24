@@ -1,0 +1,33 @@
+@import "bootstrap/scss/bootstrap";
+@import "./mixins.scss",
+        "./variables.scss";
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: $font-family;
+	font-size: $fs-sm;
+	font-weight: $fw-500;
+  transition: $transition;
+}
+.button-primary {
+  background: var(--primary);
+  color: var(--bg);
+  padding: $spacing-sm $spacing-md;
+  border-radius: $radius-sm;
+  border: none;
+  transition: $transition;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+.section {
+  padding: $spacing-xl 0;
+}
+.gradient-text {
+  background: linear-gradient(90deg, $primary, $accent);
+  background-clip: text;
+	-webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

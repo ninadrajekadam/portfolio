@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+// light theme colors
+$primary: #4f46e5;
+$secondary: #06b6d4;
+$accent: #8b5cf6;
+
+$bg-light: #ffffff;
+$bg-soft: #f8fafc;
+$text-dark: #0f172a;
+$text-muted: #64748b;
+
+$border-light: #e2e8f0;
+
+$shadow-light: 0 4px 20px rgba(0, 0, 0, 0.05);
+
+// dark theme colors
+$bg-dark: #0f172a;
+$bg-dark-soft: #1e293b;
+$text-light: #f1f5f9;
+$text-dark-muted: #94a3b8;
+
+$border-dark: #334155;
+
+$shadow-dark: 0 4px 20px rgba(0, 0, 0, 0.4);
+
+// font and spacing
+$font-family: "Montserrat", sans-serif;
+
+$fs-xs: 12px;
+$fs-sm: 15px;
+$fs-md: 16px;
+$fs-lg: 20px;
+$fs-xl: 28px;
+$fs-xxl: 36px;
+
+$fw-400: 400;
+$fw-500: 500;
+$fw-600: 600;
+$fw-700: 700;
+$fw-800: 800;
+$fw-900: 900;
+
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 40px;
+
+$radius-sm: 6px;
+$radius-md: 12px;
+$radius-lg: 20px;
+
+$transition: all 0.3s ease-in-out;

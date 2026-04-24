@@ -1,0 +1,31 @@
+@import "./variables";
+
+// light theme overrides
+:root {
+  --bg: #{$bg-light};
+  --bg-soft: #{$bg-soft};
+  --text: #{$text-dark};
+  --text-muted: #{$text-muted};
+  --border: #{$border-light};
+
+  --primary: #{$primary};
+  --secondary: #{$secondary};
+  --accent: #{$accent};
+
+  --shadow: #{$shadow-light};
+}
+
+// dark theme overrides
+:root[data-theme="dark"] {
+  --bg: #{$bg-dark};
+  --bg-soft: #{$bg-dark-soft};
+  --text: #{$text-light};
+  --text-muted: #{$text-dark-muted};
+  --border: #{$border-dark};
+
+  --primary: #{$primary};
+  --secondary: #{$secondary};
+  --accent: #{$accent};
+
+  --shadow: #{$shadow-dark};
+}

@@ -1,0 +1,66 @@
+$xs: 480px;
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1200px;
+$xxl: 1400px;
+
+@mixin respond-up($breakpoint) {
+  @if $breakpoint == xs {
+    @media (min-width: $xs) { @content; }
+  } @else if $breakpoint == sm {
+    @media (min-width: $sm) { @content; }
+  } @else if $breakpoint == md {
+    @media (min-width: $md) { @content; }
+  } @else if $breakpoint == lg {
+    @media (min-width: $lg) { @content; }
+  } @else if $breakpoint == xl {
+    @media (min-width: $xl) { @content; }
+  } @else if $breakpoint == xxl {
+    @media (min-width: $xxl) { @content; }
+  }
+}
+
+@mixin respond-down($breakpoint) {
+  @if $breakpoint == xs {
+    @media (max-width: $xs) { @content; }
+  } @else if $breakpoint == sm {
+    @media (max-width: $sm) { @content; }
+  } @else if $breakpoint == md {
+    @media (max-width: $md) { @content; }
+  } @else if $breakpoint == lg {
+    @media (max-width: $lg) { @content; }
+  } @else if $breakpoint == xl {
+    @media (max-width: $xl) { @content; }
+  } @else if $breakpoint == xxl {
+    @media (max-width: $xxl) { @content; }
+  }
+}
+
+@mixin respond-between($min, $max) {
+  @if $min == sm and $max == md {
+    @media (min-width: $sm) and (max-width: $md) { @content; }
+  } @else if $min == md and $max == lg {
+    @media (min-width: $md) and (max-width: $lg) { @content; }
+  } @else if $min == lg and $max == xl {
+    @media (min-width: $lg) and (max-width: $xl) { @content; }
+  }
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin text-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
