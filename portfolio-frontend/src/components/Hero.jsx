@@ -1,7 +1,7 @@
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight, faDownload, faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import { faGithub, faLinkedin, faXTwitter } from "@fortawesome/free-brands-svg-icons";
+import { faArrowRight, faDownload } from "@fortawesome/free-solid-svg-icons";
+import { faFacebook, faGithub, faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import "../assets/scss/components/Hero.scss";
 import heroImg from "../assets/images/ninad.png";
 
@@ -9,7 +9,7 @@ const Hero = ({ headerHeight }) => {
 	return (
 		<>
 			<section id="home" className="hero-section" style={{ marginTop: `${headerHeight}px` }}>
-				<Container fluid>
+				<Container>
 					<Row className="align-items-center">
 						<Col lg={6}>
 							<p className="hero-subtitle">HELLO, I'M</p>
@@ -23,8 +23,8 @@ const Hero = ({ headerHeight }) => {
 							<div className="hero-social">
 								<a className="social-link" href="#"><FontAwesomeIcon icon={faGithub} /></a>
 								<a className="social-link" href="#"><FontAwesomeIcon icon={faLinkedin} /></a>
-								<a className="social-link" href="#"><FontAwesomeIcon icon={faXTwitter} /></a>
-								<a className="social-link" href="#"><FontAwesomeIcon icon={faEnvelope} /></a>
+								<a className="social-link" href="#"><FontAwesomeIcon icon={faFacebook} /></a>
+								<a className="social-link" href="#"><FontAwesomeIcon icon={faInstagram} /></a>
 							</div>
 						</Col>
 						<Col lg={6} className="hero-image-wrapper">
