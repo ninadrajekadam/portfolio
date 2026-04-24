@@ -1,0 +1,63 @@
+@import "../mixins", "../variables", "../theme";
+.skills-list {
+	list-style: none;
+	padding: 0;
+	display: flex;
+	flex-wrap: wrap;
+	margin-bottom: 0;
+	.skill-item {
+		width: calc(100% / 12 - 10px);
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		padding: 10px;
+		margin: 0 10px 10px 0;
+		border: 1px solid var(--border);
+		border-radius: $radius-sm;
+		box-shadow: var(--shadow);
+		transition: $transition;
+		.skill-name {
+			font-weight: bold;
+			font-size: 14px;
+			text-align: center;
+		}
+		.skill-img {
+			width: 50px;
+			height: 50px;
+			object-fit: contain;
+			margin-bottom: 10px;
+			img {
+				width: 100%;
+				height: auto;
+			}
+		}
+	}
+	@include respond-down(lg) {
+		.skill-item {
+			width: calc(100% / 4 - 10px);
+			&:nth-child(6n) { margin-right: 10px; }
+			&:nth-child(4n) { margin-right: 0; }
+		}
+	}
+	@include respond-down(md) {
+		.skill-item {
+			width: calc(100% / 3 - 10px);
+			&:nth-child(4n) { margin-right: 10px; }
+			&:nth-child(3n) { margin-right: 0; }
+		}
+	}
+	@include respond-down(sm) {
+		.skill-item {
+			width: calc(100% / 2 - 10px);
+			&:nth-child(3n) { margin-right: 10px; }
+			&:nth-child(2n) { margin-right: 0; }
+		}
+	}
+	@include respond-down(xs) {
+		.skill-item {
+			width: 100%;
+			margin-right: 0;
+		}
+	}
+}

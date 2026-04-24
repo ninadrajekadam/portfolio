@@ -1,6 +1,5 @@
 @import "bootstrap/scss/bootstrap";
-@import "./mixins.scss",
-        "./variables.scss";
+@import "./mixins.scss", "./variables.scss";
 
 body {
   background-color: var(--bg);
@@ -17,13 +16,23 @@ body {
   border-radius: $radius-sm;
   border: none;
   transition: $transition;
-
   &:hover {
     opacity: 0.9;
   }
 }
 .section {
-  padding: $spacing-xl 0;
+  padding: $spacing-xl $spacing-md;
+}
+.section-title {
+  font-size: $fs-lg;
+  font-weight: $fw-700;
+  margin-bottom: $spacing-sm;
+  color: var(--primary);
+}
+.section-description {
+  font-size: $fs-md;
+  color: var(--text-secondary);
+  margin-bottom: 0;
 }
 .gradient-text {
   background: linear-gradient(90deg, $primary, $accent);

@@ -1,13 +1,23 @@
-import { useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Navbar, Nav, Container, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import "../assets/scss/components/Header.scss";
 
 const sections = ["home", "about", "experience", "projects", "contact"];
-const Header = () => {
+const Header = ({ setHeaderHeight }) => {
   // const { theme, toggleTheme } = useState("light");
 	const [active, setActive] = useState("#home");
+  const headerRef = useRef(null);
+
+  useEffect(() => {
+    const updateHeight = () => {
+      if (headerRef.current) setHeaderHeight(headerRef.current.offsetHeight);
+    };
+    updateHeight();
+    window.addEventListener("resize", updateHeight);
+    return () => window.removeEventListener("resize", updateHeight);
+  }, [setHeaderHeight]);
 
 	useEffect(() => {
     const observer = new IntersectionObserver(
@@ -47,8 +57,8 @@ const Header = () => {
 
   return (
     <>
-      <Navbar variant="light" expand="lg" fixed="top" className="navbar-glass">
-        <Container fluid>
+      <Navbar variant="light" expand="lg" fixed="top" className="navbar-glass" ref={headerRef}>
+        <Container>
           <Navbar.Brand className="gradient-text fw-bold">Ninad Kadam</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">

@@ -1,0 +1,40 @@
+import { Container } from "react-bootstrap";
+import "../assets/scss/components/Skills.scss";
+
+const Skills = () => {
+	const skills = [
+		{ name: "HTML5", img: "https://img.icons8.com/color/48/000000/html-5.png" },
+		{ name: "CSS3", img: "https://img.icons8.com/color/48/000000/css3.png" },
+		{ name: "SCSS", img: "https://img.icons8.com/color/48/000000/sass.png" },
+		{ name: "Bootstrap", img: "https://img.icons8.com/color/48/000000/bootstrap.png" },
+		{ name: "JavaScript", img: "https://img.icons8.com/color/48/000000/javascript.png" },
+		{ name: "ReactJs", img: "https://img.icons8.com/color/48/000000/react-native.png" },
+		{ name: "Vite", img: "https://img.icons8.com/color/48/000000/vite.png" },
+		{ name: "NodeJs", img: "https://img.icons8.com/color/48/000000/nodejs.png" },
+		{ name: "ExpressJs", img: "https://img.icons8.com/color/48/000000/express.png" },
+		{ name: "MongoDB", img: "https://img.icons8.com/color/48/000000/mongodb.png" },
+		{ name: "NPM", img: "https://img.icons8.com/color/48/000000/npm.png" },
+		{ name: "Git", img: "https://img.icons8.com/color/48/000000/git.png" },
+	];
+
+	return (
+		<>
+			<section className="section skills-section">
+				<Container>
+					<h3 className="section-title">Skills</h3>
+					<ul className="skills-list">
+						{
+							skills.map((skill, index) => (
+								<li className="skill-item" key={index}>
+									<span className="skill-img"><img src={skill.img} alt={skill.name} /></span>
+									<span className="skill-name">{skill.name}</span>
+								</li>
+							))
+						}
+					</ul>
+				</Container>
+			</section>
+		</>
+	);
+};
+export default Skills;
