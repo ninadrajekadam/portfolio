@@ -1,5 +1,6 @@
-import { Container } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../assets/scss/components/Skills.scss";
+import { faCode } from "@fortawesome/free-solid-svg-icons";
 
 const Skills = () => {
 	const skills = [
@@ -19,20 +20,18 @@ const Skills = () => {
 
 	return (
 		<>
-			<section className="section skills-section">
-				<Container>
-					<h3 className="section-title">Skills</h3>
-					<ul className="skills-list">
-						{
-							skills.map((skill, index) => (
-								<li className="skill-item" key={index}>
-									<span className="skill-img"><img src={skill.img} alt={skill.name} /></span>
-									<span className="skill-name">{skill.name}</span>
-								</li>
-							))
-						}
-					</ul>
-				</Container>
+			<section className="skills-section">
+				<h3 className="section-title"><FontAwesomeIcon icon={faCode} /> Skills</h3>
+				<ul className="skills-list">
+					{
+						skills.map((skill, index) => (
+							<li className="skill-item" key={index}>
+								<span className="skill-img"><img src={skill.img} alt={skill.name} /></span>
+								<span className="skill-name">{skill.name}</span>
+							</li>
+						))
+					}
+				</ul>
 			</section>
 		</>
 	);

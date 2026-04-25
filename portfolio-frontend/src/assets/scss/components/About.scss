@@ -1,0 +1,28 @@
+@import "../variables";
+
+.about-section {
+  .about-options {
+    display: flex;
+    gap: $spacing-lg;
+    margin-top: $spacing-md;
+    .about-option {
+      background-color: $bg-secondary;
+      padding: $spacing-md;
+      border-radius: $radius-md;
+      text-align: center;
+      flex: 1;
+      border: 1px solid $border-color;
+      box-shadow: $shadow-sm;
+      .option-title {
+        font-size: $fs-xl;
+        font-weight: $fw-700;
+        color: $text-primary;
+      }
+      .option-description {
+        font-size: $fs-sm;
+        color: $text-secondary;
+        margin-bottom: 0;
+      }
+    }
+  }
+}

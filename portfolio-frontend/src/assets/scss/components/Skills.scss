@@ -1,63 +1,65 @@
-@import "../mixins", "../variables", "../theme";
+@import "../mixins", "../variables";
+
 .skills-list {
-	list-style: none;
-	padding: 0;
-	display: flex;
-	flex-wrap: wrap;
-	margin-bottom: 0;
-	.skill-item {
-		width: calc(100% / 12 - 10px);
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 10px;
-		margin: 0 10px 10px 0;
-		border: 1px solid var(--border);
-		border-radius: $radius-sm;
-		box-shadow: var(--shadow);
-		transition: $transition;
-		.skill-name {
-			font-weight: bold;
-			font-size: 14px;
-			text-align: center;
-		}
-		.skill-img {
-			width: 50px;
-			height: 50px;
-			object-fit: contain;
-			margin-bottom: 10px;
-			img {
-				width: 100%;
-				height: auto;
-			}
-		}
-	}
-	@include respond-down(lg) {
-		.skill-item {
-			width: calc(100% / 4 - 10px);
-			&:nth-child(6n) { margin-right: 10px; }
-			&:nth-child(4n) { margin-right: 0; }
-		}
-	}
-	@include respond-down(md) {
-		.skill-item {
-			width: calc(100% / 3 - 10px);
-			&:nth-child(4n) { margin-right: 10px; }
-			&:nth-child(3n) { margin-right: 0; }
-		}
-	}
-	@include respond-down(sm) {
-		.skill-item {
-			width: calc(100% / 2 - 10px);
-			&:nth-child(3n) { margin-right: 10px; }
-			&:nth-child(2n) { margin-right: 0; }
-		}
-	}
-	@include respond-down(xs) {
-		.skill-item {
-			width: 100%;
-			margin-right: 0;
-		}
-	}
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+  margin-bottom: 0;
+  .skill-item {
+    width: 100%;
+    max-width: calc(100% / 4 - 6px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: $spacing-md;
+    border: 1px solid $border-color;
+    border-radius: $radius-md;
+    box-shadow: $shadow-sm;
+    background: $bg-tertiary;
+    transition: $transition;
+    .skill-name {
+      font-weight: $fw-600;
+      font-size: $fs-sm;
+      text-align: center;
+      color: $text-primary;
+    }
+    .skill-img {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+      margin-bottom: $spacing-sm;
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+    &:hover {
+      // transform: translateY(-5px);
+      box-shadow: $shadow-md;
+    }
+  }
+  @include respond-down(lg) {
+    .skill-item {
+      width: calc(100% / 4 - 10px);
+    }
+  }
+  @include respond-down(md) {
+    .skill-item {
+      width: calc(100% / 3 - 10px);
+    }
+  }
+  @include respond-down(sm) {
+    .skill-item {
+      width: calc(100% / 2 - 10px);
+    }
+  }
+  @include respond-down(xs) {
+    .skill-item {
+      width: 100%;
+      margin-right: 0;
+    }
+  }
 }

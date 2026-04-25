@@ -1,16 +1,71 @@
-import { Container } from "react-bootstrap";
+import { faArrowRight, faBriefcase } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "../assets/scss/components/Experience.scss";
+import { Button } from "react-bootstrap";
 
 const Experience = () => {
+	const experienceData = [
+		{
+			title: "Senior Software Developer",
+			company: "Idealake Information Technologies Pvt Ltd",
+			duration: "Jun 2024 - Present",
+			responsibilities: [
+				"Builds responsive, high-performance UIs using modern frontend technologies.",
+				"Leads frontend architecture, enforces best practices, and mentors developers.",
+				"Develops scalable, optimized web apps with seamless user experience."
+			]
+		},
+		{
+			title: "Web Developer",
+			company: "DocMode Health Technologies Ltd",
+			duration: "Jul 2021 - May 2024",
+			responsibilities: [
+				"Builds responsive, high-performance UIs using modern frontend technologies.",
+				"Leads frontend architecture, enforces best practices, and mentors developers.",
+				"Develops scalable, optimized web apps with seamless user experience."
+			]
+		},
+		{
+			title: "Front End Developer",
+			company: "AnalyticsFox Softwares Pvt Ltd",
+			duration: "Feb 2018 - Jan 2021",
+			responsibilities: [
+				"Builds responsive, high-performance UIs using modern frontend technologies.",
+				"Leads frontend architecture, enforces best practices, and mentors developers.",
+				"Develops scalable, optimized web apps with seamless user experience."
+			]
+		},
+	];
+
 	return (
 		<>
-			<section className="section">
-				<Container>
-					<h3 className="section-title">Experience</h3>
-					<p className="section-description">
-						I have experience working on various software development projects, ranging from small-scale applications to large, complex systems. My background includes both frontend and backend development, and I'm always eager to learn new technologies and approaches. I have collaborated with cross-functional teams to deliver high-quality software solutions that meet client requirements and exceed expectations. My experience has taught me the importance of effective communication, problem-solving, and continuous learning in the ever-evolving field of software development.
-					</p>
-					{/* Add project cards or links here */}
-				</Container>
+			<section className="experience-section">
+				<div className="title-wrapper">
+					<h3 className="section-title"><FontAwesomeIcon icon={faBriefcase} /> Experience</h3>
+					<Button className="btn-link-arrow">View All Experience <FontAwesomeIcon icon={faArrowRight} /></Button>
+				</div>
+				<ul className="experience-list">
+					{
+						experienceData && experienceData.map((item, index) => (
+							<li key={index} className="experience-item">
+								<div className="d-flex justify-content-between align-items-start">
+									<h4 className="experience-title">{item.title}</h4>
+									<span className="experience-duration">{item.duration}</span>
+								</div>
+								<p className="experience-company">{item.company}</p>
+								<ul className="experience-responsibilities">
+									{
+										item.responsibilities.map((resp, respIndex) => (
+											<li className="responsibility-item" key={respIndex}>
+												{resp}
+											</li>
+										))
+									}
+								</ul>
+							</li>
+						))
+					}
+				</ul>
 			</section>
 		</>
 	);

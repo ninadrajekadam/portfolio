@@ -1,12 +1,9 @@
 import { useRef, useState, useEffect } from "react";
-import { Navbar, Nav, Container, Button } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDownload } from "@fortawesome/free-solid-svg-icons";
+import { Navbar, Nav, Container } from "react-bootstrap";
 import "../assets/scss/components/Header.scss";
 
 const sections = ["home", "about", "experience", "projects", "contact"];
 const Header = ({ setHeaderHeight }) => {
-  // const { theme, toggleTheme } = useState("light");
 	const [active, setActive] = useState("#home");
   const headerRef = useRef(null);
 
@@ -70,10 +67,6 @@ const Header = ({ setHeaderHeight }) => {
                   </Nav.Link>
                 ))
               }
-              <Button>Download CV <FontAwesomeIcon icon={faDownload} /></Button>
-              {/* <Button className="theme-btn ms-lg-3" onClick={toggleTheme}>
-                <FontAwesomeIcon icon={theme === "dark" ? faSun : faMoon} />
-              </Button> */}
             </Nav>
           </Navbar.Collapse>
         </Container>

@@ -1,15 +1,11 @@
-import { Container } from "react-bootstrap";
+import { faAddressCard } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Contact = () => {
 	return (
 		<>
-			<section className="section">
-				<Container>
-					<h3 className="section-title">Contact</h3>
-					<p className="section-description">
-						Feel free to reach out to me if you have any questions or would like to discuss potential opportunities.
-					</p>
-				</Container>
+			<section className="contact-section">
+					<h3 className="section-title"><FontAwesomeIcon icon={faAddressCard} /> Contact</h3>
 			</section>
 		</>
 	);
