@@ -135,6 +135,10 @@ body {
   margin-bottom: $spacing-md;
   color: $primary;
 }
+.section-description {
+  font-size: $fs-md;
+  color: $text-secondary;
+}
 .title-wrapper {
   display: flex;
   justify-content: space-between;
@@ -143,10 +147,6 @@ body {
   .section-title {
     margin-bottom: 0;
   }
-}
-.section-description {
-  font-size: $fs-md;
-  color: $text-secondary;
 }
 .gradient-text {
   background: linear-gradient(90deg, $primary, $accent);
@@ -165,4 +165,11 @@ body {
   &:first-child {
     margin-top: 0;
   }
+}
+a {
+  text-decoration: none;
+}
+.view-all {
+  font-size: $fs-sm;
+  font-weight: $fw-500;
 }

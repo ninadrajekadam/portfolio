@@ -42,25 +42,17 @@ const Experience = () => {
 			<section className="experience-section">
 				<div className="title-wrapper">
 					<h3 className="section-title"><FontAwesomeIcon icon={faBriefcase} /> Experience</h3>
-					<Button className="btn-link-arrow">View All Experience <FontAwesomeIcon icon={faArrowRight} /></Button>
+					{ experienceData.length > 3 && (<Button className="btn-link-arrow view-all">View All Experience <FontAwesomeIcon icon={faArrowRight} /></Button>) }
 				</div>
 				<ul className="experience-list">
 					{
-						experienceData && experienceData.map((item, index) => (
+						experienceData && experienceData.slice(0, 3).map((item, index) => (
 							<li key={index} className="experience-item">
-								<div className="d-flex justify-content-between align-items-start">
-									<h4 className="experience-title">{item.title}</h4>
-									<span className="experience-duration">{item.duration}</span>
-								</div>
+								<h4 className="experience-title">{item.title}</h4>
 								<p className="experience-company">{item.company}</p>
+								<span className="experience-duration">{item.duration}</span>
 								<ul className="experience-responsibilities">
-									{
-										item.responsibilities.map((resp, respIndex) => (
-											<li className="responsibility-item" key={respIndex}>
-												{resp}
-											</li>
-										))
-									}
+									{ item.responsibilities.map((resp, respIndex) => (<li className="responsibility-item" key={respIndex}>{resp}</li>)) }
 								</ul>
 							</li>
 						))

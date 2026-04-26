@@ -1,0 +1,126 @@
+@import "../variables.scss";
+@import "../mixins.scss";
+
+.projects-section {
+  .projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+  }
+  .project-item {
+    display: flex;
+    gap: $spacing-md;
+    background: $bg-tertiary;
+    border: 1px solid $border-light;
+    border-radius: $radius-md;
+    padding: $spacing-sm;
+    box-shadow: $shadow-md;
+    transition: $transition;
+    &:hover {
+      box-shadow: $shadow-lg;
+      border-color: rgba($primary, 0.4);
+    }
+    .project-image {
+      width: 200px;
+      border-radius: $radius-sm;
+      overflow: hidden;
+      img {
+				width: 100%;
+        height: auto;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+				border-radius: $radius-sm;
+      }
+    }
+    .project-details {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      .project-title {
+        font-size: $fs-md;
+        font-weight: $fw-700;
+        color: $text-primary;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 6px;
+        transition: $transition;
+        svg {
+          transition: transform 0.3s ease;
+        }
+        &:hover {
+          color: $primary;
+          svg {
+            transform: translate(3px, -3px);
+          }
+        }
+      }
+      .project-stack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: $spacing-sm;
+        .stack-item {
+          font-size: $fs-xs;
+          padding: 4px 10px;
+          border-radius: 20px;
+          background: rgba($primary, 0.1);
+          color: $primary;
+          border: 1px solid rgba($primary, 0.2);
+        }
+      }
+			.project-description-wrapper {
+				position: relative;
+				cursor: pointer;
+				.project-description {
+					display: -webkit-box;
+					line-clamp: 3;
+					-webkit-line-clamp: 3;
+					-webkit-box-orient: vertical;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					font-size: $fs-sm;
+					color: $text-secondary;
+					line-height: 1.6;
+					margin: 0;
+				}
+				.tooltip-text {
+					position: absolute;
+					bottom: 115%;
+					left: 0;
+					width: 260px;
+					background: $bg-secondary;
+					color: $text-primary;
+					padding: $spacing-xs $spacing-sm;
+					border-radius: $radius-sm;
+					font-size: $fs-xs;
+					line-height: 1.5;
+					opacity: 0;
+					visibility: hidden;
+					transform: translateY(6px);
+					transition: all 0.2s ease;
+					z-index: 10;
+					box-shadow: $shadow-md;
+					border: 1px solid rgba($border-color, 0.4);
+				}
+				&:hover .tooltip-text {
+					opacity: 1;
+					visibility: visible;
+					transform: translateY(0);
+				}
+			}
+    }
+  }
+  @include respond-down(md) {
+    .project-item {
+      flex-direction: column;
+      .project-image {
+        width: 100%;
+        min-width: 100%;
+        height: 200px;
+      }
+    }
+  }
+}

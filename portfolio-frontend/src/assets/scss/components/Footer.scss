@@ -1,0 +1,17 @@
+@import "../variables", "../mixins";
+
+.footer {
+  padding: $spacing-md 0;
+  margin-top: $spacing-lg;
+  background: transparent;
+  border-top: 1px solid rgba($border-color, 0.4);
+  text-align: center;
+  font-size: $fs-sm;
+  color: $text-muted;
+  .container {
+    text-align: end;
+  }
+	.footer-name {
+		font-weight: $fw-700;
+	}
+}

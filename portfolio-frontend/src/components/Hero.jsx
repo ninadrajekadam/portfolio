@@ -1,9 +1,11 @@
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { Container, Row, Col } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faFacebook, faGithub, faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import "../assets/scss/components/Hero.scss";
 import heroImg from "../assets/images/ninad.png";
+import cv from "../assets/files/Ninad Kadam CV.pdf";
 
 const Hero = ({ headerHeight }) => {
 	return (
@@ -17,7 +19,7 @@ const Hero = ({ headerHeight }) => {
 							<h2 className="hero-role typing">Senior Software Developer</h2>
 							<p className="hero-desc">Results-driven Senior Software Developer with 6+ years of experience building scalable web applications and delivering high-quality UI solutions.</p>
 							<div className="hero-actions">
-								<Button className="btn-primary-custom">Download CV <FontAwesomeIcon icon={faDownload} /></Button>
+								<Link to={cv} target="_blank" className="btn-primary-custom">Download CV <FontAwesomeIcon icon={faDownload} /></Link>
 							</div>
 							<div className="hero-social">
 								<a className="social-link" href="#"><FontAwesomeIcon icon={faGithub} size="lg" /></a>
