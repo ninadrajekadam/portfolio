@@ -12,6 +12,10 @@ const Hero = ({ headerHeight }) => {
 		<>
 			<section id="home" className="hero-section" style={{ marginTop: `${headerHeight}px` }}>
 				<Container>
+					<div className="hero-text">
+						<h4 className="name">NINAD KADAM</h4>
+						<p className="role">Senior Software Developer</p>
+					</div>
 					<Row className="align-items-center">
 						<Col lg={6}>
 							<p className="hero-subtitle">HELLO, I'M</p>
@@ -36,14 +40,6 @@ const Hero = ({ headerHeight }) => {
 							</div>
 						</Col>
 					</Row>
-					<div className="scroll-indicator" onClick={() => {
-						const next = document.getElementById("about");
-						if (next) {
-							window.scrollTo({ top: next.offsetTop - 80, behavior: "smooth" });
-						}
-					}}>
-						<span></span>
-					</div>
 				</Container>
 			</section>
 		</>

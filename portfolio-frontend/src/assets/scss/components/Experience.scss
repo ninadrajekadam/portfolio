@@ -54,22 +54,22 @@
     }
     .experience-duration {
       display: block;
-      font-size: $fs-sm;
+      font-size: $fs-xs;
       font-weight: $fw-500;
-      color: $text-muted;
+      color: $text-secondary;
       white-space: nowrap;
-      margin-bottom: $spacing-sm;
+      margin-bottom: $spacing-xs;
     }
     .experience-responsibilities {
       margin: 0;
       padding-left: 18px;
       .responsibility-item {
-        font-size: 13px;
+        font-size: $fs-xs;
+        font-weight: $fw-500;
         color: $text-secondary;
-        margin-bottom: 6px;
         line-height: 1.6;
         &::marker {
-          color: $text-muted;
+          color: $text-secondary;
         }
       }
     }

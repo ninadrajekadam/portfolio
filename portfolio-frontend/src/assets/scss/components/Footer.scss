@@ -3,15 +3,33 @@
 .footer {
   padding: $spacing-md 0;
   margin-top: $spacing-lg;
-  background: transparent;
-  border-top: 1px solid rgba($border-color, 0.4);
-  text-align: center;
+  background: $bg-tertiary;
+  box-shadow: $shadow-md;
   font-size: $fs-sm;
   color: $text-muted;
-  .container {
-    text-align: end;
+  .footer-text {
+    margin-bottom: 0;
   }
 	.footer-name {
 		font-weight: $fw-700;
 	}
+  .footer-social {
+    display: flex;
+    justify-content: end;
+    gap: $spacing-md;
+    .social-link {
+      width: 30px;
+      height: 30px;
+      border: 1px solid $border-color;
+      border-radius: $radius-sm;
+      color: $text-muted;
+      @include flex-center;
+      transition: $transition;
+      &:hover {
+        color: $primary;
+        border-color: $primary;
+        transform: translateY(-3px);
+      }
+    }
+  }
 }

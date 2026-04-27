@@ -1,0 +1,62 @@
+@import "../variables", "../mixins";
+
+.contact-section {
+	.contact-divider {
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 1px;
+      background: $border-color;
+    }
+		@include respond-down(md) {
+      display: none;
+    }
+  }
+	.form-control {
+		background: $bg-tertiary;
+		border: 1px solid rgba($border-color, 0.4);
+		color: $text-primary;
+		font-size: $fs-sm;
+		padding: 10px 12px;
+		border-radius: $radius-sm;
+		transition: $transition;
+		&::placeholder {
+			color: $text-muted;
+		}
+		&:focus {
+			border-color: $primary;
+			box-shadow: 0 0 0 2px rgba($primary, 0.2);
+			background: $bg-tertiary;
+			color: $text-primary;
+		}
+	}
+	.form-check-input {
+		background-color: $text-muted;
+		border-color: $text-muted;
+	}
+	.form-check-label {
+		color: $text-muted;
+	}
+	.map-wrapper {
+		width: 100%;
+		height: 100%;
+		border-radius: $radius-md;
+		overflow: hidden;
+		box-shadow: $shadow-sm;
+		transition: $transition;
+		&:hover {
+			box-shadow: $shadow-md;
+		}
+		iframe {
+			display: block;
+			width: 100%;
+			height: 100%;
+			border: 0;
+			filter: grayscale(1) invert(0.9);
+		}
+	}
+}

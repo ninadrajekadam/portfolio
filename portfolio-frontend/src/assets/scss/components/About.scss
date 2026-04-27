@@ -3,11 +3,11 @@
 .about-section {
   .about-options {
     display: flex;
-    gap: $spacing-lg;
+    gap: $spacing-sm;
     margin-top: $spacing-md;
     .about-option {
       background-color: $bg-secondary;
-      padding: $spacing-md;
+      padding: $spacing-sm;
       border-radius: $radius-md;
       text-align: center;
       flex: 1;
@@ -17,6 +17,7 @@
         font-size: $fs-xl;
         font-weight: $fw-700;
         color: $text-primary;
+        margin-bottom: $spacing-xs;
       }
       .option-description {
         font-size: $fs-sm;

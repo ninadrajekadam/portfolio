@@ -12,7 +12,7 @@ const Skills = () => {
 		{ name: "ReactJs", img: "https://img.icons8.com/color/48/000000/react-native.png" },
 		{ name: "Vite", img: "https://img.icons8.com/color/48/000000/vite.png" },
 		{ name: "NodeJs", img: "https://img.icons8.com/color/48/000000/nodejs.png" },
-		{ name: "ExpressJs", img: "https://img.icons8.com/color/48/000000/express.png" },
+		{ name: "ExpressJs", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg", className: "filter" },
 		{ name: "MongoDB", img: "https://img.icons8.com/color/48/000000/mongodb.png" },
 		{ name: "NPM", img: "https://img.icons8.com/color/48/000000/npm.png" },
 		{ name: "Git", img: "https://img.icons8.com/color/48/000000/git.png" },
@@ -26,7 +26,7 @@ const Skills = () => {
 					{
 						skills.map((skill, index) => (
 							<li className="skill-item" key={index}>
-								<span className="skill-img"><img src={skill.img} alt={skill.name} /></span>
+								<span className="skill-img"><img src={skill.img} alt={skill.name} className={skill.className} /></span>
 								<span className="skill-name">{skill.name}</span>
 							</li>
 						))

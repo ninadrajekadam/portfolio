@@ -18,56 +18,56 @@ const Projects = () => {
 		{
 			title: "IHH Websites",
 			image: ihhLogo,
-			stack: ["HTML5", "SCSS", "JavaScript / jQuery", "Pug", "Grunt"],
-			description: "SkillSignal is a construction-focused safety and compliance platform that helps organizations manage worker onboarding, certifications, and job-site safety through a centralized web and mobile application."
+			stack: ["HTML5", "SCSS", "JavaScript", "Pug", "Grunt"],
+			description: "A network of healthcare websites under IHH, designed to provide information about hospitals, services, and patient care. These platforms ensure easy access to medical resources with a user-friendly and responsive interface."
 		},
 		{
 			title: "Axis Bank Website",
 			image: axisBank,
-			stack: ["HTML5", "SCSS", "JavaScript / jQuery", "Pug", "Grunt"],
-			description: "SkillSignal is a construction-focused safety and compliance platform that helps organizations manage worker onboarding, certifications, and job-site safety through a centralized web and mobile application.",
+			stack: ["HTML5", "SCSS", "JavaScript", "Pug", "Grunt"],
+			description: "The official digital platform of Axis Bank, offering banking services, financial products, and customer support online. It enables users to explore services, manage accounts, and access information seamlessly.",
 			link: "https://www.axis.bank.in/"
 		},
 		{
 			title: "SkillSignal",
 			image: skillsignal,
 			stack: ["HTML5", "CSS3", "jQuery", "Bootstrap", "Rest API"],
-			description: "SkillSignal is a construction-focused safety and compliance platform that helps organizations manage worker onboarding, certifications, and job-site safety through a centralized web and mobile application.",
+			description: "A construction-focused safety and compliance platform that helps organizations manage worker onboarding, certifications, and job-site safety through a centralized system.",
 			link: "https://app.skillsignal.com/SkillSignal/authentication/login"
 		},
 		{
 			title: "DocMode AIDE",
 			image: docmodeAide,
 			stack: ["HTML5", "CSS3", "jQuery", "Bootstrap", "Rest API"],
-			description: "DocMode AIDE is a specialized module within the DocMode platform designed to enhance patient safety and compliance management.",
+			description: "A healthcare support platform designed to assist medical professionals with clinical decision-making and patient management through structured digital workflows.",
 			link: "https://aide.docmode.org/"
 		},
 		{
 			title: "DocMode SURE",
 			image: docmodeSure,
 			stack: ["HTML5", "CSS3", "jQuery", "Bootstrap", "Rest API"],
-			description: "DocMode SURE is a specialized module within the DocMode platform designed to enhance patient safety and compliance management.",
+			description: "A patient safety and compliance platform that helps healthcare organizations maintain quality standards, track protocols, and improve clinical outcomes.",
 			link: "https://sure.docmode.org/"
 		},
 		{
 			title: "DocMode Website",
 			image: docmode,
 			stack: ["HTML5", "CSS3", "jQuery", "Bootstrap", "Rest API"],
-			description: "DocMode is a comprehensive healthcare management platform that streamlines patient care and administrative tasks for medical professionals.",
+			description: "A healthcare learning and engagement platform that provides medical professionals with access to courses, webinars, and clinical resources for continuous education.",
 			link: "https://docmode.com/"
 		},
 		{
 			title: "iNutriMon",
 			image: inutrimon,
 			stack: ["HTML5", "CSS3", "jQuery", "Bootstrap", "Rest API"],
-			description: "iNutriMon is a nutrition tracking application that helps users monitor their dietary intake and achieve their health goals. It provides personalized meal plans, nutrient analysis, and progress tracking features.",
+			description: "A clinical nutrition management platform that helps hospitals and healthcare professionals plan, monitor, and optimize patient diet therapy using data-driven insights.",
 			link: "https://inutrimon.com/"
 		},
 		{
 			title: "eKosh",
 			image: ekosh,
 			stack: ["HTML5", "CSS3", "jQuery", "Bootstrap", "Rest API"],
-			description: "eKosh is a financial + marketplace platform focused on helping small businesses, farmers, and retailers grow their income and operations.",
+			description: "A financial and marketplace platform that empowers small businesses and farmers by providing access to funding, resources, and growth opportunities through a connected ecosystem.",
 			link: "https://ekosh.in/"
 		}
 	];

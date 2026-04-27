@@ -10,8 +10,8 @@
   &::before {
     content: "";
     position: absolute;
-    top: -10%;
-    right: -5%;
+    top: 0;
+    right: 5%;
     width: 600px;
     height: 600px;
     background: radial-gradient(circle, rgba($primary, 0.18) 0%, rgba($secondary, 0.12) 40%, transparent 70%);
@@ -21,10 +21,10 @@
   &::after {
     content: "";
     position: absolute;
-    bottom: -15%;
-    left: -10%;
-    width: 500px;
-    height: 500px;
+    bottom: 0;
+    left: 0;
+    width: 600px;
+    height: 600px;
     background: radial-gradient(circle, rgba($accent, 0.15) 0%, transparent 70%);
     filter: blur(100px);
     z-index: 0;
@@ -32,6 +32,121 @@
   > * {
     position: relative;
     z-index: 1;
+  }
+  .hero-text {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    pointer-events: none;
+    user-select: none;
+    animation: floatText 6s ease-in-out infinite;
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 800px;
+      height: 300px;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba($primary, 0.15), transparent 70%);
+      filter: blur(60px);
+      z-index: -1;
+      animation: glowFloat 6s ease-in-out infinite alternate;
+    }
+    &::after {
+      background: radial-gradient(circle, rgba($primary, 0.08), transparent 70%);
+      animation-delay: 2s;
+    }
+    .name {
+      font-size: 125px;
+      font-weight: 900;
+      letter-spacing: 10px;
+      margin: 0;
+      line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba($primary, 0.08);
+      background: linear-gradient(90deg, rgba($primary, 0.08), rgba($primary, 0.02), rgba($primary, 0.08));
+      background-size: 200% auto;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: textGradient 8s linear infinite;
+      position: relative;
+      overflow: hidden;
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 60%;
+        height: 100%;
+        background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+        transform: skewX(-20deg);
+        animation: shine 5s infinite;
+      }
+    }
+    .role {
+      font-size: 60px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin: 0;
+      color: $bg-glass;
+      animation: rolePulse 3s ease-in-out infinite;
+    }
+    @keyframes textGradient {
+      0% {
+        background-position: 0% center;
+      }
+      100% {
+        background-position: 200% center;
+      }
+    }
+    @keyframes glowFloat {
+      0% {
+        transform: translate(-50%, -50%) scale(1);
+      }
+      100% {
+        transform: translate(-48%, -52%) scale(1.1);
+      }
+    }
+    @keyframes floatText {
+      0% {
+        transform: translate(-50%, -50%);
+      }
+      50% {
+        transform: translate(-50%, calc(-50% - 10px));
+      }
+      100% {
+        transform: translate(-50%, -50%);
+      }
+    }
+    @keyframes shine {
+      0% {
+        left: -100%;
+      }
+      20% {
+        left: 120%;
+      }
+      100% {
+        left: 120%;
+      }
+    }
+    @keyframes rolePulse {
+      0%,
+      100% {
+        opacity: 0.4;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.6;
+        transform: scale(1.02);
+      }
+    }
   }
   .hero-subtitle {
     color: $primary;
@@ -85,7 +200,7 @@
     position: relative;
     text-align: center;
     .hero-img {
-      width: 500px;
+      width: 600px;
     }
     .experience-badge {
       position: absolute;

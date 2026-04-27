@@ -1,0 +1,30 @@
+@import "../variables.scss";
+@import "../mixins.scss";
+
+.home-box {
+  background: $bg-secondary;
+  border-radius: $radius-md;
+  padding: $spacing-lg;
+  margin-top: $spacing-xl;
+  box-shadow: $shadow-sm;
+  border: 1px solid $border-light;
+  transition: $transition;
+  &:first-child {
+    margin-top: 0;
+  }
+	.divider {
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 41.666%;
+      width: 1px;
+      background: $border-color;
+    }
+    @include respond-down(md) {
+      display: none;
+    }
+  }
+}

@@ -8,12 +8,10 @@
   gap: $spacing-sm;
   margin-bottom: 0;
   .skill-item {
-    width: 100%;
-    max-width: calc(100% / 4 - 6px);
+    width: calc(100% / 4 - 6px);
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
+    gap: $spacing-sm;
     padding: $spacing-md;
     border: 1px solid $border-color;
     border-radius: $radius-md;
@@ -27,17 +25,18 @@
       color: $text-primary;
     }
     .skill-img {
-      width: 50px;
-      height: 50px;
+      width: 30px;
+      height: 30px;
       object-fit: contain;
-      margin-bottom: $spacing-sm;
       img {
         width: 100%;
         height: auto;
       }
+      .filter {
+        filter: invert(1);
+      }
     }
     &:hover {
-      // transform: translateY(-5px);
       box-shadow: $shadow-md;
     }
   }
