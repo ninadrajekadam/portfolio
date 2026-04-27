@@ -1,4 +1,22 @@
 {
+  "name": "portfolio",
+  "version": "1.0.0",
+  "main": "portfolio-backend/src/server.js",
+  "scripts": {
+    "frontend": "npm run dev --prefix portfolio-frontend",
+    "backend": "nodemon portfolio-backend/src/server.js",
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\""
+  },
+  "keywords": [
+    "portfolio",
+    "react",
+    "nodejs",
+    "mongodb",
+    "fullstack"
+  ],
+  "author": "Ninad Kadam",
+  "license": "ISC",
+  "description": "Full-stack developer portfolio using React, Node.js, Express, and MongoDB",
   "devDependencies": {
     "concurrently": "^9.2.1"
   }
