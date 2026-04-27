@@ -45,4 +45,4 @@ const Hero = ({ headerHeight }) => {
 		</>
 	);
 };
-export default Hero;
+export default Hero; 
