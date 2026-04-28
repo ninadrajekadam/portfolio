@@ -2,147 +2,230 @@
 
 .login-section {
   min-height: 100vh;
-  background: $bg-primary;
   display: flex;
   align-items: center;
+  background: linear-gradient(45deg, rgba($primary, 0.5), rgba($bg-primary, 0.5));
 }
 .login-box {
+  width: 100%;
+  display: flex;
+  margin: $s-50px $s-60px;
   background: $bg-secondary;
   border-radius: $radius-lg;
   overflow: hidden;
   box-shadow: $shadow-lg;
   border: 1px solid rgba($border-color, 0.2);
 }
+.login-left,
+.login-right {
+  width: 50%;
+}
 .login-left {
-  padding: 40px;
-  background: radial-gradient(circle at bottom, rgba($primary, 0.2), transparent);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: $spacing-xxl;
+  position: relative;
+  background: radial-gradient(circle at bottom, rgba($primary, 0.25), transparent), url("../../images/login-bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 90%;
+  background-blend-mode: overlay;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba($bg-primary, 0.25);
+    z-index: 0;
+  }
+  > * {
+    position: relative;
+    z-index: 1;
+  }
   .brand {
-		display: flex;
-		align-items: center;
-		font-size: $fs-xxl;
+    display: flex;
+    align-items: center;
+    font-size: $fs-xxl;
     font-weight: $fw-700;
-		color: $primary;
-    margin-bottom: 40px;
+    color: $primary;
+    margin-bottom: $spacing-xxl;
     .name {
-			font-size: $fs-lg;
-			font-weight: $fw-700;
-      margin-left: 8px;
-      color: $text-secondary;
+      font-size: $fs-lg;
+      font-weight: $fw-500;
+      margin-left: $spacing-xs;
+      color: $text-primary;
     }
   }
   .welcome-text {
     .welcome-title {
-      font-size: 48px;
+      font-size: $fs-xl + $fs-lg;
       font-weight: $fw-400;
-			margin-bottom: $spacing-sm;
+      margin-bottom: $spacing-sm;
       .welcome-subtitle {
-				font-weight: 700;
+        font-weight: $fw-700;
         color: $primary;
       }
     }
-		.welcome-desc {
-			font-size: $fs-sm;
-			font-weight: $fw-500;
-			color: $text-secondary;
-		}
+    .welcome-desc {
+      font-size: $fs-sm;
+      font-weight: $fw-500;
+      color: rgba($text-primary, 0.8);
+    }
   }
   .security-note {
-    margin-top: 40px;
+    margin-top: $spacing-xxl;
     display: flex;
-    gap: 12px;
+    gap: $s-12px;
     align-items: center;
     .icon {
-      font-size: 20px;
+      width: $spacing-xxl;
+      height: $spacing-xxl;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: $fs-lg;
+      color: $primary;
+      background: rgba($primary, 0.1);
+      border: 1px solid $primary;
+      border-radius: $radius-sm;
     }
-    p {
-      font-size: 12px;
-      color: $text-muted;
+    .note-title {
+      font-size: $fs-sm;
+      font-weight: $fw-600;
+      color: $primary-light;
+      margin-bottom: 0;
+    }
+    .note-desc {
+      font-size: $fs-xs;
+      color: rgba($text-primary, 0.8);
       margin: 0;
     }
   }
 }
 .login-right {
-  padding: 40px;
-  background: rgba($bg-tertiary, 0.4);
+  padding: $spacing-xxl;
+  background: rgba($bg-tertiary, 0.6);
+  backdrop-filter: $blur;
   .form-wrapper {
-    max-width: 400px;
-    margin: auto;
-    h3 {
+    width: 100%;
+    background: rgba($bg-tertiary, 0.6);
+    box-shadow: $shadow-lg;
+    border: 1px solid rgba($border-color, 0.2);
+    border-radius: $radius-lg;
+    padding: $spacing-xxl;
+    .form-title {
       font-weight: $fw-700;
-      margin-bottom: 8px;
+      margin-bottom: $spacing-sm;
     }
     .subtitle {
-      color: $text-muted;
-      margin-bottom: 20px;
+      color: $text-secondary;
+      margin-bottom: $spacing-lg;
     }
   }
 }
 .input-group-custom {
   display: flex;
   align-items: center;
-  border: 1px solid rgba($border-color, 0.4);
-  border-radius: $radius-md;
-  padding: 10px;
-  background: transparent;
-  svg {
-    color: $text-muted;
-    margin-right: 10px;
+  border: 1px solid rgba($border-color, 0.2);
+  border-radius: $radius-sm;
+  background: $bg-glass;
+  backdrop-filter: $blur;
+  transition: $transition;
+  &:focus-within {
+    border-color: $primary;
+    box-shadow: 0 0 0 1px rgba($primary, 0.2);
+  }
+  .input-group-icon {
+    width: $s-40px;
+    height: $s-40px;
+    @include flex-center;
+    color: $text-secondary;
+    &.eye-icon {
+      cursor: pointer;
+      &:hover {
+        color: $primary;
+      }
+    }
   }
   .form-control {
     background: transparent;
     border: none;
     color: $text-primary;
+    padding-left: 0;
     &:focus {
       box-shadow: none;
     }
+    &::placeholder {
+      color: $text-muted;
+      font-size: $fs-sm;
+    }
   }
-  .eye-icon {
-    margin-left: auto;
-    cursor: pointer;
+}
+.btn-login {
+  svg {
+    transition: $transition;
+  }
+  &:hover {
+    svg {
+      transform: translateX(5px);
+    }
   }
 }
 .form-options {
   display: flex;
   justify-content: space-between;
-  font-size: 13px;
-  color: $text-muted;
-  margin-bottom: 20px;
+  font-size: $fs-sm;
+  margin-bottom: $spacing-md;
+  .form-check {
+    min-height: auto;
+  }
   .forgot {
     cursor: pointer;
-    color: $primary;
-  }
-}
-.btn-login {
-  background: linear-gradient(90deg, $primary, lighten($primary, 10%));
-  border: none;
-  padding: 12px;
-  font-weight: $fw-600;
-  border-radius: $radius-md;
-  transition: $transition;
-  &:hover {
-    opacity: 0.9;
+    color: $primary-light;
+    &:hover {
+      color: $primary;
+    }
   }
 }
 .divider {
+  position: relative;
   text-align: center;
-  margin: 20px 0;
-  font-size: 12px;
-  color: $text-muted;
+  margin: $spacing-md 0;
+  font-size: $fs-sm;
+  color: $text-secondary;
+  &:before, &:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 35%;
+    height: 1px;
+    background: $text-secondary;
+  }
+  &:before {
+    left: 0;
+  }
+  &:after {
+    right: 0;
+  }
 }
 .social-login {
   display: flex;
-  gap: 10px;
-  button {
-		flex: 1;
-		border-radius: $radius-md;
+  gap: $spacing-sm;
+  .social-login-icon {
+    flex: 1;
+    font-size: $fs-md;
   }
 }
 .signup {
   text-align: center;
-  margin-top: 20px;
-  font-size: 13px;
+  margin-top: $spacing-lg;
+  margin-bottom: 0;
+  font-size: $fs-sm;
   span {
-    color: $primary;
+    color: $accent;
     cursor: pointer;
+    &:hover {
+      color: $primary-light;
+    }
   }
 }

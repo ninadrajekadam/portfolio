@@ -52,6 +52,8 @@ $blur: blur(10px);
 $radius-sm: 6px;
 $radius-md: 12px;
 $radius-lg: 20px;
+$radius-xl: 40px;
+$radius-xxl: 50px;
 
 // spacing (can be used for margins, padding, gaps, etc.)
 $spacing-xs: 4px;
@@ -86,4 +88,23 @@ $fw-900: 900;
 // z-index
 $z-header: 1000;
 $z-overlay: 1100;
-$z-modal: 1200; 
+$z-modal: 1200;
+
+// sizing
+$s-5px: 5px;
+$s-10px: 10px;
+$s-12px: 12px;
+$s-14px: 14px;
+$s-16px: 16px;
+$s-18px: 18px;
+$s-20px: 20px;
+$s-24px: 24px;
+$s-28px: 28px;
+$s-30px: 30px;
+$s-32px: 32px;
+$s-36px: 36px;
+$s-40px: 40px;
+$s-50px: 50px;
+$s-60px: 60px;
+$s-80px: 80px;
+$s-100px: 100px;

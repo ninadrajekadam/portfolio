@@ -3,7 +3,7 @@
 
 body {
   color: $text-primary;
-  background-color: $bg-primary;
+  background: $bg-primary;
   background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0) 100%);
   font-family: $font-family;
   font-size: $fs-sm;
@@ -50,19 +50,19 @@ body {
   }
 }
 .btn-outline-custom {
-  border: 1px solid $border-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  border: 1px solid rgba($border-color, 0.2);
   color: $text-primary;
-  background: rgba(255, 255, 255, 0.02);
-  backdrop-filter: $blur;
-  border-radius: 50px;
-  padding: 12px 26px;
-  font-weight: $fw-500;
+  border-radius: $radius-md;
+  padding: $s-12px $s-24px;
+  font-weight: $fw-600;
   transition: $transition;
   &:hover {
-    background: rgba($primary, 0.1);
-    border-color: $primary;
-    color: $primary;
-    transform: translateY(-2px);
+    background: $border-color;
+    border-color: rgba($border-color, 0.2);
   }
 }
 .btn-link-custom {
@@ -157,4 +157,11 @@ a {
 .view-all {
   font-size: $fs-sm;
   font-weight: $fw-500;
-} 
+}
+.form-check-input {
+  background: $bg-tertiary;
+  border-color: $text-muted;
+}
+.form-check-label {
+  color: $text-secondary;
+}
