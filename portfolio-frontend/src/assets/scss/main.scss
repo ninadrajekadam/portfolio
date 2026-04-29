@@ -21,13 +21,16 @@ body {
     background: $primary-light;
   }
 }
+
+a.btn-primary-custom {
+  padding: $s-12px $s-24px;
+  font-weight: $fw-600;
+}
 .btn-primary-custom {
   background: $gradient-primary;
   color: $text-primary;
-  padding: 12px 26px;
-  border-radius: 50px;
-  font-weight: $fw-600;
   border: none;
+  border-radius: $s-50px;
   position: relative;
   overflow: hidden;
   transition: $transition;
@@ -47,6 +50,9 @@ body {
   }
   &:hover::after {
     left: 100%;
+  }
+  &.rounded {
+    border-radius: 50px;
   }
 }
 .btn-outline-custom {
@@ -75,21 +81,8 @@ body {
   cursor: pointer;
   position: relative;
   transition: $transition;
-  &::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -2px;
-    width: 0%;
-    height: 2px;
-    background: $gradient-primary;
-    transition: width 0.3s ease;
-  }
   &:hover {
     color: $primary-light;
-    &::after {
-      width: 100%;
-    }
   }
 }
 .btn-link-muted {
@@ -164,4 +157,52 @@ a {
 }
 .form-check-label {
   color: $text-secondary;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+  box-shadow: 0 0 0px 1000px transparent inset !important;
+  -webkit-text-fill-color: $text-primary !important;
+  caret-color: $text-primary;
+  transition: background-color 5000s ease-in-out 0s;
+}
+.error-text {
+  color: $error;
+}
+
+.custom-modal {
+  .modal-content {
+    background: $bg-secondary;
+    border: 1px solid $border-color;
+    border-radius: $radius-lg;
+    color: $text-primary;
+  }
+  .modal-header {
+    border-bottom: 1px solid $border-color;
+  }
+  .modal-footer {
+    border-top: 1px solid $border-color;
+  }
+  .form-control {
+    background: $bg-tertiary;
+    border: 1px solid $border-color;
+    color: $text-primary;
+    &:focus {
+      border-color: $primary;
+      box-shadow: none;
+    }
+  }
+}
+
+.Toastify__toast {
+  background: $bg-secondary;
+  color: $text-primary;
+  border: 1px solid $border-color;
+  border-radius: $radius-md;
+}
+.Toastify__progress-bar {
+  background: linear-gradient(90deg, $primary, $secondary);
 }

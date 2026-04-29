@@ -2,8 +2,9 @@ $xs: 480px;
 $sm: 576px;
 $md: 768px;
 $lg: 992px;
-$xl: 1200px;
-$xxl: 1400px;
+$xl: 1024px;
+$xxl: 1200px;
+$xxxl: 1400px;
 
 @mixin respond-up($breakpoint) {
   @if $breakpoint == xs {
@@ -18,6 +19,8 @@ $xxl: 1400px;
     @media (min-width: $xl) { @content; }
   } @else if $breakpoint == xxl {
     @media (min-width: $xxl) { @content; }
+  } @else if $breakpoint == xxxl {
+    @media (min-width: $xxxl) { @content; }
   }
 }
 
@@ -34,6 +37,8 @@ $xxl: 1400px;
     @media (max-width: $xl) { @content; }
   } @else if $breakpoint == xxl {
     @media (max-width: $xxl) { @content; }
+  } @else if $breakpoint == xxxl {
+    @media (max-width: $xxxl) { @content; }
   }
 }
 

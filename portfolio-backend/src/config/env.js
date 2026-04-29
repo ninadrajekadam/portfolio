@@ -1,12 +1,25 @@
 import dotenv from "dotenv";
-import { dirname, resolve } from "path";
+import path from "path";
 import { fileURLToPath } from "url";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-dotenv.config({ path: resolve(__dirname, "../../.env") });
+dotenv.config({ path: path.resolve(__dirname, "../../.env") });
 
-export const PORT = process.env.PORT;
-export const MONGO_URI = process.env.MONGO_URI;
-export const JWT_SECRET = process.env.JWT_SECRET;
-export const JWT_EXPIRE = process.env.JWT_EXPIRE;	
+const requiredEnvVars = ["PORT", "MONGO_URI", "JWT_SECRET"];
+
+requiredEnvVars.forEach((key) => {
+  if (!process.env[key]) {
+    console.error(`❌ Missing environment variable: ${key}`);
+    process.exit(1);
+  }
+});
+
+export default {
+  PORT: parseInt(process.env.PORT, 10) || 5000,
+  MONGO_URI: process.env.MONGO_URI,
+  JWT_SECRET: process.env.JWT_SECRET,
+  CORS_ORIGIN: process.env.CORS_ORIGIN,
+  NODE_ENV: process.env.NODE_ENV || "development",
+};

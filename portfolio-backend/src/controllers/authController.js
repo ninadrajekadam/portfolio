@@ -1,17 +1,16 @@
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
-import { JWT_SECRET, JWT_EXPIRE } from "../config/env.js";
 
 const generateToken = (id) => {
-  return jwt.sign({ id }, JWT_SECRET, {
-    expiresIn: JWT_EXPIRE,
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: "7d",
   });
 };
 
-export const register = async (req, res) => {
-  try {
-    const { name, email, password } = req.body;
+const registerUser = async (req, res) => {
+  const { name, email, password } = req.body;
 
+  try {
     const userExists = await User.findOne({ email });
 
     if (userExists) {
@@ -31,9 +30,10 @@ export const register = async (req, res) => {
   }
 };
 
-export const login = async (req, res) => {
+const loginUser = async (req, res) => {
+  const { email, password } = req.body;
+
   try {
-    const { email, password } = req.body;
     const user = await User.findOne({ email });
 
     if (user && (await user.matchPassword(password))) {
@@ -50,3 +50,5 @@ export const login = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export { registerUser, loginUser }; 

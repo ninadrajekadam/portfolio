@@ -8,8 +8,9 @@
 }
 .login-box {
   width: 100%;
+  max-width: 1200px;
   display: flex;
-  margin: $s-50px $s-60px;
+  margin: $s-50px auto;
   background: $bg-secondary;
   border-radius: $radius-lg;
   overflow: hidden;
@@ -48,7 +49,7 @@
     font-size: $fs-xxl;
     font-weight: $fw-700;
     color: $primary;
-    margin-bottom: $spacing-xxl;
+    margin-bottom: $spacing-lg;
     .name {
       font-size: $fs-lg;
       font-weight: $fw-500;
@@ -70,6 +71,7 @@
       font-size: $fs-sm;
       font-weight: $fw-500;
       color: rgba($text-primary, 0.8);
+      margin-bottom: 0;
     }
   }
   .security-note {
@@ -85,7 +87,7 @@
       align-items: center;
       font-size: $fs-lg;
       color: $primary;
-      background: rgba($primary, 0.1);
+      background: rgba($primary, 0.3);
       border: 1px solid $primary;
       border-radius: $radius-sm;
     }
@@ -135,9 +137,20 @@
     border-color: $primary;
     box-shadow: 0 0 0 1px rgba($primary, 0.2);
   }
+  &.error {
+    border: 1px solid $error;
+    svg {
+      color: $error;
+    }
+  }
+  .error-text {
+    font-size: 12px;
+    color: $error;
+    margin-top: 4px;
+  }
   .input-group-icon {
-    width: $s-40px;
-    height: $s-40px;
+    min-width: $s-36px;
+    height: $s-36px;
     @include flex-center;
     color: $text-secondary;
     &.eye-icon {
@@ -152,6 +165,7 @@
     border: none;
     color: $text-primary;
     padding-left: 0;
+    font-size: $fs-sm;
     &:focus {
       box-shadow: none;
     }
@@ -160,6 +174,11 @@
       font-size: $fs-sm;
     }
   }
+}
+.password-hint {
+  font-size: $fs-xs;
+  color: $text-muted;
+  margin-top: $spacing-xs;
 }
 .btn-login {
   svg {
@@ -187,7 +206,7 @@
     }
   }
 }
-.divider {
+.login-divider {
   position: relative;
   text-align: center;
   margin: $spacing-md 0;
@@ -227,5 +246,127 @@
     &:hover {
       color: $primary-light;
     }
+  }
+}
+
+// 1200px
+@include respond-down(xxl) {
+  .login-box {
+    max-width: 1050px;
+  }
+  .login-left, .login-right {
+    padding: $spacing-xl;
+  }
+}
+
+// 1024px
+@include respond-down(xl) {
+  .login-box {
+    max-width: 90%;
+  }
+  .login-left, .login-right {
+    padding: $spacing-lg;
+  }
+  .login-left {
+    background-position: center;
+  }
+  .login-right .form-wrapper {
+    padding: $spacing-lg;
+  }
+}
+
+// 992px
+@include respond-down(lg) {
+  .login-box {
+    flex-direction: column;
+    max-width: 90%;
+  }
+  .login-left, .login-right {
+    width: 100%;
+  }
+}
+
+// 768px
+@include respond-down(md) {
+  .login-section {
+    padding: $spacing-md;
+  }
+  .login-box {
+    margin: $spacing-md auto;
+    border-radius: $radius-md;
+  }
+  .login-left {
+    min-height: 300px;
+    padding: $spacing-md;
+    .brand {
+      .name {
+        font-size: $fs-sm;
+      }
+    }
+    .welcome-text {
+      .welcome-title {
+        font-size: $fs-xl;
+      }
+    }
+    .security-note {
+      margin-top: $spacing-lg;
+    }
+  }
+  .login-right {
+    padding: $spacing-md;
+    .form-wrapper {
+      padding: $spacing-md;
+    }
+  }
+  .form-options {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $spacing-sm;
+  }
+}
+
+// 576px
+@include respond-down(sm) {
+  .login-box {
+    max-width: 100%;
+    margin: 0;
+  }
+  .login-left {
+    padding: $spacing-md;
+    .welcome-text {
+      .welcome-title {
+        font-size: $fs-lg;
+      }
+      .welcome-desc {
+        font-size: $fs-xs;
+      }
+    }
+  }
+  .input-group-custom {
+    .input-group-icon {
+      min-width: 30px;
+      height: 30px;
+    }
+    .form-control {
+      font-size: $fs-xs;
+    }
+  }
+  .btn-login {
+    width: 100%;
+  }
+}
+
+// 480px
+@include respond-down(xs) {
+  .login-section {
+    padding: $spacing-sm;
+  }
+  .login-left {
+    .brand {
+      gap: $spacing-xs;
+    }
+  }
+  .form-options, .login-divider, .signup {
+    font-size: $fs-xs;
   }
 }

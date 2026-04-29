@@ -1,12 +1,6 @@
-# Portfolio Repository
+# Portfolio Backend
 
-This workspace contains both the frontend and backend for the portfolio project.
-
-## Backend
-
-The backend is located in `portfolio-backend`.
-
-### Run backend in development
+## Development
 
 If PowerShell blocks `npm run dev` because script execution is disabled, use the direct nodemon entrypoint:
 
@@ -15,7 +9,7 @@ cd portfolio-backend
 npm run dev:direct
 ```
 
-Or start the backend directly with Node:
+Or run the server directly with Node:
 
 ```powershell
 cd portfolio-backend
@@ -26,4 +20,3 @@ node src/server.js
 
 - The backend uses ESM modules (`type: "module"`).
 - Environment variables are loaded from `portfolio-backend/.env`.
-

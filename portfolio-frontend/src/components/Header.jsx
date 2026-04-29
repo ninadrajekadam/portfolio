@@ -57,8 +57,8 @@ const Header = ({ setHeaderHeight }) => {
       <Navbar variant="light" expand="lg" fixed="top" className="navbar-glass" ref={headerRef}>
         <Container>
           <Navbar.Brand className="gradient-text fw-bold">Ninad Kadam</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
+          <Navbar.Toggle aria-controls="portfolioNavbar" />
+          <Navbar.Collapse id="portfolioNavbar">
             <Nav className="ms-auto align-items-lg-center gap-lg-3">
               {
                 sections.map((sec) => (
