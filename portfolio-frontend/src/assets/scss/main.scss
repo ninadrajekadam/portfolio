@@ -25,12 +25,14 @@ body {
 a.btn-primary-custom {
   padding: $s-12px $s-24px;
   font-weight: $fw-600;
+  border-radius: 50px;
 }
 .btn-primary-custom {
   background: $gradient-primary;
   color: $text-primary;
   border: none;
-  border-radius: $s-50px;
+  border-radius: $radius-sm;
+  font-weight: $fw-500;
   position: relative;
   overflow: hidden;
   transition: $transition;
@@ -53,6 +55,45 @@ a.btn-primary-custom {
   }
   &.rounded {
     border-radius: 50px;
+  }
+}
+.btn-danger-custom {
+  cursor: pointer;
+  color: $text-primary;
+  background: rgba($error, 1);
+  border: 1px solid rgba($error, 0.35);
+  border-radius: $radius-sm;
+  position: relative;
+  overflow: hidden;
+  transition: $transition;
+  box-shadow: 0 0 20px rgba($error, 0.25), 0 10px 40px rgba($error, 0.15);
+  &:hover {
+    background: rgba($error, 0.25);
+    border-color: $error;
+    box-shadow: 0 0 25px rgba($error, 0.45), 0 15px 50px rgba($error, 0.35);
+    transform: translateY(-2px);
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      120deg,
+      transparent,
+      rgba(255, 255, 255, 0.25),
+      transparent
+    );
+    transition: 0.6s;
+  }
+  &:hover::after {
+    left: 100%;
+  }
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba($error, 0.25);
   }
 }
 .btn-outline-custom {
@@ -186,13 +227,18 @@ select:-webkit-autofill {
   .modal-footer {
     border-top: 1px solid $border-color;
   }
-  .form-control {
+  .form-control, .form-select {
     background: $bg-tertiary;
     border: 1px solid $border-color;
-    color: $text-primary;
+    color: $text-secondary;
     &:focus {
       border-color: $primary;
       box-shadow: none;
+    }
+    &::placeholder {
+      font-size: $fs-sm;
+      font-weight: $fw-500;
+      color: $text-secondary;
     }
   }
 }

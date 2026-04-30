@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
+import { Container } from "react-bootstrap";
 import AdminSidebar from "./AdminSidebar";
 import AdminTopbar from "./AdminTopbar";
 import "../../assets/scss/pages/admin/AdminLayout.scss";
-import { Container } from "react-bootstrap";
+import "../../assets/scss/pages/admin/CustomTable.scss";
+import "../../assets/scss/pages/admin/Admin.scss";
 
 const AdminLayout = () => {
   const [collapsed, setCollapsed] = useState(false);

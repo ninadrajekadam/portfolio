@@ -1,0 +1,105 @@
+@import "../../mixins", "../../variables";
+
+.table-wrapper {
+  background: $bg-secondary;
+	border: 1px solid $border-color;
+  border-radius: $radius-md;
+  padding: $spacing-md;
+  box-shadow: $shadow-sm;
+  overflow-x: auto;
+	backdrop-filter: $blur;
+  transition: $transition;
+  &:hover {
+    box-shadow: $shadow-md;
+  }
+	.custom-table {
+		width: 100%;
+		margin: 0;
+		border-collapse: separate;
+		border-spacing: 0;
+		overflow: hidden;
+		border: 1px solid $border-color;
+		border-radius: $radius-md;
+		color: $text-primary;
+		thead {
+			font-size: $fs-xs;
+			font-weight: $fw-600;
+			text-align: left;
+			border-bottom: 1px solid $border-color;
+			white-space: nowrap;
+			letter-spacing: 0.3px;
+			th {
+				padding: $spacing-sm $spacing-md;
+				text-transform: uppercase;
+				color: $text-secondary;
+				background: $bg-secondary;
+				border-bottom: 1px solid $border-color;
+				&:first-child {
+					width: 3%;
+					border-top-left-radius: $radius-md;
+				}
+				&:last-child {
+					width: 9%;
+					border-top-right-radius: $radius-md;
+				}
+			}
+		}
+		tbody {
+			tr {
+				transition: $transition;
+				border-bottom: 1px solid $border-light;
+				&:hover {
+					background: $hover-bg;
+				}
+				&:last-child td {
+					&:first-child {
+						border-bottom-left-radius: $radius-md;
+					}
+					&:last-child {
+						border-bottom-right-radius: $radius-md;
+					}
+				}
+			}
+			td {
+				padding: $spacing-sm $spacing-md;
+				font-size: $fs-sm;
+				font-weight: $fw-500;
+				color: $text-primary;
+				background: $bg-primary;
+				border-bottom: 1px solid $border-color;
+				vertical-align: middle;
+			}
+		}
+	}
+}
+.table-status {
+  padding: 4px 10px;
+  border-radius: $radius-xl;
+  font-size: $fs-xs;
+  font-weight: $fw-600;
+  display: inline-block;
+  &--success {
+    background: rgba($success, 0.15);
+    color: $success;
+  }
+  &--warning {
+    background: rgba($warning, 0.15);
+    color: $warning;
+  }
+  &--error {
+    background: rgba($error, 0.15);
+    color: $error;
+  }
+}
+
+@include respond-down(md) {
+  .table-wrapper {
+    padding: $spacing-sm;
+		.table {
+			thead th, tbody td {
+				padding: $spacing-sm;
+				font-size: $fs-xs;
+			}
+		}
+  }
+}

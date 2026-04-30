@@ -1,0 +1,37 @@
+@import "../../mixins", "../../variables";
+
+.search-bar {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  background: $bg-secondary;
+  border: 1px solid $border-color;
+  border-radius: $radius-md;
+  padding: $spacing-sm $spacing-md;
+	margin-bottom: $spacing-md;
+  transition: $transition;
+  box-shadow: $shadow-sm;
+  &:focus-within {
+    border-color: $primary;
+    box-shadow: 0 0 0 3px rgba($primary, 0.15);
+  }
+  &:hover {
+    box-shadow: $shadow-md;
+  }
+}
+.search-bar__icon {
+  color: $text-muted;
+  font-size: $fs-sm;
+}
+.search-bar__input {
+  flex: 1;
+	font-weight: $fw-500;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: $text-secondary;
+  font-size: $fs-sm;
+  font-family: $font-family;
+}

@@ -12,7 +12,7 @@
   flex-direction: column;
 }
 .admin-layout__content {
-  padding: $spacing-sm;
+  padding: $spacing-md $spacing-sm;
 }
 .admin-sidebar {
   width: 240px;
@@ -69,6 +69,7 @@
   gap: $spacing-sm;
   padding: 12px $spacing-md;
   background: $bg-glass;
+  border: 1px solid $border-color;
   border-radius: $radius-md;
   color: $text-secondary;
   text-decoration: none;
@@ -79,7 +80,8 @@
   color: $text-primary;
 }
 .admin-sidebar__link.active {
-  background: $gradient-primary;
+  background: rgba($primary-light, .3);
+  border: 1px solid $primary;
   color: $text-primary;
   .admin-sidebar__label {
     font-weight: $fw-600;
@@ -140,6 +142,7 @@
   align-items: center;
   gap: $spacing-sm;
   background: $hover-bg;
+  border: 1px solid $border-color;
   padding: $spacing-sm $spacing-md;
   border-radius: $radius-xl;
 }
@@ -155,8 +158,9 @@
   align-items: center;
   gap: $spacing-sm;
   padding: $spacing-sm;
-  border-radius: $radius-md;
   background: $hover-bg;
+  border: 1px solid $border-color;
+  border-radius: $radius-md;
   margin-bottom: $spacing-sm;
 }
 .admin-sidebar__avatar {
@@ -202,6 +206,35 @@
   flex-direction: column;
   justify-content: space-between;
 }
+.heading-btn-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-md;
+  .heading-wrapper {
+    margin-bottom: 0;
+  }
+  .add-btn {
+    padding: $spacing-sm $spacing-lg;
+  }
+}
+.heading-wrapper {
+  width: max-content;
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  margin-bottom: $spacing-md;
+  .heading-icon {
+    @include flex-center;
+    width: $s-50px;
+    height: $s-50px;
+    font-size: $fs-lg;
+    color: $primary;
+    background-color: $bg-glass;
+    border: 1px solid $border-color;
+    border-radius: $radius-md;
+  }
+}
 .layout-heading {
   font-size: $fs-lg;
   font-weight: $fw-700;
@@ -211,7 +244,8 @@
 .layout-desc {
   font-size: $fs-sm;
   font-weight: $fw-500;
-  margin-bottom: $spacing-sm;
+  margin-bottom: 0;
+  color: $text-secondary;
 }
 @include respond-down(md) {
   .admin-sidebar {
@@ -229,4 +263,9 @@
   .admin-topbar__title {
     font-size: $fs-sm;
   }
+}
+
+.skill-img {
+  width: 40px;
+  height: auto;
 }

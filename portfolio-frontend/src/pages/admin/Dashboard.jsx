@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Row, Col, Dropdown } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCode, faBriefcase, faFolder, faChevronRight, faEnvelope, faTrophy, faAward } from "@fortawesome/free-solid-svg-icons";
+import { faCode, faBriefcase, faFolder, faChevronRight, faEnvelope, faTrophy, faAward, faGauge } from "@fortawesome/free-solid-svg-icons";
 import OverviewChart from "./OverviewChart";
 import ProfileViewsChart from "./ProfileViewsChart";
 import "../../assets/scss/pages/admin/Dashboard.scss";
@@ -18,8 +18,13 @@ const Dashboard = () => {
 
   return (
     <>
-      <h2 className="layout-heading">Dashboard</h2>
-      <p className="layout-desc">Welcome to the Admin Dashboard</p>
+      <div className="heading-wrapper">
+				<div className="heading-icon"><FontAwesomeIcon icon={faGauge} /></div>
+				<div className="heading">
+					<h2 className="layout-heading">Dashboard</h2>
+      		<p className="layout-desc">Welcome to the Admin Dashboard</p>
+				</div>
+			</div>
       <div className="dashboard-wrapper">
 				<div className="stats-list">
 					<Row>
