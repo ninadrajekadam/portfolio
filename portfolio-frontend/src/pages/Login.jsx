@@ -48,19 +48,23 @@ const Login = () => {
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length !== 0) return;
-    
+
     try {
       setLoading(true);
 
       const data = await login(email, password);
+      const token = data.token || data?.data?.token;
 
+      localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(data));
 
-      setAuthToken(data.token);
+      setAuthToken(token);
+
       toast.success("Login successful 🚀");
       navigate("/admin/dashboard");
+
     } catch (err) {
-      const message = err?.response?.data?.message || "Invalid email or password";
+      const message = err?.message || "Invalid email or password";
       toast.error(message);
     } finally {
       setLoading(false);

@@ -1,5 +1,5 @@
 import { Offcanvas, Nav } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGauge, faFolder, faCode, faBriefcase, faAward, faTrophy, faEnvelope, faGear, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import sidebarImg from "../../assets/images/ninad.png";
@@ -23,6 +23,11 @@ const AdminSidebar = ({ collapsed, showSidebar, setShowSidebar }) => {
 		name: "Ninad Kadam",
 		role: "Sr. Software Developer",
 		image: sidebarImg
+	}
+
+	const handleLogout = () => {
+		localStorage.removeItem("user");
+		window.location.href = "/";
 	}
 
   return (
@@ -63,7 +68,7 @@ const AdminSidebar = ({ collapsed, showSidebar, setShowSidebar }) => {
 					</div>
 					<div className="sidebar-bottom">
 						<div className="admin-sidebar__bottom">
-							<div className="admin-sidebar__user">
+							<Link to="/" target="_blank" className="admin-sidebar__user">
 								<div className="admin-sidebar__avatar">
 									<img src={adminInfo.image} alt="Ninad Kadam" className="admin-sidebar__avatar-img" />
 								</div>
@@ -75,8 +80,8 @@ const AdminSidebar = ({ collapsed, showSidebar, setShowSidebar }) => {
 										</div>
 									)
 								}
-							</div>
-							<button className="admin-sidebar__logout">
+							</Link>
+							<button className="admin-sidebar__logout" onClick={handleLogout}>
 								<FontAwesomeIcon icon={faRightFromBracket} /> {!collapsed && <span>Logout</span>}
 							</button>
 						</div>
@@ -122,7 +127,7 @@ const AdminSidebar = ({ collapsed, showSidebar, setShowSidebar }) => {
 										)
 									}
 								</div>
-								<button className="admin-sidebar__logout">
+								<button className="admin-sidebar__logout" onClick={handleLogout}>
 									<FontAwesomeIcon icon={faRightFromBracket} /> {!collapsed && <span>Logout</span>}
 								</button>
 							</div>

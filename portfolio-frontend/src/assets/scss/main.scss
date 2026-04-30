@@ -230,7 +230,7 @@ select:-webkit-autofill {
   .form-control, .form-select {
     background: $bg-tertiary;
     border: 1px solid $border-color;
-    color: $text-secondary;
+    color: $text-primary;
     &:focus {
       border-color: $primary;
       box-shadow: none;

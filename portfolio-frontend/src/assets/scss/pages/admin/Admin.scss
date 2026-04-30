@@ -10,16 +10,6 @@
 .experience-resp {
 	width: 40%;
 }
-.pills {
-	background: $bg-glass;
-	border: 1px solid $border-color;
-	border-radius: 50px;
-	padding: $spacing-sm $spacing-md;
-	margin-right: $spacing-sm;
-	&:last-child {
-		margin-right: 0;
-	}
-}
 
 // file upload input
 .file-upload {
@@ -35,10 +25,10 @@
   align-items: center;
   gap: $spacing-sm;
   padding: 8px 14px;
-  border-radius: $radius-md;
+  border-radius: $radius-sm;
   background: $bg-tertiary;
   border: 1px solid $border-color;
-  color: $text-secondary;
+  color: $text-primary;
   font-size: $fs-sm;
   font-family: $font-family;
   transition: $transition;

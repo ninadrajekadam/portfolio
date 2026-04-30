@@ -5,11 +5,13 @@ import cookieParser from "cookie-parser";
 
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import skillRoutes from "./routes/skillRoutes.js";
 
 const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
+app.use("/uploads", express.static("uploads"));
 
 const allowedOrigins = [process.env.CORS_ORIGIN, "http://localhost:5173"].filter(Boolean);
 const corsOptions = {
@@ -21,11 +23,11 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
 app.use(morgan("dev"));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/skills", skillRoutes);
 
 app.get("/", (req, res) => {
   res.send("API is running...");
