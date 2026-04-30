@@ -1,0 +1,82 @@
+@import "../mixins", "../variables";
+
+.pagenotfound {
+  min-height: 100vh;
+  background: $bg-primary;
+  padding: $spacing-lg;
+  @include flex-center;
+}
+.pagenotfound__card {
+  background: $bg-glass;
+  backdrop-filter: $blur;
+  border: 1px solid $border-color;
+  border-radius: $radius-lg;
+  padding: $spacing-xxl;
+  text-align: center;
+  box-shadow: $shadow-md;
+  max-width: 500px;
+  width: 100%;
+  transition: $transition;
+}
+.pagenotfound__header {
+  margin-bottom: $spacing-md;
+}
+.pagenotfound__icon {
+  font-size: $fs-xxl;
+  color: $warning;
+  margin-bottom: $spacing-sm;
+}
+.pagenotfound__code {
+  font-size: 72px;
+  font-weight: $fw-800;
+  background: $gradient-primary;
+	background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: $spacing-xs;
+}
+.pagenotfound__title {
+  font-size: $fs-lg;
+  font-weight: $fw-600;
+  margin-bottom: $spacing-sm;
+}
+.pagenotfound__desc {
+  font-size: $fs-sm;
+  color: $text-secondary;
+  margin-bottom: $spacing-lg;
+  line-height: 1.6;
+}
+.pagenotfound__actions {
+  display: flex;
+  justify-content: center;
+}
+.pagenotfound__link {
+  text-decoration: none;
+}
+.pagenotfound__btn {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-lg;
+  border-radius: $radius-xl;
+  background: $gradient-primary;
+  border: none;
+  color: $text-primary;
+  font-size: $fs-sm;
+  transition: $transition;
+}
+.pagenotfound__btn:hover {
+  transform: translateY(-2px);
+  box-shadow: $shadow-sm;
+}
+.pagenotfound__btn-text {
+  font-weight: $fw-500;
+}
+@include respond-down(sm) {
+  .pagenotfound__card {
+    padding: $spacing-lg;
+  }
+  .pagenotfound__code {
+    font-size: 56px;
+  }
+}

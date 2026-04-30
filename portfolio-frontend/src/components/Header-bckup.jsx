@@ -3,7 +3,7 @@ import { Navbar, Nav, Container } from "react-bootstrap";
 import "../assets/scss/components/Header.scss";
 import { Link } from "react-router-dom";
 
-const sections = ["home", "about", "experience", "contact"];
+const sections = ["home", "about", "skills","experience", "projects", "contact"];
 const Header = ({ setHeaderHeight }) => {
 	const [active, setActive] = useState("#home");
   const headerRef = useRef(null);
@@ -46,8 +46,11 @@ const Header = ({ setHeaderHeight }) => {
 
     const section = document.querySelector(id);
     if (section) {
+      const yOffset = -80;
+      const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset - 30;
+
       window.scrollTo({
-        top: section.offsetTop - 80,
+        top: y,
         behavior: "smooth",
       });
     }

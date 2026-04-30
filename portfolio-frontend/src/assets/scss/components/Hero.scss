@@ -33,6 +33,9 @@
     position: relative;
     z-index: 1;
   }
+  @include respond-down(md) {
+    padding: $spacing-lg 0 0;
+  }
   .hero-text {
     width: 100%;
     position: absolute;
@@ -61,6 +64,9 @@
       background: radial-gradient(circle, rgba($primary, 0.08), transparent 70%);
       animation-delay: 2s;
     }
+    @include respond-down(md) {
+      padding: 0 $spacing-xl;
+    }
     .name {
       font-size: 125px;
       font-weight: 900;
@@ -77,6 +83,10 @@
       animation: textGradient 8s linear infinite;
       position: relative;
       overflow: hidden;
+      @include respond-down(md) {
+        font-size: 75px;
+        text-align: center;
+      }
       &::after {
         content: "";
         position: absolute;
@@ -97,6 +107,10 @@
       margin: 0;
       color: $bg-glass;
       animation: rolePulse 3s ease-in-out infinite;
+      @include respond-down(md) {
+        font-size: 50px;
+        text-align: center;
+      }
     }
     @keyframes textGradient {
       0% {
@@ -159,18 +173,32 @@
     font-weight: $fw-700;
     margin-bottom: $spacing-sm;
     line-height: 1.2;
+    @include respond-down(md) {
+      font-size: $fs-xxl;
+    }
   }
   .hero-role {
-    font-size: $fs-xl;
+    font-size: $fs-md;
     font-weight: $fw-600;
     color: $primary-light;
     margin-bottom: $spacing-md;
+    @include respond-down(md) {
+      font-size: $fs-lg;
+      margin-bottom: $spacing-sm;
+    }
   }
   .hero-desc {
+    font-size: $fs-sm;
     color: $text-secondary;
     max-width: 500px;
     margin-bottom: $spacing-md;
     line-height: 1.6;
+    @include respond-down(md) {
+      margin-bottom: $spacing-sm;
+    }
+    @include respond-down(sm) {
+      margin-bottom: $spacing-md;
+    }
   }
   .hero-actions {
     display: flex;
@@ -181,6 +209,12 @@
     display: flex;
     gap: $spacing-md;
     margin-top: $spacing-md;
+    @include respond-down(md) {
+      margin-top: $spacing-sm;
+    }
+    @include respond-down(sm) {
+      margin-top: $spacing-md;
+    }
     .social-link {
       width: 40px;
       height: 40px;
@@ -201,6 +235,9 @@
     text-align: center;
     .hero-img {
       width: 600px;
+      @include respond-down(md) {
+        width: 100%;
+      }
     }
     .experience-badge {
       position: absolute;

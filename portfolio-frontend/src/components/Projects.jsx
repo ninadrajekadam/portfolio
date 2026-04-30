@@ -12,62 +12,77 @@ import docmodeSure from "../assets/images/project-thumbnails/docmode-sure.jpg";
 import docmodeAide from "../assets/images/project-thumbnails/docmode-aide.jpg";
 import axisBank from "../assets/images/project-thumbnails/axis-bank.jpg";
 import ihhLogo from "../assets/images/project-thumbnails/ihh-logo.png";
+import { useEffect } from "react";
+import { useState } from "react";
 
 const Projects = () => {
+	const [showTooltip, setShowTooltip] = useState(false);
+
+	useEffect(() => {
+		const handleResize = () => {
+			setShowTooltip(window.innerWidth <= 1366 && window.innerWidth >= 786);
+		};
+
+		handleResize();
+		window.addEventListener("resize", handleResize);
+
+		return () => window.removeEventListener("resize", handleResize);
+	}, []);
+
 	const projects = [
 		{
 			title: "IHH Websites",
 			image: ihhLogo,
 			stack: ["HTML5", "SCSS", "JavaScript", "Pug", "Grunt"],
-			description: "A network of healthcare websites under IHH, designed to provide information about hospitals, services, and patient care. These platforms ensure easy access to medical resources with a user-friendly and responsive interface."
+			description: "Managed maintenance and support for 17 IHH Singapore healthcare websites, ensuring high performance, consistent content structure, and optimized responsive experiences across the entire digital ecosystem."
 		},
 		{
 			title: "Axis Bank Website",
 			image: axisBank,
 			stack: ["HTML5", "SCSS", "JavaScript", "Pug", "Grunt"],
-			description: "The official digital platform of Axis Bank, offering banking services, financial products, and customer support online. It enables users to explore services, manage accounts, and access information seamlessly.",
+			description: "Developed and maintained Axis Bank’s digital platform, enabling seamless access to banking services and financial products with a strong focus on performance, scalability, and usability.",
 			link: "https://www.axis.bank.in/"
 		},
 		{
 			title: "SkillSignal",
 			image: skillsignal,
 			stack: ["HTML5", "CSS3", "jQuery", "Bootstrap", "Rest API"],
-			description: "A construction-focused safety and compliance platform that helps organizations manage worker onboarding, certifications, and job-site safety through a centralized system.",
+			description: "Developed a construction safety and compliance platform that streamlines worker onboarding, certification tracking, and site safety management through API-driven architecture.",
 			link: "https://app.skillsignal.com/SkillSignal/authentication/login"
 		},
 		{
 			title: "DocMode AIDE",
 			image: docmodeAide,
 			stack: ["HTML5", "CSS3", "jQuery", "Bootstrap", "Rest API"],
-			description: "A healthcare support platform designed to assist medical professionals with clinical decision-making and patient management through structured digital workflows.",
+			description: "Developed a healthcare decision-support system that enhances clinical workflows, supports medical professionals, and improves patient management through structured digital processes.",
 			link: "https://aide.docmode.org/"
 		},
 		{
 			title: "DocMode SURE",
 			image: docmodeSure,
 			stack: ["HTML5", "CSS3", "jQuery", "Bootstrap", "Rest API"],
-			description: "A patient safety and compliance platform that helps healthcare organizations maintain quality standards, track protocols, and improve clinical outcomes.",
+			description: "Developed a healthcare compliance and safety platform focused on maintaining clinical standards, monitoring protocols, and improving overall healthcare quality outcomes.",
 			link: "https://sure.docmode.org/"
 		},
 		{
 			title: "DocMode Website",
 			image: docmode,
 			stack: ["HTML5", "CSS3", "jQuery", "Bootstrap", "Rest API"],
-			description: "A healthcare learning and engagement platform that provides medical professionals with access to courses, webinars, and clinical resources for continuous education.",
+			description: "Developed a healthcare learning platform providing access to medical courses, webinars, and educational resources to support continuous professional development for medical professionals.",
 			link: "https://docmode.com/"
 		},
 		{
 			title: "iNutriMon",
 			image: inutrimon,
 			stack: ["HTML5", "CSS3", "jQuery", "Bootstrap", "Rest API"],
-			description: "A clinical nutrition management platform that helps hospitals and healthcare professionals plan, monitor, and optimize patient diet therapy using data-driven insights.",
+			description: "Developed a clinical nutrition management platform for hospitals, enabling structured diet planning, patient monitoring, and workflow optimization using data-driven insights.",
 			link: "https://inutrimon.com/"
 		},
 		{
 			title: "eKosh",
 			image: ekosh,
 			stack: ["HTML5", "CSS3", "jQuery", "Bootstrap", "Rest API"],
-			description: "A financial and marketplace platform that empowers small businesses and farmers by providing access to funding, resources, and growth opportunities through a connected ecosystem.",
+			description: "Developed a financial ecosystem platform supporting small businesses and farmers by enabling access to funding, resources, and digital marketplace services.",
 			link: "https://ekosh.in/"
 		}
 	];
@@ -101,7 +116,7 @@ const Projects = () => {
 									</div>
 									<div className="project-description-wrapper">
 										<p className="project-description">{project.description}</p>
-										<span className="tooltip-text">{project.description}</span>
+										{ showTooltip && (<span className="tooltip-text">{project.description}</span>) }
 									</div>
 								</div>
 							</div>

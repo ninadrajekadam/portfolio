@@ -22,9 +22,17 @@
       left: 41.666%;
       width: 1px;
       background: $border-color;
+      @include respond-down(md) {
+        display: none;
+      }
     }
-    @include respond-down(md) {
-      display: none;
+  }
+  @include respond-down(md) {
+    .row > * {
+      margin-bottom: $spacing-md;
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
   }
 }
