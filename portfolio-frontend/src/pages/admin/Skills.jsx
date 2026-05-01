@@ -22,54 +22,24 @@ const Skills = () => {
   const fetchSkills = async () => {
     try {
       const res = await getSkills();
-      setSkills(res.data.data);
-      toast.success("Skills loaded successfully");
+      console.log("API Response:", res);
+      setSkills(res.data || res);
     } catch (err) {
-      console.log(err);
+      console.log("Error fetching skills:", err);
       toast.error("Failed to load skills");
     }
   };
 
-	useEffect(() => {
-		let ignore = false;
-
-		const loadSkills = async () => {
-			try {
-				const res = await getSkills();
-				if (!ignore) {
-					setSkills(res.data.data);
-				}
-			} catch (err) {
-				console.log(err);
-			}
-		};
-
-		loadSkills();
-
-		return () => {
-			ignore = true;
-		};
-	}, []);
-
   useEffect(() => {
-		let isMounted = true;
-
-		(async () => {
-			try {
-				const res = await getSkills();
-				if (isMounted) {
-					setSkills(res.data.data);
-				}
-			} catch (err) {
-				console.log(err);
-			}
-		})();
-
-		return () => {
-			isMounted = false;
-		};
-	}, []);
-
+    (async () => {
+      try {
+        const res = await getSkills();
+        setSkills(res.data || res);
+      } catch (err) {
+        toast.error(err);
+      }
+    })();
+  }, []);
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setFormData({ ...formData, image: file });
@@ -91,14 +61,15 @@ const Skills = () => {
   const handleShow = () => setShow(true);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const value = e.target.name === "proficiency" ? Number.parseInt(e.target.value, 10) || "" : e.target.value;
+    setFormData({ ...formData, [e.target.name]: value });
   };
 
   const handleSubmit = async () => {
 		try {
 			const data = new FormData();
 			data.append("skillName", formData.name);
-			data.append("category", formData.category.toLowerCase());
+			data.append("category", formData.category);
 			data.append("proficiency", formData.proficiency);
 
 			if (formData.image) {
@@ -107,8 +78,10 @@ const Skills = () => {
 
 			if (isEdit) {
 				await updateSkill(editId, data);
+				toast.success("Skill updated successfully!");
 			} else {
 				await addSkill(data);
+				toast.success("Skill added successfully!");
 			}
 
 			fetchSkills();
@@ -117,34 +90,35 @@ const Skills = () => {
 			setEditId(null);
 		} catch (err) {
 			console.log(err);
+			toast.error(isEdit ? "Failed to update skill" : "Failed to add skill");
 		}
-	};
-
-	const handleEdit = (item) => {
-		setIsEdit(true);
-		setEditId(item._id);
-
-		setFormData({
-			name: item.skillName,
-			image: "",
-			category: item.category,
-			proficiency: item.proficiency,
-		});
-
-		setShow(true);
 	};
 
   const handleDelete = async (id) => {
     try {
       await deleteSkill(id);
-      fetchSkills();
-    } catch (err) {
-      console.log(err);
+			toast.success("Skill deleted successfully!");
+			fetchSkills();
+		} catch (err) {
+			console.log(err);
+			toast.error("Failed to delete skill");
     }
   };
 
   const handleSearch = (value) => {
     console.log(value);
+  };
+
+  const handleEdit = (item) => {
+    setIsEdit(true);
+    setEditId(item._id);
+    setFormData({
+      name: item.skillName,
+      image: "",
+      category: item.category,
+      proficiency: item.proficiency,
+    });
+    setShow(true);
   };
 
   return (

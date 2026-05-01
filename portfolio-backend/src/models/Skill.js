@@ -6,7 +6,7 @@ const skillSchema = new mongoose.Schema(
     skillImage: { type: String, required: true },
     imagePublicId: { type: String },
     category: { type: String, required: true },
-    proficiency: { type: String, required: true, trim: true },
+    proficiency: { type: Number, required: true, trim: true },
   },
   { timestamps: true }
 );

@@ -92,7 +92,7 @@ const Projects = () => {
 									<td>{ index + 1 }</td>
 									<td>{ item.projectName }</td>
 									<td>{ item.companyName }</td>
-									<td>{item.usedSkills?.join(", ")}</td>
+									<td>{ item.usedSkills?.join(", ") }</td>
 									<td>{ item.description }</td>
 									<td>
 										<Button className="btn-primary-custom"><FontAwesomeIcon icon={faPencil} /></Button>

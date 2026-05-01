@@ -35,11 +35,11 @@
 				background: $bg-secondary;
 				border-bottom: 1px solid $border-color;
 				&:first-child {
-					// width: 3%;
+					width: 3%;
 					border-top-left-radius: $radius-md;
 				}
 				&:last-child {
-					// width: 9%;
+					width: 9%;
 					border-top-right-radius: $radius-md;
 				}
 			}
