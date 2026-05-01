@@ -154,7 +154,8 @@ const Skills = () => {
 									<tr key={item._id}>
 										<td>{index + 1}</td>
 										<td>
-											<img src={`http://localhost:5000${item.skillImage}`} alt={item.skillName} className="skill-img"/>{" "}
+
+										<img src={`http://localhost:5000${item.skillImage}`} alt={item.skillName} className="skill-img"/>{" "}
 											{item.skillName}
 										</td>
 										<td>{item.category}</td>
@@ -168,7 +169,7 @@ const Skills = () => {
 								))
 							) : (
 								<tr>
-									<td colSpan="5" className="text-center">No Skills Available</td>
+									<td colSpan="5" className="text-center">Skills not available</td>
 								</tr>
 							)
 						}

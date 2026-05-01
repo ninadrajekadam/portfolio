@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, Modal, Table, Form } from "react-bootstrap";
-import { faCode, faPencil, faPlus, faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { faFolder, faPencil, faPlus, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Search from "./Search";
 
@@ -64,7 +64,7 @@ const Projects = () => {
     <>
       <div className="heading-btn-wrapper">
         <div className="heading-wrapper">
-          <div className="heading-icon"><FontAwesomeIcon icon={faCode} /></div>
+          <div className="heading-icon"><FontAwesomeIcon icon={faFolder} /></div>
           <div className="heading">
             <h2 className="layout-heading">Projects</h2>
             <p className="layout-desc">Real-world projects focused on UI development, performance, and usability.</p>

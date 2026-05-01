@@ -66,4 +66,25 @@ export const deleteSkill = async (id) => {
   return data;
 };
 
+// Experience CRUD operations
+export const getExperience = async () => {
+  const { data } = await api.get("/experience/getAllExperience");
+  return data;
+};
+
+export const addExperience = async (experienceData) => {
+  const { data } = await api.post("/experience/addExperience", experienceData);
+  return data;
+};
+
+export const updateExperience = async (id, experienceData) => {
+  const { data } = await api.put(`/experience/updateExperience/${id}`, experienceData);
+  return data;
+};
+
+export const deleteExperience = async (id) => {
+  const { data } = await api.delete(`/experience/deleteExperience/${id}`);
+  return data;
+};
+
 export default api;

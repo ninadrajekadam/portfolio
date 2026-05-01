@@ -221,7 +221,8 @@ select:-webkit-autofill {
   .modal-footer {
     border-top: 1px solid $border-color;
   }
-  .form-control, .form-select {
+  .form-control {
+    font-size: $fs-sm;
     background: $bg-tertiary;
     border: 1px solid $border-color;
     color: $text-primary;
@@ -235,8 +236,17 @@ select:-webkit-autofill {
       color: $text-secondary;
     }
   }
+  .form-select {
+    font-size: $fs-sm;
+    background: $bg-tertiary;
+    border: 1px solid $border-color;
+    color: $text-primary;
+    &:focus {
+      border-color: $primary;
+      box-shadow: none;
+    }
+  }
 }
-
 .Toastify__toast {
   background: $bg-secondary;
   color: $text-primary;

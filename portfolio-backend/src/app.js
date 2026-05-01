@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import skillRoutes from "./routes/skillRoutes.js";
+import experienceRoutes from "./routes/experienceRoutes.js";
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use(morgan("dev"));
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/skills", skillRoutes);
+app.use("/api/experience", experienceRoutes);
 
 app.get("/", (req, res) => {
   res.send("API is running...");
