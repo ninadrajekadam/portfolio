@@ -1,16 +1,42 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Row, Col, Dropdown } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCode, faBriefcase, faFolder, faChevronRight, faEnvelope, faTrophy, faAward, faGauge } from "@fortawesome/free-solid-svg-icons";
 import OverviewChart from "./OverviewChart";
 import ProfileViewsChart from "./ProfileViewsChart";
+import { getSkills, getExperience, getProjects } from "../../app/api";
 import "../../assets/scss/pages/admin/Dashboard.scss";
 
 const Dashboard = () => {
+	const [statsData, setStatsData] = useState({ skills: 0, experience: 0, projects: 0 });
+
+	useEffect(() => {
+		const loadStats = async () => {
+			try {
+				const [skills, experience, projects] = await Promise.all([
+					getSkills(),
+					getExperience(),
+					getProjects(),
+				]);
+
+				setStatsData({
+					skills: skills.data.length,
+					experience: experience.data.length,
+					projects: projects.data.length,
+				});
+			} catch (error) {
+				console.error(error);
+			}
+		};
+
+		loadStats();
+	}, []);
+
   const stats = [
-    { title: "Skills", count: 18, label: "Total Skills", icon: faCode, class: "skills" },
-    { title: "Experience", count: 4, label: "Total Experience", icon: faBriefcase, class: "experience" },
-    { title: "Projects", count: 8, label: "Total Projects", icon: faFolder, class: "projects" },
+    { title: "Skills", count: statsData.skills, label: "Total Skills", icon: faCode, class: "skills" },
+    { title: "Experience", count: statsData.experience, label: "Total Experience", icon: faBriefcase, class: "experience" },
+    { title: "Projects", count: statsData.projects, label: "Total Projects", icon: faFolder, class: "projects" },
     { title: "Certificates", count: 3, label: "Total Certificates", icon: faAward, class: "certificates" },
     { title: "Achievements", count: 5, label: "Total Achievements", icon: faTrophy, class: "achievements" },
     { title: "Messages", count: 100, label: "Total Messages", icon: faEnvelope, class: "messages" },
