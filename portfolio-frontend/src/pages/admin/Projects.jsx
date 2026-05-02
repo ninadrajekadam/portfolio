@@ -1,11 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button, Modal, Table, Form } from "react-bootstrap";
 import { faFolder, faPencil, faPlus, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { toast } from "react-toastify";
 import Search from "./Search";
+import { addProject, deleteProject, getProjects, updateProject } from "../../app/api";
 
 const Projects = () => {
   const [show, setShow] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
+  const [editId, setEditId] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const [formData, setFormData] = useState({
     projectName: "",
@@ -14,51 +19,108 @@ const Projects = () => {
     description: "",
   });
 
-  const [projects, setProjects] = useState([
-    {
-      id: 1,
-      projectName: "SkillSignal",
-      companyName: "AnalyticsFox Softwares Pvt Ltd",
-      usedSkills: [ "React", "Node", "MongoDB" ],
-      description: "Developed a construction safety and compliance platform that streamlines worker onboarding and certification tracking.",
-    },
-  ]);
+  const [projects, setProjects] = useState([]);
+
+  const fetchProjects = async () => {
+    try {
+      const res = await getProjects();
+      setProjects(res.data || []);
+    } catch (err) {
+      console.log(err);
+      toast.error("Failed to load projects");
+    }
+  };
+
+  useEffect(() => {
+    (async () => {
+      await fetchProjects();
+    })();
+  }, []);
+
+  const handleClose = () => {
+    setShow(false);
+    setIsEdit(false);
+    setEditId(null);
+    setFormData({
+      projectName: "",
+      companyName: "",
+      usedSkills: "",
+      description: "",
+    });
+  };
 
   const handleShow = () => setShow(true);
-  const handleClose = () => setShow(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = () => {
-		const newProject = {
-			id: projects.length + 1,
-			projectName: formData.projectName,
-			companyName: formData.companyName,
-			usedSkills: formData.usedSkills.split(",").map((skill) => skill.trim()).filter((skill) => skill !== ""),
-			description: formData.description,
-		};
+  const handleSubmit = async () => {
+    try {
+      if (!formData.projectName || !formData.companyName || !formData.description || !formData.usedSkills) {
+        toast.error("Please fill out all fields");
+        return;
+      }
 
-		setProjects([...projects, newProject]);
+      const payload = {
+        projectName: formData.projectName,
+        companyName: formData.companyName,
+        description: formData.description,
+        usedSkills: formData.usedSkills,
+      };
 
-		setFormData({
-			projectName: "",
-			companyName: "",
-			usedSkills: "",
-			description: "",
-		});
+      if (isEdit) {
+        await updateProject(editId, payload);
+        toast.success("Project updated successfully!");
+      } else {
+        await addProject(payload);
+        toast.success("Project added successfully!");
+      }
 
-		setShow(false);
-	};
+      fetchProjects();
+      handleClose();
+    } catch (err) {
+      console.log(err);
+      toast.error(isEdit ? "Failed to update project" : "Failed to add project");
+    }
+  };
 
-  const handleDelete = (id) => {
-    setProjects(projects.filter((item) => item.id !== id));
+  const handleDelete = async (id) => {
+    try {
+      await deleteProject(id);
+      toast.success("Project deleted successfully!");
+      fetchProjects();
+    } catch (err) {
+      console.log(err);
+      toast.error("Failed to delete project");
+    }
+  };
+
+  const handleEdit = (item) => {
+    setIsEdit(true);
+    setEditId(item._id);
+    setFormData({
+      projectName: item.projectName,
+      companyName: item.companyName,
+      usedSkills: item.usedSkills.join(", "),
+      description: item.description,
+    });
+    setShow(true);
   };
 
   const handleSearch = (value) => {
-    console.log(value);
+    setSearchQuery(value);
   };
+
+  const filteredProjects = projects.filter((item) => {
+    const query = searchQuery.toLowerCase();
+    return (
+      item.projectName.toLowerCase().includes(query) ||
+      item.companyName.toLowerCase().includes(query) ||
+      item.description.toLowerCase().includes(query) ||
+      item.usedSkills.some(skill => skill.toLowerCase().includes(query))
+    );
+  });
 
   return (
     <>
@@ -74,7 +136,7 @@ const Projects = () => {
       </div>
       <div className="table-wrapper">
         <Search placeholder="Search Projects..." onSearch={handleSearch} />
-        <Table className="custom-table">
+        <Table className="custom-table" responsive>
           <thead>
             <tr>
               <th>#</th>
@@ -87,27 +149,33 @@ const Projects = () => {
           </thead>
           <tbody>
             {
-							projects.map((item, index) => (
-								<tr key={item.id}>
-									<td>{ index + 1 }</td>
-									<td>{ item.projectName }</td>
-									<td>{ item.companyName }</td>
-									<td>{ item.usedSkills?.join(", ") }</td>
-									<td>{ item.description }</td>
-									<td>
-										<Button className="btn-primary-custom"><FontAwesomeIcon icon={faPencil} /></Button>
-										<span className="px-2"></span>
-										<Button className="btn-danger-custom" onClick={() => handleDelete(item.id)}><FontAwesomeIcon icon={faTrashCan} /></Button>
-									</td>
+							filteredProjects.length > 0 ? (
+								filteredProjects.map((item, index) => (
+									<tr key={item._id || item.id}>
+										<td>{ index + 1 }</td>
+										<td>{ item.projectName }</td>
+										<td>{ item.companyName }</td>
+										<td>{ item.usedSkills?.join(", ") }</td>
+										<td>{ item.description }</td>
+										<td>
+											<Button className="btn-primary-custom" onClick={() => handleEdit(item)}><FontAwesomeIcon icon={faPencil} /></Button>
+											<span className="px-2"></span>
+											<Button className="btn-danger-custom" onClick={() => handleDelete(item._id || item.id)}><FontAwesomeIcon icon={faTrashCan} /></Button>
+										</td>
+									</tr>
+								))
+							) : (
+								<tr>
+									<td colSpan="6" className="text-center">Project not available</td>
 								</tr>
-							))
+							)
 						}
           </tbody>
         </Table>
       </div>
       <Modal show={show} onHide={handleClose} centered className="custom-modal">
         <Modal.Header closeButton>
-          <Modal.Title>Add Project</Modal.Title>
+          <Modal.Title>{isEdit ? "Edit Project" : "Add Project"}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>

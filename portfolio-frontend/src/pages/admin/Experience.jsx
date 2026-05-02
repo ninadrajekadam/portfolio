@@ -258,7 +258,7 @@ const Experience = () => {
       </div>
       <div className="table-wrapper">
         <Search placeholder="Search Experience..." onSearch={handleSearch} />
-        <Table className="custom-table">
+        <Table responsive className="custom-table">
           <thead>
             <tr>
               <th>#</th>

@@ -87,4 +87,25 @@ export const deleteExperience = async (id) => {
   return data;
 };
 
+// Projects CRUD operations
+export const getProjects = async () => {
+  const { data } = await api.get("/projects");
+  return data;
+};
+
+export const addProject = async (projectData) => {
+  const { data } = await api.post("/projects", projectData);
+  return data;
+};
+
+export const updateProject = async (id, projectData) => {
+  const { data } = await api.put(`/projects/${id}`, projectData);
+  return data;
+};
+
+export const deleteProject = async (id) => {
+  const { data } = await api.delete(`/projects/${id}`);
+  return data;
+};
+
 export default api;

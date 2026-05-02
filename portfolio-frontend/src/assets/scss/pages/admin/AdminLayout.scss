@@ -210,6 +210,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   margin-bottom: $spacing-md;
   .heading-wrapper {
     margin-bottom: 0;
@@ -219,7 +220,7 @@
   }
 }
 .heading-wrapper {
-  width: max-content;
+  width: auto;
   display: flex;
   align-items: center;
   gap: $spacing-md;
@@ -246,6 +247,21 @@
   font-weight: $fw-500;
   margin-bottom: 0;
   color: $text-secondary;
+}
+.sidebar-footer {
+  margin-top: $spacing-sm;
+}
+.sidebar-footer-rights {
+  font-size: $fs-xs;
+  font-weight: $fw-500;
+  color: $text-muted;
+  margin-bottom: 0;
+}
+.sidebar-footer-text {
+  margin-bottom: $spacing-sm;
+}
+.footer-name {
+  font-weight: $fw-700;
 }
 @include respond-down(md) {
   .admin-sidebar {

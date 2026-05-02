@@ -3,8 +3,11 @@ import { Link, NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGauge, faFolder, faCode, faBriefcase, faAward, faTrophy, faEnvelope, faGear, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import sidebarImg from "../../assets/images/ninad.png";
+import { faCopyright } from "@fortawesome/free-regular-svg-icons";
 
 const AdminSidebar = ({ collapsed, showSidebar, setShowSidebar }) => {
+	const year = new Date().getFullYear();
+	
   const menuItems = [
     { name: "Dashboard", icon: faGauge, path: "/admin/dashboard" },
     { name: "Skills", icon: faCode, path: "/admin/skills" },
@@ -85,6 +88,11 @@ const AdminSidebar = ({ collapsed, showSidebar, setShowSidebar }) => {
 								<FontAwesomeIcon icon={faRightFromBracket} /> {!collapsed && <span>Logout</span>}
 							</button>
 						</div>
+						<div className="sidebar-footer">
+							<p className="sidebar-footer-rights">
+								<FontAwesomeIcon icon={faCopyright} /> {year} <span className="footer-name">Ninad Kadam</span>. All Rights Reserved.
+							</p>
+						</div>
 					</div>
 				</div>
       </div>
@@ -130,6 +138,11 @@ const AdminSidebar = ({ collapsed, showSidebar, setShowSidebar }) => {
 								<button className="admin-sidebar__logout" onClick={handleLogout}>
 									<FontAwesomeIcon icon={faRightFromBracket} /> {!collapsed && <span>Logout</span>}
 								</button>
+							</div>
+							<div className="sidebar-footer">
+								<p className="sidebar-footer-rights">
+									<FontAwesomeIcon icon={faCopyright} /> {year} <span className="footer-name">Ninad Kadam</span>. All Rights Reserved.
+								</p>
 							</div>
 						</div>
 					</div>

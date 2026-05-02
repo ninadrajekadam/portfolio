@@ -196,11 +196,7 @@ const Skills = () => {
                 </label>
               </div>
 							{
-								formData.image && (
-									<div className="file-name">
-										{ formData.image ? formData.image.name : "No file selected"}
-									</div>
-								)
+								formData.image && (<div className="file-name">{ formData.image ? formData.image.name : "No file selected"}</div>)
 							}
             </Form.Group>
             <Form.Group className="mb-3">
