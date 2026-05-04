@@ -1,16 +1,22 @@
 import { useState, useEffect } from "react";
 import { Button, Modal, Table, Form } from "react-bootstrap";
-import { faCode, faFolderOpen, faPencil, faPlus, faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { faCode, faPencil, faPlus, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import FileDropzone from "../../components/FileDropzone";
 import { toast } from "react-toastify";
 import Search from "./Search";
 import { addSkill, deleteSkill, getSkills, updateSkill } from "../../app/api";
+
+const BASE_URL = "http://localhost:5000";
 
 const Skills = () => {
   const [show, setShow] = useState(false);
   const [skills, setSkills] = useState([]);
 	const [isEdit, setIsEdit] = useState(false);
 	const [editId, setEditId] = useState(null);
+  
+  const [previewImage, setPreviewImage] = useState(null);
+  const [existingImage, setExistingImage] = useState("");
 
   const [formData, setFormData] = useState({
     name: "",
@@ -22,11 +28,9 @@ const Skills = () => {
   const fetchSkills = async () => {
     try {
       const res = await getSkills();
-      console.log("API Response:", res);
       setSkills(res.data || res);
     } catch (err) {
-      console.log("Error fetching skills:", err);
-      toast.error("Failed to load skills");
+      toast.error(err.message);
     }
   };
 
@@ -40,23 +44,22 @@ const Skills = () => {
       }
     })();
   }, []);
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setFormData({ ...formData, image: file });
-  };
 
   const handleClose = () => {
-		setShow(false);
-		setIsEdit(false);
-		setEditId(null);
+    setShow(false);
+    setIsEdit(false);
+    setEditId(null);
 
-		setFormData({
-			name: "",
-			image: "",
-			category: "",
-			proficiency: "",
-		});
-	};
+    setFormData({
+      name: "",
+      image: "",
+      category: "",
+      proficiency: "",
+    });
+
+    setPreviewImage(null);
+    setExistingImage("");
+  };
 
   const handleShow = () => setShow(true);
 
@@ -66,33 +69,32 @@ const Skills = () => {
   };
 
   const handleSubmit = async () => {
-		try {
-			const data = new FormData();
-			data.append("skillName", formData.name);
-			data.append("category", formData.category);
-			data.append("proficiency", formData.proficiency);
+    try {
+      const data = new FormData();
 
-			if (formData.image) {
-				data.append("skillImage", formData.image);
-			}
+      data.append("skillName", formData.name);
+      data.append("category", formData.category);
+      data.append("proficiency", formData.proficiency);
 
-			if (isEdit) {
-				await updateSkill(editId, data);
-				toast.success("Skill updated successfully!");
-			} else {
-				await addSkill(data);
-				toast.success("Skill added successfully!");
-			}
+      if (formData.image) {
+        data.append("skillImage", formData.image);
+      }
 
-			fetchSkills();
-			handleClose();
-			setIsEdit(false);
-			setEditId(null);
-		} catch (err) {
-			console.log(err);
-			toast.error(isEdit ? "Failed to update skill" : "Failed to add skill");
-		}
-	};
+      if (isEdit) {
+        await updateSkill(editId, data);
+        toast.success("Skill updated successfully!");
+      } else {
+        await addSkill(data);
+        toast.success("Skill added successfully!");
+      }
+
+      fetchSkills();
+      handleClose();
+    } catch (err) {
+      console.log(err);
+      toast.error(isEdit ? "Failed to update skill" : "Failed to add skill");
+    }
+  };
 
   const handleDelete = async (id) => {
     try {
@@ -112,12 +114,17 @@ const Skills = () => {
   const handleEdit = (item) => {
     setIsEdit(true);
     setEditId(item._id);
+
     setFormData({
       name: item.skillName,
       image: "",
       category: item.category,
       proficiency: item.proficiency,
     });
+
+    setExistingImage(item.skillImage);
+    setPreviewImage(null);
+
     setShow(true);
   };
 
@@ -153,11 +160,7 @@ const Skills = () => {
 								skills.map((item, index) => (
 									<tr key={item._id}>
 										<td>{index + 1}</td>
-										<td>
-
-										<img src={`http://localhost:5000${item.skillImage}`} alt={item.skillName} className="skill-img"/>{" "}
-											{item.skillName}
-										</td>
+										<td><img src={`${BASE_URL}${item.skillImage}`} alt={item.skillName} className="skill-img"/>{" "}{item.skillName}</td>
 										<td>{item.category}</td>
 										<td>{item.proficiency}%</td>
 										<td>
@@ -188,16 +191,12 @@ const Skills = () => {
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Skill Image</Form.Label>
-              <div className="file-upload">
-                <input type="file" name="image" accept="image/*" id="skillImageUpload" onChange={handleImageChange} />
-                <label htmlFor="skillImageUpload" className="file-upload__label">
-                  <FontAwesomeIcon icon={faFolderOpen} className="file-upload__icon" />
-                  <span>Upload Image</span>
-                </label>
-              </div>
-							{
-								formData.image && (<div className="file-name">{ formData.image ? formData.image.name : "No file selected"}</div>)
-							}
+              <FileDropzone label="Drop Skill Image" accept={{ "image/*": [] }} preview={previewImage ? previewImage : existingImage ? `${BASE_URL}${existingImage}` : null}
+                onFileSelect={(file) => {
+                  setFormData({ ...formData, image: file });
+                  setPreviewImage(URL.createObjectURL(file));
+                }}
+              />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Category</Form.Label>

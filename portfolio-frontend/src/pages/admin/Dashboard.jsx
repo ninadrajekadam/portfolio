@@ -5,28 +5,31 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCode, faBriefcase, faFolder, faChevronRight, faEnvelope, faTrophy, faAward, faGauge } from "@fortawesome/free-solid-svg-icons";
 import OverviewChart from "./OverviewChart";
 import ProfileViewsChart from "./ProfileViewsChart";
-import { getSkills, getExperience, getProjects } from "../../app/api";
+import { getSkills, getExperience, getProjects, getMessages } from "../../app/api";
 import "../../assets/scss/pages/admin/Dashboard.scss";
+import { toast } from "react-toastify";
 
 const Dashboard = () => {
-	const [statsData, setStatsData] = useState({ skills: 0, experience: 0, projects: 0 });
+	const [statsData, setStatsData] = useState({ skills: 0, experience: 0, projects: 0, messages: 0 });
 
 	useEffect(() => {
 		const loadStats = async () => {
 			try {
-				const [skills, experience, projects] = await Promise.all([
+				const [skills, experience, projects, messages] = await Promise.all([
 					getSkills(),
 					getExperience(),
 					getProjects(),
+					getMessages(),
 				]);
 
 				setStatsData({
 					skills: skills.data.length,
 					experience: experience.data.length,
 					projects: projects.data.length,
+					messages: messages.length
 				});
 			} catch (error) {
-				console.error(error);
+				toast.error(error);
 			}
 		};
 
@@ -37,9 +40,9 @@ const Dashboard = () => {
     { title: "Skills", count: statsData.skills, label: "Total Skills", icon: faCode, class: "skills" },
     { title: "Experience", count: statsData.experience, label: "Total Experience", icon: faBriefcase, class: "experience" },
     { title: "Projects", count: statsData.projects, label: "Total Projects", icon: faFolder, class: "projects" },
-    { title: "Certificates", count: 3, label: "Total Certificates", icon: faAward, class: "certificates" },
-    { title: "Achievements", count: 5, label: "Total Achievements", icon: faTrophy, class: "achievements" },
-    { title: "Messages", count: 100, label: "Total Messages", icon: faEnvelope, class: "messages" },
+    { title: "Certificates", count: 0, label: "Total Certificates", icon: faAward, class: "certificates" },
+    { title: "Achievements", count: 0, label: "Total Achievements", icon: faTrophy, class: "achievements" },
+    { title: "Messages", count: statsData.messages, label: "Total Messages", icon: faEnvelope, class: "messages" },
   ];
 
   return (
@@ -56,6 +59,7 @@ const Dashboard = () => {
 					<Row>
 						{
 							stats.map((item, index) => (
+								item.count === 0 ? null :
 								<Col xxl={3} xl={4} lg={4} md={6} sm={12} xs={12} key={ index }>
 									<Link to={ `/admin/${ item.class }` } className={`dashboard-card dashboard-card--${ item.class }`}>
 										<div className="dashboard-card__left">

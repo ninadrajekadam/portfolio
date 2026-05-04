@@ -2,8 +2,11 @@ import { Offcanvas, Nav } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGauge, faFolder, faCode, faBriefcase, faAward, faTrophy, faEnvelope, faGear, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
-import sidebarImg from "../../assets/images/ninad.png";
 import { faCopyright } from "@fortawesome/free-regular-svg-icons";
+import { getProfile } from "../../app/api";
+import { useEffect, useState } from "react";
+
+const BASE_URL = "http://localhost:5000";
 
 const AdminSidebar = ({ collapsed, showSidebar, setShowSidebar }) => {
 	const year = new Date().getFullYear();
@@ -16,16 +19,37 @@ const AdminSidebar = ({ collapsed, showSidebar, setShowSidebar }) => {
   ];
 
 	const menuOther = [
-		{ name: "Certificates", icon: faAward, path: "/admin/certificates" },
+		{ name: "Certifications", icon: faAward, path: "/admin/certifications" },
 		{ name: "Achievements", icon: faTrophy, path: "/admin/achievements" },
 		{ name: "Messages", icon: faEnvelope, path: "/admin/messages" },
 		{ name: "Settings", icon: faGear, path: "/admin/settings" },
 	];
 
+	const [form, setForm] = useState({
+		profileName: "",
+		profileemail: "",
+		profilerole: "",
+		profileabout: ""
+	});
+
+	const [existingImage, setExistingImage] = useState("");
+
+	useEffect(() => {
+		getProfile().then((res) => {
+			if (res) {
+				setForm({
+					profileName: res.name || "",
+					profilerole: res.role || ""
+				});
+				setExistingImage(res.profileImage);
+			}
+		});
+	}, []);
+
 	const adminInfo = {
-		name: "Ninad Kadam",
-		role: "Sr. Software Developer",
-		image: sidebarImg
+		name: form.profileName,
+		role: form.profilerole,
+		image: `${BASE_URL}/uploads/profile/${existingImage}`
 	}
 
 	const handleLogout = () => {

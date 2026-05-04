@@ -2,9 +2,20 @@ import { useState, useEffect } from "react";
 import { Button, Modal, Table, Form } from "react-bootstrap";
 import { faFolder, faPencil, faPlus, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import FileDropzone from "../../components/FileDropzone";
 import { toast } from "react-toastify";
 import Search from "./Search";
 import { addProject, deleteProject, getProjects, updateProject } from "../../app/api";
+
+const BASE_URL = "http://localhost:5000";
+const isValidURL = (url) => {
+  try {
+    new URL(url);
+    return true;
+  } catch {
+    return false;
+  }
+};
 
 const Projects = () => {
   const [show, setShow] = useState(false);
@@ -12,11 +23,16 @@ const Projects = () => {
   const [editId, setEditId] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
 
+  const [projectImage, setProjectImage] = useState(null);
+  const [previewImage, setPreviewImage] = useState(null);
+	const [existingImage, setExistingImage] = useState("");
+
   const [formData, setFormData] = useState({
     projectName: "",
     companyName: "",
     usedSkills: "",
     description: "",
+    projectUrl: ""
   });
 
   const [projects, setProjects] = useState([]);
@@ -26,8 +42,7 @@ const Projects = () => {
       const res = await getProjects();
       setProjects(res.data || []);
     } catch (err) {
-      console.log(err);
-      toast.error("Failed to load projects");
+      toast.error(err.message);
     }
   };
 
@@ -41,12 +56,18 @@ const Projects = () => {
     setShow(false);
     setIsEdit(false);
     setEditId(null);
+
     setFormData({
       projectName: "",
       companyName: "",
       usedSkills: "",
       description: "",
+      projectUrl: "",
     });
+
+    setProjectImage(null);
+    setPreviewImage(null);
+    setExistingImage("");
   };
 
   const handleShow = () => setShow(true);
@@ -57,31 +78,48 @@ const Projects = () => {
 
   const handleSubmit = async () => {
     try {
-      if (!formData.projectName || !formData.companyName || !formData.description || !formData.usedSkills) {
+      if (
+        !formData.projectName ||
+        !formData.companyName ||
+        !formData.description ||
+        !formData.usedSkills
+      ) {
         toast.error("Please fill out all fields");
         return;
       }
 
-      const payload = {
-        projectName: formData.projectName,
-        companyName: formData.companyName,
-        description: formData.description,
-        usedSkills: formData.usedSkills,
-      };
+      if (formData.projectUrl && !isValidURL(formData.projectUrl)) {
+        toast.error("Please enter a valid project URL");
+        return;
+      }
+
+      const formDataToSend = new FormData();
+
+      formDataToSend.append("projectName", formData.projectName);
+      formDataToSend.append("companyName", formData.companyName);
+      formDataToSend.append("description", formData.description);
+      formDataToSend.append("usedSkills", formData.usedSkills);
+
+      if (formData.projectUrl) {
+        formDataToSend.append("projectUrl", formData.projectUrl);
+      }
+
+      if (projectImage) {
+        formDataToSend.append("projectImage", projectImage);
+      }
 
       if (isEdit) {
-        await updateProject(editId, payload);
+        await updateProject(editId, formDataToSend);
         toast.success("Project updated successfully!");
       } else {
-        await addProject(payload);
+        await addProject(formDataToSend);
         toast.success("Project added successfully!");
       }
 
       fetchProjects();
       handleClose();
     } catch (err) {
-      console.log(err);
-      toast.error(isEdit ? "Failed to update project" : "Failed to add project");
+      toast.error(err.message || (isEdit ? "Failed to update project" : "Failed to add project"));
     }
   };
 
@@ -99,12 +137,17 @@ const Projects = () => {
   const handleEdit = (item) => {
     setIsEdit(true);
     setEditId(item._id);
+
     setFormData({
       projectName: item.projectName,
       companyName: item.companyName,
       usedSkills: item.usedSkills.join(", "),
       description: item.description,
+      projectUrl: item.projectUrl || ""
     });
+    
+    setExistingImage(item.image);
+    setPreviewImage(null);
     setShow(true);
   };
 
@@ -191,9 +234,22 @@ const Projects = () => {
               <Form.Label>Used Skills</Form.Label>
               <Form.Control type="text" name="usedSkills" value={formData.usedSkills} onChange={handleChange} placeholder="e.g. React, Node, MongoDB" />
             </Form.Group>
-            <Form.Group>
+            <Form.Group className="mb-3">
               <Form.Label>Description</Form.Label>
               <Form.Control as="textarea" rows={4} name="description" value={formData.description} onChange={handleChange} placeholder="Enter project description" />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Project URL</Form.Label>
+              <Form.Control type="text" name="projectUrl" value={formData.projectUrl} onChange={handleChange} placeholder="https://your-project-link.com" />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Project Screenshot</Form.Label>
+              <FileDropzone label="Drop Project Image" accept={{ "image/*": [] }} preview={ previewImage ? previewImage : existingImage ? `${BASE_URL}/${existingImage}` : null }
+                onFileSelect={(file) => {
+                  setProjectImage(file);
+                  setPreviewImage(URL.createObjectURL(file));
+                }}
+              />
             </Form.Group>
           </Form>
         </Modal.Body>

@@ -38,3 +38,35 @@
   font-size: $fs-md;
   color: $primary;
 }
+
+.setting-wrapper {
+  height: 100%;
+  background: $bg-secondary;
+	border: 1px solid $border-color;
+  border-radius: $radius-md;
+  padding: $spacing-md;
+  box-shadow: $shadow-sm;
+  overflow-x: auto;
+	backdrop-filter: $blur;
+  transition: $transition;
+  &:hover {
+    box-shadow: $shadow-md;
+  }
+  .title {
+    font-size: $fs-md;
+    font-weight: $fw-600;
+    color: $text-secondary;
+    margin-bottom: $spacing-md;
+  }
+}
+.profile-image {
+  .img {
+    width: 150px;
+    height: 150px;
+    border: 1px solid $border-color;
+    border-radius: 50%;
+  }
+  .dropzone {
+    margin-bottom: 0;
+  }
+}

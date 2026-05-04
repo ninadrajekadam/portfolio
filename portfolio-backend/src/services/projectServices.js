@@ -21,8 +21,9 @@ export const createProject = async (projectData) => {
     companyName: projectData.companyName,
     description: projectData.description,
     usedSkills: normalizeSkills(projectData.usedSkills),
+    projectUrl: projectData.projectUrl || "",
+    image: projectData.image || ""
   });
-
   return await project.save();
 };
 
@@ -38,6 +39,8 @@ export const updateProject = async (id, updateData) => {
   const normalizedData = {
     ...updateData,
     usedSkills: updateData.usedSkills ? normalizeSkills(updateData.usedSkills) : undefined,
+    projectUrl: updateData.projectUrl,
+    image: updateData.image
   };
 
   return await Project.findByIdAndUpdate(id, normalizedData, {

@@ -20,7 +20,6 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// auth token
 export const setAuthToken = (token) => {
   if (token) {
     api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -29,7 +28,6 @@ export const setAuthToken = (token) => {
   }
 };
 
-// login api
 export const login = async (email, password) => {
   try {
     const { data } = await api.post("/auth/login", { email, password });
@@ -39,13 +37,6 @@ export const login = async (email, password) => {
   }
 };
 
-// user profile
-export const getProfile = async () => {
-  const { data } = await api.get("/users/profile");
-  return data;
-};
-
-// Skills CRUD operations
 export const getSkills = async () => {
   const { data } = await api.get("/skills/getAllSkills");
   return data;
@@ -66,7 +57,6 @@ export const deleteSkill = async (id) => {
   return data;
 };
 
-// Experience CRUD operations
 export const getExperience = async () => {
   const { data } = await api.get("/experience/getAllExperience");
   return data;
@@ -89,22 +79,75 @@ export const deleteExperience = async (id) => {
 
 // Projects CRUD operations
 export const getProjects = async () => {
-  const { data } = await api.get("/projects");
+  const { data } = await api.get("/projects/getAllProjects");
   return data;
 };
 
 export const addProject = async (projectData) => {
-  const { data } = await api.post("/projects", projectData);
+  const { data } = await api.post("/projects/addProject", projectData);
   return data;
 };
 
 export const updateProject = async (id, projectData) => {
-  const { data } = await api.put(`/projects/${id}`, projectData);
+  const { data } = await api.put(`/projects/updateProject/${id}`, projectData);
   return data;
 };
 
 export const deleteProject = async (id) => {
-  const { data } = await api.delete(`/projects/${id}`);
+  const { data } = await api.delete(`/projects/deleteProject/${id}`);
+  return data;
+};
+
+export const sendMessage = async (messageData) => {
+  try {
+    const { data } = await api.post("/messages/contact", messageData);
+    return data;
+  } catch (error) {
+    throw error.response?.data || { message: "Failed to send message" };
+  }
+};
+
+export const getMessages = async () => {
+  const { data } = await api.get("/messages/getMessages");
+  return data;
+};
+
+export const getUnreadCount = async () => {
+  const { data } = await api.get("/messages/unreadCount");
+  return data;
+};
+
+export const markAsRead = async (id) => {
+  const { data } = await api.put(`/messages/read/${id}`);
+  return data;
+};
+
+export const replyToMessage = async (id, reply) => {
+  const { data } = await api.post(`/messages/reply/${id}`, { reply });
+  return data;
+};
+
+export const deleteMessage = async (id) => {
+  const { data } = await api.delete(`/messages/deleteMessage/${id}`);
+  return data;
+};
+
+export const getProfile = async () => {
+  const { data } = await api.get("/profile/getProfile");
+  return data;
+};
+
+export const updateProfile = async (formData) => {
+  try {
+    const { data } = await api.put("/profile/update", formData);
+    return data;
+  } catch (error) {
+    throw error.response?.data || { message: "Failed to update profile" };
+  }
+};
+
+export const saveProfile = async (formData) => {
+  const { data } = await api.post("/profile/save", formData);
   return data;
 };
 

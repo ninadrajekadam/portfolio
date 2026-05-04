@@ -16,12 +16,6 @@
 			}
     }
   }
-	.form-group {
-		margin-bottom: $spacing-md;
-		@include respond-down(md) {
-			margin-bottom: 0;
-		}
-	}
 	.form-control {
 		background: $bg-tertiary;
 		border: 1px solid rgba($border-color, 0.4);

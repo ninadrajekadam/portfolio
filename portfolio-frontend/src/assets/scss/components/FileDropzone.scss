@@ -1,0 +1,67 @@
+@import "../variables";
+
+.dropzone {
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 1px solid $border-color;
+	border-radius: $radius-sm;
+	padding: $spacing-lg;
+	text-align: center;
+	cursor: pointer;
+	transition: $transition;
+	background: $bg-glass;
+	backdrop-filter: $blur;
+	color: $text-secondary;
+	box-shadow: $shadow-sm;
+	position: relative;
+	margin-bottom: $spacing-lg;
+	&:hover {
+		border-color: $primary;
+		background: rgba(79, 70, 229, 0.08);
+		box-shadow: $shadow-md;
+		color: $text-primary;
+	}
+	&.active {
+		border-color: $primary-light;
+		background: rgba(99, 102, 241, 0.12);
+		box-shadow: $shadow-md;
+		color: $text-primary;
+		transform: scale(1.01);
+	}
+}
+.drop-preview {
+	width: 70px;
+	height: 70px;
+	border-radius: 50%;
+	object-fit: cover;
+	border: 1px solid $border-color;
+	box-shadow: $shadow-sm;
+	margin-bottom: $spacing-sm;
+}
+.drop-content {
+	.drop-label {
+		margin: 0;
+		font-size: $fs-sm;
+		font-weight: $fw-500;
+		color: $text-secondary;
+	}
+	.drop-text {
+		font-size: $fs-xs;
+		color: $text-muted;
+	}
+}
+.drop-icon {
+	font-size: $fs-xl;
+	color: $primary;
+	margin-bottom: $spacing-sm;
+}
+.dropzone--cv {
+	border-radius: $radius-md;
+	.drop-preview {
+		width: $s-50px;
+		height: $s-50px;
+		border-radius: $radius-sm;
+	}
+}

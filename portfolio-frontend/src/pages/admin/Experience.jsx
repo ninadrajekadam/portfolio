@@ -98,8 +98,7 @@ const Experience = () => {
       const res = await getExperience();
       setExperience(res.data || []);
     } catch (err) {
-      console.log(err);
-      toast.error("Failed to load experience");
+      toast.error(err.message);
     }
   };
 

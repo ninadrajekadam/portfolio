@@ -5,8 +5,8 @@ import { addSkill, getAllSkills, updateSkill, deleteSkill } from "../controllers
 
 const router = express.Router();
 
-router.post("/addSkill", protect, upload.single("skillImage"), addSkill);
 router.get("/getAllSkills", getAllSkills);
+router.post("/addSkill", protect, upload.single("skillImage"), addSkill);
 router.put("/updateSkill/:id", protect, upload.single("skillImage"), updateSkill);
 router.delete("/deleteSkill/:id", protect, deleteSkill);
 

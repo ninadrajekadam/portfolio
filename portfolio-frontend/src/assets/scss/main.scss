@@ -186,8 +186,14 @@ a {
   font-size: $fs-sm;
   font-weight: $fw-500;
 }
+.form-group {
+  margin-bottom: $spacing-md;
+  @include respond-down(md) {
+    margin-bottom: 0;
+  }
+}
 .form-check-input {
-  background: $bg-tertiary;
+  background-color: $bg-tertiary;
   border-color: $text-muted;
 }
 .form-check-label {
@@ -203,6 +209,33 @@ select:-webkit-autofill {
   -webkit-text-fill-color: $text-primary !important;
   caret-color: $text-primary;
   transition: background-color 5000s ease-in-out 0s;
+}
+.form-control {
+  font-size: $fs-sm;
+  background: $bg-tertiary;
+  border: 1px solid $border-color;
+  color: $text-primary;
+  &:focus {
+    background: $bg-tertiary;
+    border-color: $primary;
+    color: $text-primary;
+    box-shadow: none;
+  }
+  &::placeholder {
+    font-size: $fs-sm;
+    font-weight: $fw-500;
+    color: $text-secondary;
+  }
+}
+.form-select {
+  font-size: $fs-sm;
+  background: $bg-tertiary;
+  border: 1px solid $border-color;
+  color: $text-primary;
+  &:focus {
+    border-color: $primary;
+    box-shadow: none;
+  }
 }
 .error-text {
   color: $error;
@@ -220,31 +253,6 @@ select:-webkit-autofill {
   }
   .modal-footer {
     border-top: 1px solid $border-color;
-  }
-  .form-control {
-    font-size: $fs-sm;
-    background: $bg-tertiary;
-    border: 1px solid $border-color;
-    color: $text-primary;
-    &:focus {
-      border-color: $primary;
-      box-shadow: none;
-    }
-    &::placeholder {
-      font-size: $fs-sm;
-      font-weight: $fw-500;
-      color: $text-secondary;
-    }
-  }
-  .form-select {
-    font-size: $fs-sm;
-    background: $bg-tertiary;
-    border: 1px solid $border-color;
-    color: $text-primary;
-    &:focus {
-      border-color: $primary;
-      box-shadow: none;
-    }
   }
 }
 .Toastify__toast {
