@@ -1,33 +1,42 @@
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "../assets/scss/components/Skills.scss";
 import { faCode } from "@fortawesome/free-solid-svg-icons";
+import "../assets/scss/components/Skills.scss";
+import { getSkills } from "../app/api";
+import { toast } from "react-toastify";
+
+const BASE_URL = "http://localhost:5000";
 
 const Skills = () => {
-	const skills = [
-		{ name: "HTML5", img: "https://img.icons8.com/color/48/000000/html-5.png" },
-		{ name: "CSS3", img: "https://img.icons8.com/color/48/000000/css3.png" },
-		{ name: "SCSS", img: "https://img.icons8.com/color/48/000000/sass.png" },
-		{ name: "Bootstrap", img: "https://img.icons8.com/color/48/000000/bootstrap.png" },
-		{ name: "JavaScript", img: "https://img.icons8.com/color/48/000000/javascript.png" },
-		{ name: "ReactJs", img: "https://img.icons8.com/color/48/000000/react-native.png" },
-		{ name: "Vite", img: "https://img.icons8.com/color/48/000000/vite.png" },
-		{ name: "NodeJs", img: "https://img.icons8.com/color/48/000000/nodejs.png" },
-		{ name: "ExpressJs", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg", className: "filter" },
-		{ name: "MongoDB", img: "https://img.icons8.com/color/48/000000/mongodb.png" },
-		{ name: "NPM", img: "https://img.icons8.com/color/48/000000/npm.png" },
-		{ name: "Git", img: "https://img.icons8.com/color/48/000000/git.png" },
-	];
+	const [skills, setSkills] = useState([]);
+			
+	useEffect(() => {
+		const fetchAllData = async () => {
+			try {
+				const [skillsRes] = await Promise.all([
+					getSkills()
+				]);
+				setSkills(skillsRes?.data || []);
+			} catch (err) {
+				toast.error(err.message || "Failed to load data");
+			}
+		};
+
+		fetchAllData();
+	}, []);
 
 	return (
 		<>
 			<section className="skills-section">
-				<h3 className="section-title"><FontAwesomeIcon icon={faCode} /> Skills</h3>
+				<h3 className="section-title"><FontAwesomeIcon icon={faCode} /> Tech Stacks</h3>
 				<ul className="skills-list">
 					{
 						skills.map((skill, index) => (
 							<li className="skill-item" key={index}>
-								<span className="skill-img"><img src={skill.img} alt={skill.name} className={skill.className} /></span>
-								<span className="skill-name">{skill.name}</span>
+								<span className="skill-img">
+									<img src={`${BASE_URL}${skill.skillImage}`} alt={skill.skillName} className={skill.skillName === "ExpressJs" ? "filter" : ""} />
+								</span>
+								<span className="skill-name">{skill.skillName}</span>
 							</li>
 						))
 					}

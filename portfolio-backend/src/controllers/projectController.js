@@ -22,8 +22,6 @@ const isValidURL = (url) => {
 
 export const addProject = async (req, res) => {
   try {
-    console.log("BODY:", req.body);
-    console.log("FILE:", req.file);
     const { projectName, companyName, description, usedSkills, projectUrl } = req.body;
 
     if (!projectName || !companyName || !description) {

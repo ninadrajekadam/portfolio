@@ -4,12 +4,16 @@ import { Container, Row, Col } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faFacebook, faGithub, faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
-import { getProfile } from "../app/api";
+import { getProfile, getExperience } from "../app/api";
 import "../assets/scss/components/Hero.scss";
+import { toast } from "react-toastify";
 
 const BASE_URL = "http://localhost:5000";
 
 const Hero = ({ headerHeight }) => {
+	const [experience, setExperience] = useState([]);
+	const [existingImage, setExistingImage] = useState("");
+	const [existingCV, setExistingCV] = useState("");
 	const [form, setForm] = useState({
 		profileName: "",
 		profileemail: "",
@@ -17,8 +21,22 @@ const Hero = ({ headerHeight }) => {
 		profileabout: ""
 	});
 
-	const [existingImage, setExistingImage] = useState("");
-	const [existingCV, setExistingCV] = useState("");
+	const fetchExperience = async () => {
+		try {
+			const res = await getExperience();
+			setExperience(res.data || []);
+		} catch (err) {
+			toast.error(err.message);
+		}
+	};
+
+	useEffect(() => {
+		(async () => {
+			await fetchExperience();
+		})();
+	}, []);
+
+	const totalExperience = experience.reduce((total, exp) => total + exp.totalExp, 0).toFixed(1);
 
 	useEffect(() => {
 		getProfile().then((res) => {
@@ -48,7 +66,7 @@ const Hero = ({ headerHeight }) => {
 							<p className="hero-subtitle">HELLO, I'M</p>
 							<h1 className="hero-title gradient-text">{form.profileName}</h1>
 							<h2 className="hero-role typing">{form.profilerole}</h2>
-							<p className="hero-desc">Results-driven Senior Software Developer with 6+ years of experience building scalable web applications and delivering high-quality UI solutions.</p>
+							<p className="hero-desc">Results-driven Senior Software Developer with {totalExperience} years of experience building scalable web applications and delivering high-quality UI solutions.</p>
 							<div className="hero-actions">
 								<Link to={`${BASE_URL}/uploads/pdf/${existingCV}`} target="_blank" className="btn-primary-custom">Download CV <FontAwesomeIcon icon={faDownload} /></Link>
 							</div>
@@ -62,7 +80,7 @@ const Hero = ({ headerHeight }) => {
 						<Col xl={6} lg={6} md={6} sm={6} xs={12} className="hero-image-wrapper">
 							<img src={`${BASE_URL}/uploads/profile/${existingImage}`} alt="hero" className="hero-img" />
 							<div className="experience-badge">
-								<span className="exp-number">6+</span>
+								<span className="exp-number">{totalExperience}</span>
 								<span className="exp-text">Years of Experience</span>
 							</div>
 						</Col>

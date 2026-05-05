@@ -14,7 +14,7 @@ const Skills = () => {
   const [skills, setSkills] = useState([]);
 	const [isEdit, setIsEdit] = useState(false);
 	const [editId, setEditId] = useState(null);
-  
+  const [searchQuery, setSearchQuery] = useState("");
   const [previewImage, setPreviewImage] = useState(null);
   const [existingImage, setExistingImage] = useState("");
 
@@ -91,8 +91,7 @@ const Skills = () => {
       fetchSkills();
       handleClose();
     } catch (err) {
-      console.log(err);
-      toast.error(isEdit ? "Failed to update skill" : "Failed to add skill");
+      toast.error(isEdit ? err.message || "Failed to update skill" : err.message || "Failed to add skill");
     }
   };
 
@@ -102,13 +101,12 @@ const Skills = () => {
 			toast.success("Skill deleted successfully!");
 			fetchSkills();
 		} catch (err) {
-			console.log(err);
-			toast.error("Failed to delete skill");
+			toast.error(err.message || "Failed to delete skill");
     }
   };
 
   const handleSearch = (value) => {
-    console.log(value);
+    setSearchQuery(value);
   };
 
   const handleEdit = (item) => {
@@ -128,23 +126,28 @@ const Skills = () => {
     setShow(true);
   };
 
+  const filteredSkills = skills.filter((item) => {
+    const query = searchQuery.toLowerCase();
+
+    return (
+      item.skillName?.toLowerCase().includes(query) ||
+      item.category?.toLowerCase().includes(query) ||
+      String(item.proficiency)?.toLowerCase().includes(query)
+    );
+  });
+
   return (
     <>
       <div className="heading-btn-wrapper">
         <div className="heading-wrapper">
           <div className="heading-icon"><FontAwesomeIcon icon={faCode} /></div>
-          <div className="heading">
-            <h2 className="layout-heading">Skills</h2>
-            <p className="layout-desc">Skills in frontend, backend, and database development for web applications.</p>
-          </div>
+          <div className="heading"><h2 className="layout-heading">Skills</h2></div>
         </div>
-        <Button className="btn-primary-custom add-btn" onClick={handleShow}>
-          <FontAwesomeIcon icon={faPlus} /> Add Skill
-        </Button>
+        <Button className="btn-primary-custom add-btn" onClick={handleShow}><FontAwesomeIcon icon={faPlus} /> Add</Button>
       </div>
       <div className="table-wrapper">
         <Search placeholder="Search Skills..." onSearch={handleSearch} />
-        <Table className="custom-table">
+        <Table responsive>
           <thead>
             <tr>
               <th>#</th>
@@ -156,8 +159,8 @@ const Skills = () => {
           </thead>
           <tbody>
             {
-							skills?.length > 0 ? (
-								skills.map((item, index) => (
+							filteredSkills?.length > 0 ? (
+								filteredSkills.map((item, index) => (
 									<tr key={item._id}>
 										<td>{index + 1}</td>
 										<td><img src={`${BASE_URL}${item.skillImage}`} alt={item.skillName} className="skill-img"/>{" "}{item.skillName}</td>
@@ -165,15 +168,13 @@ const Skills = () => {
 										<td>{item.proficiency}%</td>
 										<td>
 											<Button className="btn-primary-custom" onClick={() => handleEdit(item)}><FontAwesomeIcon icon={faPencil} /></Button>
-											<span className="px-2"></span>
+											<span className="px-1"></span>
 											<Button className="btn-danger-custom" onClick={() => handleDelete(item._id)}><FontAwesomeIcon icon={faTrashCan} /></Button>
 										</td>
 									</tr>
 								))
 							) : (
-								<tr>
-									<td colSpan="5" className="text-center">Skills not available</td>
-								</tr>
+								<tr><td colSpan="5" className="text-center">Skills not available</td></tr>
 							)
 						}
           </tbody>
@@ -211,9 +212,9 @@ const Skills = () => {
               <Form.Label>Proficiency</Form.Label>
               <Form.Select name="proficiency" value={formData.proficiency} onChange={handleChange}>
                 <option value="">Select Level</option>
-                <option value="10">Beginner</option>
-                <option value="40">Intermediate</option>
-                <option value="70">Advanced</option>
+                <option value="15">Beginner</option>
+                <option value="50">Intermediate</option>
+                <option value="75">Advanced</option>
                 <option value="100">Expert</option>
               </Form.Select>
             </Form.Group>

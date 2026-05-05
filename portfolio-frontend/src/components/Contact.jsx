@@ -47,24 +47,21 @@ const Contact = () => {
       <h3 className="section-title"><FontAwesomeIcon icon={faAddressCard} /> Get in Touch</h3>
       <div className="contact-wrapper">
         <Row className="contact-divider">
-          <Col xl={6} lg={3} md={12}>
-            
-          </Col>
           <Col xl={6} lg={9} md={12}>
             <Form className="contact-form" onSubmit={handleSubmit}>
               <Row>
                 <Col lg={12}>
-                  <Form.Group className="form-group">
+                  <Form.Group className="form-check-group">
                     <Form.Check inline label="Feedback" id="feedback" name="contactType" type="radio" value="feedback" checked={formData.type === "feedback"} onChange={() =>setFormData((prev) => ({ ...prev, type: "feedback" }))} />
                     <Form.Check inline label="Message" id="message" name="contactType" type="radio" value="message" checked={formData.type === "message"} onChange={() =>setFormData((prev) => ({ ...prev, type: "message" }))} />
                   </Form.Group>
                 </Col>
-                <Col lg={6}>
+                <Col lg={12}>
 									<Form.Group className="form-group">
                   	<Form.Control type="text" name="name" placeholder="Enter your name" value={formData.name} onChange={handleChange} required />
 									</Form.Group>
                 </Col>
-                <Col lg={6}>
+                <Col lg={12}>
 									<Form.Group className="form-group">
                   	<Form.Control type="email" name="email" placeholder="Enter your email" value={formData.email} onChange={handleChange} required />
 									</Form.Group>
@@ -81,6 +78,9 @@ const Contact = () => {
                 </Col>
               </Row>
             </Form>
+          </Col>
+          <Col xl={6} lg={3} md={12}>
+            Coming soon...
           </Col>
         </Row>
       </div>

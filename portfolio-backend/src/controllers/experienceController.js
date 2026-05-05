@@ -71,7 +71,15 @@ export const addExperience = async (req, res) => {
 export const getAllExperience = async (req, res) => {
   try {
     const experiences = await experienceService.getExperiences();
-    res.status(200).json({ success: true, data: experiences });
+
+    const updatedExperiences = experiences.map((exp) => {
+      const totalExp = computeTotalExp(exp.joiningDate, exp.exitDate);
+      return {
+        ...exp._doc, totalExp
+      };
+    });
+
+    res.status(200).json({ success: true, data: updatedExperiences });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

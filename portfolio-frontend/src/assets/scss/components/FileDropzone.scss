@@ -32,8 +32,8 @@
 	}
 }
 .drop-preview {
-	width: 70px;
-	height: 70px;
+	width: 50px;
+	height: 50px;
 	border-radius: 50%;
 	object-fit: cover;
 	border: 1px solid $border-color;
@@ -60,8 +60,6 @@
 .dropzone--cv {
 	border-radius: $radius-md;
 	.drop-preview {
-		width: $s-50px;
-		height: $s-50px;
 		border-radius: $radius-sm;
 	}
 }

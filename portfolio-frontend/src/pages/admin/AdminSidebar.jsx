@@ -19,7 +19,7 @@ const AdminSidebar = ({ collapsed, showSidebar, setShowSidebar }) => {
   ];
 
 	const menuOther = [
-		{ name: "Certifications", icon: faAward, path: "/admin/certifications" },
+		{ name: "Certifications", icon: faAward, path: "/admin/certificates" },
 		{ name: "Achievements", icon: faTrophy, path: "/admin/achievements" },
 		{ name: "Messages", icon: faEnvelope, path: "/admin/messages" },
 		{ name: "Settings", icon: faGear, path: "/admin/settings" },

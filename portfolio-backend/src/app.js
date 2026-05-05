@@ -11,6 +11,9 @@ import experienceRoutes from "./routes/experienceRoutes.js";
 import projectRoutes from "./routes/projectsRoutes.js";
 import messageRoutes from "./routes/messageRoutes.js";
 import profileRoutes from "./routes/profileRoutes.js";
+import certificationRoutes from "./routes/certificationRoutes.js";
+import achievementRoutes from "./routes/achievementRoutes.js";
+import profileViewRoutes from "./routes/profileViewRoutes.js";
 
 const app = express();
 
@@ -39,6 +42,9 @@ app.use("/api/experience", experienceRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/profile", profileRoutes);
+app.use("/api/certifications", certificationRoutes);
+app.use("/api/achievements", achievementRoutes);
+app.use("/api/view", profileViewRoutes);
 
 app.get("/", (req, res) => {
   res.send("API is running...");

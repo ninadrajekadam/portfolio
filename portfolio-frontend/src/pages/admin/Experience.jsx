@@ -161,8 +161,7 @@ const Experience = () => {
       fetchExperience();
       handleClose();
     } catch (err) {
-      console.log(err);
-      toast.error(isEdit ? "Failed to update experience" : "Failed to add experience");
+      toast.error(isEdit ? err.message || "Failed to update experience" : err.message || "Failed to add experience");
     }
   };
 
@@ -172,8 +171,7 @@ const Experience = () => {
       toast.success("Experience deleted successfully!");
       fetchExperience();
     } catch (err) {
-      console.log(err);
-      toast.error("Failed to delete experience");
+      toast.error(err.message || "Failed to delete experience");
     }
   };
 
@@ -239,21 +237,18 @@ const Experience = () => {
     );
   });
 
-  const totalExperience = filteredExperience.reduce((sum, item) => sum + (item.totalExp || 0), 0).toFixed(1);
+  const totalExperience = filteredExperience.reduce((sum, item) => {
+    return sum + calculateTotalExp(item.joiningDate, item.exitDate);
+  }, 0).toFixed(1);
 
   return (
     <>
       <div className="heading-btn-wrapper">
         <div className="heading-wrapper">
-          <div className="heading-icon">
-            <FontAwesomeIcon icon={faBriefcase} />
-          </div>
-          <div className="heading">
-            <h2 className="layout-heading">Experience</h2>
-            <p className="layout-desc">Professional experience in building scalable and responsive web applications.</p>
-          </div>
+          <div className="heading-icon"><FontAwesomeIcon icon={faBriefcase} /></div>
+          <div className="heading"><h2 className="layout-heading">Experience</h2></div>
         </div>
-        <Button className="btn-primary-custom add-btn" onClick={handleShow}><FontAwesomeIcon icon={faPlus} /> Add Experience</Button>
+        <Button className="btn-primary-custom add-btn" onClick={handleShow}><FontAwesomeIcon icon={faPlus} /> Add</Button>
       </div>
       <div className="table-wrapper">
         <Search placeholder="Search Experience..." onSearch={handleSearch} />
@@ -265,7 +260,6 @@ const Experience = () => {
               <th>Company Name</th>
               <th>Start - End</th>
               <th>Total Exp</th>
-              {/* <th>Responsibilities</th> */}
               <th>Actions</th>
             </tr>
           </thead>
@@ -277,12 +271,7 @@ const Experience = () => {
                   <td>{item.role}</td>
                   <td>{item.company}</td>
                   <td>{formatDateRange(item)}</td>
-                  <td>{item.totalExp ? `${item.totalExp} yrs` : "-"}</td>
-                  {/* <td className="experience-resp">
-                    <ol className="responsibility-list">
-                      { item.responsibilities.map((res, i) => (<li key={i} className="list-item">{res}</li>)) }
-                    </ol>
-                  </td> */}
+                  <td>{calculateTotalExp(item.joiningDate, item.exitDate).toFixed(1)} yrs</td>
                   <td>
                     <Button className="btn-primary-custom" onClick={() => handleEdit(item)}><FontAwesomeIcon icon={faPencil} /></Button>
                     <span className="px-2"></span>
@@ -328,10 +317,14 @@ const Experience = () => {
               <Form.Label>Joining Date</Form.Label>
               <Form.Control type="date" name="joiningDate" value={formData.joiningDate} onChange={handleChange} />
             </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Exit Date</Form.Label>
-              <Form.Control type="date" name="exitDate" value={formData.exitDate} onChange={handleChange} disabled={formData.present} />
-            </Form.Group>
+            {
+              !formData.present && (
+                <Form.Group className="mb-3">
+                  <Form.Label>Exit Date</Form.Label>
+                  <Form.Control type="date" name="exitDate" value={formData.exitDate} onChange={handleChange} disabled={formData.present} />
+                </Form.Group>
+              )
+            }
             <Form.Group className="mb-3">
               <Form.Check type="checkbox" id="present-checkbox" name="present" label="Present" checked={formData.present} onChange={handleChange} />
             </Form.Group>

@@ -16,23 +16,8 @@
 			}
     }
   }
-	.form-control {
-		background: $bg-tertiary;
-		border: 1px solid rgba($border-color, 0.4);
-		color: $text-primary;
-		font-size: $fs-sm;
-		padding: 10px 12px;
-		border-radius: $radius-sm;
-		transition: $transition;
-		&::placeholder {
-			color: $text-muted;
-		}
-		&:focus {
-			border-color: $primary;
-			box-shadow: 0 0 0 2px rgba($primary, 0.2);
-			background: $bg-tertiary;
-			color: $text-primary;
-		}
+	.form-check-group {
+		margin-bottom: $spacing-sm;
 	}
 	.map-wrapper {
 		height: 100%;

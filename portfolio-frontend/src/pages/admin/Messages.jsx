@@ -143,7 +143,7 @@ const Messages = () => {
 								))
 							) : (
 								<tr>
-									<td colSpan="7" className="text-center py-4">Messages not available</td>
+									<td colSpan="7" className="text-center">Messages not available</td>
 								</tr>
 							)
 						}

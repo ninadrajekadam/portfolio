@@ -151,4 +151,81 @@ export const saveProfile = async (formData) => {
   return data;
 };
 
+export const getCertifications = async () => {
+  const { data } = await api.get("/certifications/getCertifications");
+  return data;
+};
+
+export const getCertificationById = async (id) => {
+  const { data } = await api.get(`/certifications/getCertification/${id}`);
+  return data;
+};
+
+export const addCertification = async (certData) => {
+  const { data } = await api.post("/certifications/createCertification", certData);
+  return data;
+};
+
+export const updateCertification = async (id, certData) => {
+  const { data } = await api.put(`/certifications/updateCertification/${id}`, certData);
+  return data;
+};
+
+export const deleteCertification = async (id) => {
+  const { data } = await api.delete(`/certifications/deleteCertification/${id}`);
+  return data;
+};
+
+export const getAchievements = async () => {
+  const { data } = await api.get("/achievements/getAchievements");
+  return data;
+};
+
+export const getAchievementById = async (id) => {
+  const { data } = await api.get(`/achievements/getAchievement/${id}`);
+  return data;
+};
+
+export const addAchievement = async (formData) => {
+  const { data } = await api.post("/achievements/createAchievement", formData);
+  return data;
+};
+
+export const updateAchievement = async (id, formData) => {
+  const { data } = await api.put(`/achievements/updateAchievement/${id}`, formData);
+  return data;
+};
+
+export const deleteAchievement = async (id) => {
+  const { data } = await api.delete(`/achievements/deleteAchievement/${id}`);
+  return data;
+};
+
+export const incrementProfileView = async () => {
+  try {
+    await api.post("/view/addProfileView");
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getProfileStats = async () => {
+  try {
+    const { data } = await api.get("/view/getProfileStats");
+    return data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+export const changePassword = async (passwordData) => {
+  try {
+    const { data } = await api.put("/users/changePassword", passwordData);
+    return data;
+  } catch (error) {
+    throw error.response?.data || { message: "Failed to change password" };
+  }
+};
+
 export default api;

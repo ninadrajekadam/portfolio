@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import FileDropzone from "../../components/FileDropzone";
 import { toast } from "react-toastify";
 import Search from "./Search";
-import { addProject, deleteProject, getProjects, updateProject } from "../../app/api";
+import { addProject, deleteProject, getProjects, updateProject, getExperience } from "../../app/api";
 
 const BASE_URL = "http://localhost:5000";
 const isValidURL = (url) => {
@@ -26,6 +26,8 @@ const Projects = () => {
   const [projectImage, setProjectImage] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
 	const [existingImage, setExistingImage] = useState("");
+	const [companyName, setCompanyName] = useState("");
+  const [projects, setProjects] = useState([]);
 
   const [formData, setFormData] = useState({
     projectName: "",
@@ -35,7 +37,6 @@ const Projects = () => {
     projectUrl: ""
   });
 
-  const [projects, setProjects] = useState([]);
 
   const fetchProjects = async () => {
     try {
@@ -46,9 +47,20 @@ const Projects = () => {
     }
   };
 
+  const fetchCompanyName = async () => {
+    try {
+      const res = await getExperience();
+      const companies = [...new Set(res.data.map(item => item.company))];
+      setCompanyName(companies);
+    } catch (err) {
+      toast.error(err.message);
+    }
+  };
+
   useEffect(() => {
     (async () => {
       await fetchProjects();
+      await fetchCompanyName();
     })();
   }, []);
 
@@ -129,8 +141,7 @@ const Projects = () => {
       toast.success("Project deleted successfully!");
       fetchProjects();
     } catch (err) {
-      console.log(err);
-      toast.error("Failed to delete project");
+      toast.error(err.message || "Failed to delete project");
     }
   };
 
@@ -172,10 +183,9 @@ const Projects = () => {
           <div className="heading-icon"><FontAwesomeIcon icon={faFolder} /></div>
           <div className="heading">
             <h2 className="layout-heading">Projects</h2>
-            <p className="layout-desc">Real-world projects focused on UI development, performance, and usability.</p>
           </div>
         </div>
-        <Button className="btn-primary-custom add-btn" onClick={handleShow}><FontAwesomeIcon icon={faPlus} /> Add Project</Button>
+        <Button className="btn-primary-custom add-btn" onClick={handleShow}><FontAwesomeIcon icon={faPlus} /> Add</Button>
       </div>
       <div className="table-wrapper">
         <Search placeholder="Search Projects..." onSearch={handleSearch} />
@@ -186,7 +196,6 @@ const Projects = () => {
               <th>Project Name</th>
               <th>Company Name</th>
               <th>Used Skills</th>
-              <th className="project-description">Description</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -199,7 +208,6 @@ const Projects = () => {
 										<td>{ item.projectName }</td>
 										<td>{ item.companyName }</td>
 										<td>{ item.usedSkills?.join(", ") }</td>
-										<td>{ item.description }</td>
 										<td>
 											<Button className="btn-primary-custom" onClick={() => handleEdit(item)}><FontAwesomeIcon icon={faPencil} /></Button>
 											<span className="px-2"></span>
@@ -228,7 +236,15 @@ const Projects = () => {
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Company Name</Form.Label>
-              <Form.Control type="text" name="companyName" value={formData.companyName} onChange={handleChange} placeholder="Enter company name"/>
+              <Form.Select name="companyName" value={formData.companyName} onChange={handleChange}>
+                <option value="">Select Company</option>
+                {
+                  companyName && companyName.map((item, index) => (
+                    <option key={index} value={item}>{item}</option>
+                  ))
+                }
+              </Form.Select>
+              {/* <Form.Control type="text" name="companyName" value={formData.companyName} onChange={handleChange} placeholder="Enter company name"/> */}
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Used Skills</Form.Label>

@@ -5,19 +5,7 @@
 	border: 1px solid $border-color;
   border-radius: $radius-md;
   padding: $spacing-md;
-  box-shadow: $shadow-sm;
-  overflow-x: auto;
-	backdrop-filter: $blur;
-  transition: $transition;
-  &:hover {
-    box-shadow: $shadow-md;
-  }
-	.custom-table {
-		width: 100%;
-		margin: 0;
-		border-collapse: separate;
-		border-spacing: 0;
-		overflow: hidden;
+	.table {
 		border: 1px solid $border-color;
 		border-radius: $radius-md;
 		color: $text-primary;
@@ -26,7 +14,6 @@
 			font-weight: $fw-600;
 			text-align: left;
 			border-bottom: 1px solid $border-color;
-			white-space: nowrap;
 			letter-spacing: 0.3px;
 			th {
 				padding: $spacing-sm $spacing-md;
@@ -34,12 +21,11 @@
 				color: $text-secondary;
 				background: $bg-secondary;
 				border-bottom: 1px solid $border-color;
+				white-space: nowrap;
 				&:first-child {
-					width: 3%;
 					border-top-left-radius: $radius-md;
 				}
 				&:last-child {
-					width: 9%;
 					border-top-right-radius: $radius-md;
 				}
 			}
@@ -68,9 +54,7 @@
 				background: $bg-primary;
 				border-bottom: 1px solid $border-color;
 				vertical-align: middle;
-				&:last-child {
-					white-space: nowrap;
-				}
+				white-space: nowrap;
 			}
 		}
 	}
@@ -93,6 +77,11 @@
     background: rgba($error, 0.15);
     color: $error;
   }
+}
+.table-responsive {
+	&::-webkit-scrollbar {
+		height: 0;
+	}
 }
 
 @include respond-down(md) {

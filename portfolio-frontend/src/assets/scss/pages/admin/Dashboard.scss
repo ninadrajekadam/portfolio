@@ -213,19 +213,24 @@
     background: #c7d2fe;
   }
 }
+.cart-title {
+  font-size: $fs-lg;
+  font-weight: $fw-600;
+}
 .custom-dropdown {
   position: relative;
   &__toggle {
-    background: $bg-tertiary !important;
+    background: $bg-primary !important;
     color: $text-primary !important;
     border: 1px solid $border-color !important;
     border-radius: $radius-md !important;
     padding: $spacing-sm 14px;
     font-size: $fs-sm;
+    font-weight: $fw-500;
     transition: $transition;
     box-shadow: none !important;
     &:hover, &:focus, &:active {
-      background: $hover-bg !important;
+      background: $bg-primary !important;
       border-color: $primary !important;
       color: $text-primary !important;
       box-shadow: none !important;
@@ -243,6 +248,7 @@
   &__item {
     color: $text-secondary;
     font-size: $fs-sm;
+    font-weight: $fw-500;
     padding: 8px 12px;
     border-radius: $radius-sm;
     transition: $transition;
@@ -265,5 +271,18 @@
   .legend {
     margin-top: $spacing-md;
     padding-left: 0;
+  }
+}
+.recharts-default-tooltip {
+  background-color: $bg-glass !important;
+  border-color: $border-color !important;
+  border-radius: $radius-md !important;
+  .recharts-tooltip-label {
+    color: $text-secondary !important;
+    font-weight: $fw-600 !important;
+  }
+  .recharts-tooltip-item {
+    font-weight: $fw-600 !important;
+    color: $text-primary !important;
   }
 }
