@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { toast } from "react-toastify";
 import "../assets/scss/components/Experience.scss";
 import { getExperience } from "../app/api";
+import { Link } from "react-router-dom";
 
 const Experience = () => {
 	const [experience, setExperience] = useState([]);
@@ -38,12 +39,13 @@ const Experience = () => {
 			<section className="experience-section">
 				<div className="title-wrapper">
 					<h3 className="section-title"><FontAwesomeIcon icon={faBriefcase} /> Experience</h3>
-					{ experience.length > 3 && (<Button className="btn-link-arrow view-all">View All Experience <FontAwesomeIcon icon={faArrowRight} /></Button>) }
+					{ experience.length > 3 && (<Button as={Link} to="/experiences" className="btn-link-arrow view-all">View All Experience <FontAwesomeIcon icon={faArrowRight} /></Button>) }
 				</div>
 				<ul className="experience-list">
 					{
 						experience && experience.slice(0, 3).map((item, index) => (
 							<li key={index} className="experience-item">
+								{ item.exitDate === null && (<span className="experience-badge">Current</span>) }
 								<h4 className="experience-title">{item.role}</h4>
 								<p className="experience-company">{item.company}</p>
 								<span className="experience-duration">{formatDate(item.joiningDate)} - {item.isPresent ? "Present" : formatDate(item.exitDate)}</span>

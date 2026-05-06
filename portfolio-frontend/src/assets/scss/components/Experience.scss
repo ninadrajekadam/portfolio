@@ -42,13 +42,14 @@
       box-shadow: 0 0 6px rgba($primary, 0.5);
     }
     .experience-title {
-      font-size: $fs-md;
+      font-size: $fs-lg;
       font-weight: $fw-700;
       color: $text-primary;
       margin-bottom: $spacing-xs;
     }
     .experience-company {
-      font-size: $fs-sm;
+      font-size: $fs-md;
+      font-weight: $fw-600;
       color: $primary;
       margin-bottom: $spacing-xs;
     }
@@ -73,5 +74,47 @@
         }
       }
     }
+    .experience-badge {
+      position: absolute;
+      right: 0;
+      font-size: $fs-xs;
+      font-weight: $fw-500;
+      color: $success;
+      background: rgba($success, 0.3);
+      border-radius: $radius-sm;
+      padding: $spacing-xs $spacing-sm;
+    }
   }
-} 
+  &.all-experiences {
+    .experience-list {
+      &::before {
+        top: 20px;
+        height: 95%;
+      }
+    }
+    .experience-item {
+      display: flex;
+      gap: $spacing-md;
+      &::before {
+        top: 20px;
+      }
+    }
+    .experience-left {
+      padding: $spacing-md 0;
+    }
+    .experience-card {
+      flex: 1;
+      background-color: $bg-glass;
+      border: 1px solid $border-color;
+      border-radius: $radius-md;
+      padding: $spacing-md;
+    }
+    .experience-date {
+      font-weight: $fw-600;
+    }
+    .experience-badge {
+      top: $spacing-md;
+      right: $spacing-md;
+    }
+  }
+}

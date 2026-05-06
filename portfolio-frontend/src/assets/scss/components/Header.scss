@@ -2,20 +2,20 @@
 @import "../mixins.scss";
 
 .navbar-glass {
-  border-bottom: 1px solid $border-color;
-  box-shadow: $shadow-sm;
+  // border-bottom: 1px solid $border-color;
+  box-shadow: $shadow-md;
   backdrop-filter: blur(12px);
   background: $bg-glass;
-  padding: $spacing-md;
+  padding: $spacing-sm 0;
   .nav-link {
     color: $text-primary;
     &::after {
       background: $primary;
     }
-    &:hover,
-    &.active {
-      color: $primary;
-    }
+    // &:hover,
+    // &.active {
+    //   color: $primary;
+    // }
   }
   .theme-btn {
     background: $bg-tertiary;

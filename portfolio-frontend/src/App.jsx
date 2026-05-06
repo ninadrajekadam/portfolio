@@ -14,6 +14,8 @@ import Certifications from "./pages/admin/Certifications";
 import Achievements from "./pages/admin/Achievements";
 import Messages from "./pages/admin/Messages";
 import Settings from "./pages/admin/Settings";
+import AllExperiences from "./components/AllExperiences";
+import AllProjects from "./components/AllProjects";
 
 const App = () => {
   return (
@@ -21,6 +23,8 @@ const App = () => {
       <ToastContainer position="top-right" autoClose={2000} theme="dark" hideProgressBar={false} newestOnTop closeOnClick />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/experiences" element={<AllExperiences />} />
+        <Route path="/projects" element={<AllProjects />} />
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<PageNotFound />} />
         <Route path="/admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>

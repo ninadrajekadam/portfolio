@@ -1,11 +1,10 @@
-import { useRef, useState, useEffect } from "react";
-import { Navbar, Nav, Container } from "react-bootstrap";
+import { useRef, useEffect } from "react";
+import { Navbar, Container } from "react-bootstrap";
 import "../assets/scss/components/Header.scss";
 import { Link } from "react-router-dom";
 
-const sections = ["home", "about", "experience", "contact"];
+// const sections = ["home", "about", "experience", "contact"];
 const Header = ({ setHeaderHeight }) => {
-	const [active, setActive] = useState("#home");
   const headerRef = useRef(null);
 
   useEffect(() => {
@@ -17,59 +16,23 @@ const Header = ({ setHeaderHeight }) => {
     return () => window.removeEventListener("resize", updateHeight);
   }, [setHeaderHeight]);
 
-	useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActive(`#${entry.target.id}`);
-          }
-        });
-      },
-      {
-        root: null,
-        rootMargin: "-40% 0px -50% 0px",
-        threshold: 0,
-      }
-    );
-
-    sections.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
-  const handleClick = (id) => {
-    setActive(id);
-
-    const section = document.querySelector(id);
-    if (section) {
-      window.scrollTo({
-        top: section.offsetTop - 80,
-        behavior: "smooth",
-      });
-    }
-  };
-
   return (
     <>
       <Navbar variant="light" expand="lg" fixed="top" className="navbar-glass" ref={headerRef}>
         <Container>
           <Navbar.Brand as={Link} to="/" className="gradient-text fw-bold">Ninad Kadam</Navbar.Brand>
-          <Navbar.Toggle aria-controls="portfolioNavbar" />
+          {/* <Navbar.Toggle aria-controls="portfolioNavbar" />
           <Navbar.Collapse id="portfolioNavbar">
             <Nav className="ms-auto align-items-lg-center gap-lg-3">
               {
                 sections.map((sec) => (
-                  <Nav.Link key={sec} onClick={() => handleClick(`#${sec}`)} className={active === `#${sec}` ? "active" : ""}>
+                  <Nav.Link key={sec}>
                     { sec.charAt(0).toUpperCase() + sec.slice(1) }
                   </Nav.Link>
                 ))
               }
             </Nav>
-          </Navbar.Collapse>
+          </Navbar.Collapse> */}
         </Container>
       </Navbar>
     </>

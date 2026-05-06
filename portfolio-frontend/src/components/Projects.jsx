@@ -53,7 +53,7 @@ const Projects = () => {
 			<section className="projects-section">
 				<div className="title-wrapper">
 					<h3 className="section-title"><FontAwesomeIcon icon={faFolderClosed} /> Projects</h3>
-					{ projects.length > 5 && (<Button className="btn-link-arrow view-all mt-2">View All Projects <FontAwesomeIcon icon={faArrowRight} /></Button>) }
+					{ projects.length > 5 && (<Button as={Link} to="/projects" className="btn-link-arrow view-all mt-2">View All Projects <FontAwesomeIcon icon={faArrowRight} /></Button>) }
 				</div>
 				<div className="projects-list">
 					{

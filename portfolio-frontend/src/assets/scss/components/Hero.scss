@@ -84,7 +84,7 @@
       position: relative;
       overflow: hidden;
       @include respond-down(md) {
-        font-size: 75px;
+        font-size: 65px;
       }
       &::after {
         content: "";
@@ -108,7 +108,7 @@
       color: $bg-glass;
       animation: rolePulse 3s ease-in-out infinite;
       @include respond-down(md) {
-        font-size: 50px;
+        font-size: 45px;
       }
     }
     @keyframes textGradient {
@@ -157,7 +157,7 @@
       }
       50% {
         opacity: 0.6;
-        transform: scale(1.02);
+        transform: scale(1.05);
       }
     }
   }
@@ -224,6 +224,7 @@
       transition: $transition;
       &:hover {
         color: $primary;
+        background: $bg-glass;
         border-color: $primary;
         transform: translateY(-3px);
       }
