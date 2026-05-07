@@ -1,4 +1,5 @@
 import fs from "fs";
+import path from "path";
 import * as skillService from "../services/skillServices.js";
 
 export const addSkill = async (req, res) => {
@@ -9,7 +10,7 @@ export const addSkill = async (req, res) => {
       return res.status(400).json({ message: "Image is required" });
     }
 
-    const skillImage = `/uploads/skills/${req.file.filename}`;
+    const skillImage = `skills/${req.file.filename}`;
 
     const skill = await skillService.createSkill({
       skillName,
@@ -49,13 +50,13 @@ export const updateSkill = async (req, res) => {
 
     if (req.file) {
       if (skill.skillImage) {
-        const oldPath = `.${skill.skillImage}`;
+        const oldPath = path.join(process.cwd(), "/portfolio-backend/uploads", skill.skillImage);
         if (fs.existsSync(oldPath)) {
           fs.unlinkSync(oldPath);
         }
       }
 
-      updatedData.skillImage = `/uploads/skills/${req.file.filename}`;
+      updatedData.skillImage = `skills/${req.file.filename}`;
     }
 
     const updatedSkill = await skillService.updateSkill(
@@ -82,7 +83,7 @@ export const deleteSkill = async (req, res) => {
     }
 
     if (skill.skillImage) {
-      const filePath = `.${skill.skillImage}`;
+      const filePath = path.join(process.cwd(), "/portfolio-backend/uploads", skill.skillImage);
       if (fs.existsSync(filePath)) {
         fs.unlinkSync(filePath);
       }

@@ -2,13 +2,13 @@ import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFolderClosed } from "@fortawesome/free-regular-svg-icons";
-import { faArrowRight, faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
+import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
 import { getProjects } from "../app/api";
 import { toast } from "react-toastify";
 import "../assets/scss/components/Projects.scss";
 
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const Projects = () => {
 	const [zoomImage, setZoomImage] = useState(null);
@@ -53,7 +53,7 @@ const Projects = () => {
 			<section className="projects-section">
 				<div className="title-wrapper">
 					<h3 className="section-title"><FontAwesomeIcon icon={faFolderClosed} /> Projects</h3>
-					{ projects.length > 5 && (<Button as={Link} to="/projects" className="btn-link-arrow view-all mt-2">View All Projects <FontAwesomeIcon icon={faArrowRight} /></Button>) }
+					{ projects.length > 5 && (<Button as={Link} to="/projects" className="btn-link-arrow view-all mt-2">View All <FontAwesomeIcon icon={faArrowUpRightFromSquare} /></Button>) }
 				</div>
 				<div className="projects-list">
 					{
@@ -65,7 +65,7 @@ const Projects = () => {
 									(<span className="project-status unknown">Unknown Status</span>)
 								}
 								<div className="project-image">
-									<img src={`${BASE_URL}/${project.image}`} alt={project.projectName} onClick={() => setZoomImage(`${BASE_URL}/${project.image}`)} style={{ cursor: "zoom-in" }} />
+									<img src={`${BASE_URL}/uploads/${project.image}`} alt={project.projectName} onClick={() => setZoomImage(`${BASE_URL}/uploads/${project.image}`)} style={{ cursor: "zoom-in" }} />
 								</div>
 								<div className="project-details">
 									{

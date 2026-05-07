@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import Search from "./Search";
 import { addSkill, deleteSkill, getSkills, updateSkill } from "../../app/api";
 
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const Skills = () => {
   const [show, setShow] = useState(false);
@@ -171,7 +171,7 @@ const Skills = () => {
 								currentSkills.map((item, index) => (
 									<tr key={item._id}>
 										<td>{index + 1 + indexOfFirstSkill}</td>
-										<td><img src={`${BASE_URL}${item.skillImage}`} alt={item.skillName} className={`skill-img ${item.skillName === "ExpressJs" ? "filter" : ""}`} />{" "}{item.skillName}</td>
+										<td><img src={`${BASE_URL}/uploads/${item.skillImage}`} alt={item.skillName} className={`skill-img ${item.skillName === "ExpressJs" ? "filter" : ""}`} />{" "}{item.skillName}</td>
 										<td>{item.category}</td>
 										<td>{item.proficiency}%</td>
 										<td>

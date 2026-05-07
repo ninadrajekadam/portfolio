@@ -2,7 +2,7 @@ import multer from "multer";
 import path from "path";
 import fs from "fs";
 
-const basePath = path.join(process.cwd(), "uploads");
+const basePath = path.join(process.cwd(), "/portfolio-backend/uploads");
 const folders = ["skills", "projects", "profile", "pdf"];
 
 folders.forEach((folder) => {

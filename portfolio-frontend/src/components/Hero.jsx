@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
@@ -8,7 +7,7 @@ import { getProfile, getExperience } from "../app/api";
 import "../assets/scss/components/Hero.scss";
 import { toast } from "react-toastify";
 
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const Hero = ({ headerHeight }) => {
 	const [experience, setExperience] = useState([]);
@@ -48,6 +47,7 @@ const Hero = ({ headerHeight }) => {
 					profileabout: res.about || ""
 				});
 				setExistingImage(res.profileImage);
+				console.log(res);
 				setExistingCV(res.cvFile);
 			}
 		});
@@ -68,7 +68,7 @@ const Hero = ({ headerHeight }) => {
 							<h2 className="hero-role typing">{form.profilerole}</h2>
 							<p className="hero-desc">Results-driven Senior Software Developer with {totalExperience} years of experience building scalable web applications and delivering high-quality UI solutions.</p>
 							<div className="hero-actions">
-								<Link to={`${BASE_URL}/uploads/pdf/${existingCV}`} target="_blank" className="btn-primary-custom">Download CV <FontAwesomeIcon icon={faDownload} /></Link>
+								<a href={`${BASE_URL}/uploads/pdf/${existingCV}`} target="_blank" rel="noreferrer" className="btn-primary-custom">Download CV <FontAwesomeIcon icon={faDownload} /></a>
 							</div>
 							<div className="hero-social">
 								<a className="social-link" href="https://github.com/ninadrajekadam" target="_blank"><FontAwesomeIcon icon={faGithub} size="lg" /></a>

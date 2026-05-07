@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
-import { faArrowRight, faBriefcase } from "@fortawesome/free-solid-svg-icons";
+import { faArrowUpRightFromSquare, faBriefcase } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { toast } from "react-toastify";
 import "../assets/scss/components/Experience.scss";
@@ -39,7 +39,7 @@ const Experience = () => {
 			<section className="experience-section">
 				<div className="title-wrapper">
 					<h3 className="section-title"><FontAwesomeIcon icon={faBriefcase} /> Experience</h3>
-					{ experience.length > 3 && (<Button as={Link} to="/experiences" className="btn-link-arrow view-all">View All Experience <FontAwesomeIcon icon={faArrowRight} /></Button>) }
+					{ experience.length > 3 && (<Button as={Link} to="/experiences" className="btn-link-arrow view-all">View All <FontAwesomeIcon icon={faArrowUpRightFromSquare} /></Button>) }
 				</div>
 				<ul className="experience-list">
 					{

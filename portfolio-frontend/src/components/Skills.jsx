@@ -5,7 +5,7 @@ import "../assets/scss/components/Skills.scss";
 import { getSkills } from "../app/api";
 import { toast } from "react-toastify";
 
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const Skills = () => {
 	const [skills, setSkills] = useState([]);
@@ -34,7 +34,7 @@ const Skills = () => {
 						skills.map((skill, index) => (
 							<li className="skill-item" key={index}>
 								<span className="skill-img">
-									<img src={`${BASE_URL}${skill.skillImage}`} alt={skill.skillName} className={skill.skillName === "ExpressJs" ? "filter" : ""} />
+									<img src={`${BASE_URL}/uploads/${skill.skillImage}`} alt={skill.skillName} className={skill.skillName === "ExpressJs" ? "filter" : ""} />
 								</span>
 								<span className="skill-name">{skill.skillName}</span>
 							</li>

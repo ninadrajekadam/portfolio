@@ -53,8 +53,9 @@ export const updateProfile = async (req, res) => {
   try {
     const { name, email, role, about } = req.body;
 
-    const profileImage = req.files?.profileImage?.[0]?.filename;
-    const cvFile = req.files?.cvFile?.[0]?.filename;
+    const profileImage = req.files?.profileImage?.[0]? `profile/${req.files.profileImage[0].filename}`: undefined;
+    const cvFile = req.files?.cvFile?.[0]? `pdf/${req.files.cvFile[0].filename}`: undefined;
+    console.log("Received files:", req.files);
 
     let profile = await Profile.findOne();
 

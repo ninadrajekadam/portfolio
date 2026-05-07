@@ -1,4 +1,5 @@
 import fs from "fs";
+import path from "path";
 import * as projectService from "../services/projectServices.js";
 
 const normalizeSkills = (skills) => {
@@ -50,7 +51,7 @@ export const addProject = async (req, res) => {
       });
     }
 
-    const image = req.file ? `uploads/projects/${req.file.filename}` : "";
+    const image = req.file ? `projects/${req.file.filename}` : "";
     const project = await projectService.createProject({ projectName, companyName, description, usedSkills: skillsArray, projectUrl, projectStatus, image });
 
     res.status(201).json({
@@ -117,10 +118,13 @@ export const updateProject = async (req, res) => {
     let image = existingProject.image;
 
     if (req.file) {
-      if (existingProject.image && fs.existsSync(existingProject.image)) {
-        fs.unlinkSync(existingProject.image);
+      if (existingProject.image) {
+        const oldPath = path.join(process.cwd(), "/portfolio-backend/uploads", existingProject.image);
+        if (fs.existsSync(oldPath)) {
+          fs.unlinkSync(oldPath);
+        }
       }
-      image = req.file.path.replace(/\\/g, "/");
+      image = `projects/${req.file.filename}`;
     }
 
     const updatedData = {
@@ -160,8 +164,11 @@ export const deleteProject = async (req, res) => {
       });
     }
 
-    if (existingProject.image && fs.existsSync(existingProject.image)) {
-      fs.unlinkSync(existingProject.image);
+    if (existingProject.image) {
+      const filePath = path.join(process.cwd(), "/portfolio-backend/uploads", existingProject.image);
+      if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath);
+      }
     }
 
     await projectService.deleteProject(req.params.id);

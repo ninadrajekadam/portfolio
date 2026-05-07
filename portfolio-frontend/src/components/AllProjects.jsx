@@ -9,7 +9,7 @@ import "../assets/scss/components/Projects.scss";
 import Header from "./Header";
 import Footer from "./Footer";
 
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const AllProjects = () => {
 	const [headerHeight, setHeaderHeight] = useState(0);
@@ -90,7 +90,7 @@ const AllProjects = () => {
 										(<span className="project-status unknown">Unknown Status</span>)
 									}
 									<div className="project-image">
-										<img src={`${BASE_URL}/${project.image}`} alt={project.projectName} onClick={() => setZoomImage(`${BASE_URL}/${project.image}`)} style={{ cursor: "zoom-in" }} />
+										<img src={`${BASE_URL}/uploads/${project.image}`} alt={project.projectName} onClick={() => setZoomImage(`${BASE_URL}/uploads/${project.image}`)} style={{ cursor: "zoom-in" }} />
 									</div>
 									<div className="project-details">
 										{

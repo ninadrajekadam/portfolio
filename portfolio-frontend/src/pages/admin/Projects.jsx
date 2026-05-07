@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import Search from "./Search";
 import { addProject, deleteProject, getProjects, updateProject, getExperience } from "../../app/api";
 
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 const isValidURL = (url) => {
   try {
     new URL(url);
@@ -162,6 +162,7 @@ const Projects = () => {
     });
     
     setExistingImage(item.image);
+    console.log(item.image);
     setPreviewImage(null);
     setShow(true);
   };
@@ -297,7 +298,7 @@ const Projects = () => {
             </Form.Group>
             <Form.Group>
               <Form.Label>Project Screenshot</Form.Label>
-              <FileDropzone label="Drop Project Image" accept={{ "image/*": [] }} preview={ previewImage ? previewImage : existingImage ? `${BASE_URL}/${existingImage}` : null }
+              <FileDropzone label="Drop Project Image" accept={{ "image/*": [] }} preview={ previewImage ? previewImage : existingImage ? `${BASE_URL}/uploads/${existingImage}` : null }
                 onFileSelect={(file) => {
                   setProjectImage(file);
                   setPreviewImage(URL.createObjectURL(file));

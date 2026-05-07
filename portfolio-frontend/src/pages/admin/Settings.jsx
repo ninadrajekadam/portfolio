@@ -6,7 +6,7 @@ import FileDropzone from "../../components/FileDropzone";
 import { getProfile, updateProfile, changePassword } from "../../app/api";
 import { toast } from "react-toastify";
 
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const Settings = () => {
 	const [form, setForm] = useState({
@@ -221,7 +221,7 @@ const Settings = () => {
 									{
 										existingCV && !cvFile && (
 											<a className="btn-primary-custom" href={`${BASE_URL}/uploads/pdf/${existingCV}`} target="_blank" rel="noreferrer">
-												<FontAwesomeIcon icon={faDownload}/> Download Current CV
+												<FontAwesomeIcon icon={faDownload}/> View CV
 											</a>
 										)
 									}
