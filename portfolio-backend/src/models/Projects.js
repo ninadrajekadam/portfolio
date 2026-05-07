@@ -13,6 +13,10 @@ const projectSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  projectStatus: {
+    type: String,
+    required: true
+  },
   usedSkills: {
     type: [String],
     required: true

@@ -1,20 +1,21 @@
 import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { toast } from "react-toastify";
-import Header from "./Header";
-import Footer from "./Footer";
-import "../assets/scss/components/Experience.scss";
-import "../assets/scss/components/ExperienceProject.scss";
-import { getExperience } from "../app/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBarsStaggered } from "@fortawesome/free-solid-svg-icons";
+import Header from "./Header";
+import Footer from "./Footer";
+import { getExperience, getProjects } from "../app/api";
+import "../assets/scss/components/Experience.scss";
+import "../assets/scss/components/ExperienceProject.scss";
 
 const AllExperiences = () => {
 	const [headerHeight, setHeaderHeight] = useState(0);
   const [experience, setExperience] = useState([]);
+	const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    const fetchAllData = async () => {
+    const fetchAllExperiences = async () => {
       try {
         const res = await getExperience();
         setExperience(res?.data || []);
@@ -23,7 +24,20 @@ const AllExperiences = () => {
       }
     };
 
-    fetchAllData();
+    fetchAllExperiences();
+  }, []);
+
+	useEffect(() => {
+    const fetchAllProjects = async () => {
+      try {
+        const res = await getProjects();
+        setProjects(res?.data || []);
+      } catch (err) {
+        toast.error(err.message || "Failed to load data");
+      }
+    };
+
+    fetchAllProjects();
   }, []);
 
   const formatDate = (date) => {
@@ -36,6 +50,8 @@ const AllExperiences = () => {
   };
 
 	const totalExperience = experience.reduce((total, exp) => total + (exp.totalExp || 0), 0).toFixed(1);
+	const completedProjects = projects.filter(project => project.projectStatus === "Completed").length;
+	const ongoingProjects = projects.filter(project => project.projectStatus === "Ongoing").length;
 
   return (
 		<>
@@ -80,24 +96,30 @@ const AllExperiences = () => {
 					</div>
 				</section>
 				<section className="overview">
-					<h3 className="overview-title"><FontAwesomeIcon icon={faBarsStaggered} className="overview-icon" /> Experience Overview</h3>
+					<h3 className="overview-title"><FontAwesomeIcon icon={faBarsStaggered} className="overview-icon" /> Overview</h3>
 					<Row>
-						<Col xl={4} lg={4} md={12}>
+						<Col xl={3} lg={3} md={6} sm={12} xs={12}>
 							<div className="overview-item">
 								<h4 className="overview-value">{totalExperience}</h4>
 								<p className="overview-desc">Years of Experience</p>
 							</div>
 						</Col>
-						<Col xl={4} lg={4} md={12}>
+						<Col xl={3} lg={3} md={6} sm={12} xs={12}>
 							<div className="overview-item">
 								<h4 className="overview-value">{experience.length}</h4>
 								<p className="overview-desc">Organizations</p>
 							</div>
 						</Col>
-						<Col xl={4} lg={4} md={12}>
+						<Col xl={3} lg={3} md={6} sm={12} xs={12}>
 							<div className="overview-item">
-								<h4 className="overview-value">7+</h4>
-								<p className="overview-desc">Project Delivered</p>
+								<h4 className="overview-value">{completedProjects}</h4>
+								<p className="overview-desc">Projects Delivered</p>
+							</div>
+						</Col>
+						<Col xl={3} lg={3} md={6} sm={12} xs={12}>
+							<div className="overview-item">
+								<h4 className="overview-value">{ongoingProjects}</h4>
+								<p className="overview-desc">Projects Ongoing</p>
 							</div>
 						</Col>
 					</Row>
@@ -107,5 +129,4 @@ const AllExperiences = () => {
 		</>
   );
 };
-
 export default AllExperiences;

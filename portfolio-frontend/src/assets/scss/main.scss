@@ -260,3 +260,39 @@ select:-webkit-autofill {
 .Toastify__progress-bar {
   background: linear-gradient(90deg, $primary, $secondary);
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+  margin-top: $spacing-md;
+  .page-item {
+    .page-link {
+      min-width: $s-40px;
+      padding: $spacing-sm;
+      background: $bg-glass;
+      border: 1px solid $border-color;
+      color: $text-primary;
+      border-radius: $radius-md;
+      text-align: center;
+      font-weight: $fw-500;
+      transition: $transition;
+      &:hover,
+      &:focus {
+        background: $hover-bg;
+        border-color: $primary;
+        color: $text-primary;
+      }
+    }
+    &.active {
+      .page-link {
+        font-weight: $fw-600;
+        background: $primary;
+        border-color: $primary;
+        color: $text-primary;
+        box-shadow: 0 0 0 0.15rem rgba($primary, 0.2);
+      }
+    }
+  }
+}

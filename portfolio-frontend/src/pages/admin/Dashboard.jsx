@@ -49,7 +49,7 @@ const Dashboard = () => {
 	}, []);
 
   const stats = [
-    { title: "Skills", count: statsData.skills, label: "Total Skills", icon: faCode, class: "skills" },
+    { title: "Tech Stacks", count: statsData.skills, label: "Total Tech Stacks", icon: faCode, class: "skills" },
     { title: "Experience", count: statsData.experience, label: "Total Experience", icon: faBriefcase, class: "experience" },
     { title: "Projects", count: statsData.projects, label: "Total Projects", icon: faFolder, class: "projects" },
     { title: "Certificates", count: statsData.certifications, label: "Total Certificates", icon: faAward, class: "certificates" },
@@ -64,7 +64,6 @@ const Dashboard = () => {
 					<div className="heading-icon"><FontAwesomeIcon icon={faGauge} /></div>
 					<div className="heading">
 						<h2 className="layout-heading">Dashboard</h2>
-						<p className="layout-desc">Welcome to the Admin Dashboard</p>
 					</div>
 				</div>
         <Button className="btn-primary-custom"  onClick={loadStats} disabled={loading}><FontAwesomeIcon icon={faRefresh} className={loading ? "rotate" : ""} /></Button>

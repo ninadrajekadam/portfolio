@@ -3,7 +3,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpRightFromSquare, faBarsStaggered } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
-import { getProjects } from "../app/api";
+import { getExperience, getProjects } from "../app/api";
 import { toast } from "react-toastify";
 import "../assets/scss/components/Projects.scss";
 import Header from "./Header";
@@ -16,20 +16,32 @@ const AllProjects = () => {
 	const [zoomImage, setZoomImage] = useState(null);
 	const [showTooltip, setShowTooltip] = useState(false);
 	const [projects, setProjects] = useState([]);
+	const [experience, setExperience] = useState([]);
 		
 	useEffect(() => {
-		const fetchAllData = async () => {
+		const fetchAllExperiences = async () => {
 			try {
-				const [projectsRes] = await Promise.all([
-					getProjects()
-				]);
-				setProjects(projectsRes?.data || []);
+				const res = await getExperience();
+				setExperience(res?.data || []);
 			} catch (err) {
 				toast.error(err.message || "Failed to load data");
 			}
 		};
 
-		fetchAllData();
+		fetchAllExperiences();
+	}, []);
+
+	useEffect(() => {
+		const fetchAllProjects = async () => {
+			try {
+				const res = await getProjects();
+				setProjects(res?.data || []);
+			} catch (err) {
+				toast.error(err.message || "Failed to load data");
+			}
+		};
+
+		fetchAllProjects();
 	}, []);
 
 	useEffect(() => {
@@ -50,6 +62,10 @@ const AllProjects = () => {
 		return () => document.body.style.overflow = "auto";
 	}, [zoomImage]);
 
+	const totalExperience = experience.reduce((total, exp) => total + (exp.totalExp || 0), 0).toFixed(1);
+	const completedProjects = projects.filter(project => project.projectStatus === "Completed").length;
+	const ongoingProjects = projects.filter(project => project.projectStatus === "Ongoing").length;
+
 	return (
 		<>
 			<Header setHeaderHeight={setHeaderHeight} />
@@ -68,6 +84,11 @@ const AllProjects = () => {
 						{
 							projects && projects.map((project, index) => (
 								<div className="project-item" key={index}>
+									{
+										project.projectStatus === "Completed" ? (<span className="project-status completed">Completed</span>) : 
+										project.projectStatus === "Ongoing" ? (<span className="project-status ongoing">Ongoing</span>) : 
+										(<span className="project-status unknown">Unknown Status</span>)
+									}
 									<div className="project-image">
 										<img src={`${BASE_URL}/${project.image}`} alt={project.projectName} onClick={() => setZoomImage(`${BASE_URL}/${project.image}`)} style={{ cursor: "zoom-in" }} />
 									</div>
@@ -96,24 +117,30 @@ const AllProjects = () => {
 					{ zoomImage && (<div className="image-zoom-overlay" onClick={() => setZoomImage(null)}><img src={zoomImage} alt="Zoomed Project" /></div>) }
 				</section>
 				<section className="overview">
-					<h3 className="overview-title"><FontAwesomeIcon icon={faBarsStaggered} className="overview-icon" /> Experience Overview</h3>
+					<h3 className="overview-title"><FontAwesomeIcon icon={faBarsStaggered} className="overview-icon" /> Overview</h3>
 					<Row>
-						<Col xl={4} lg={4} md={12}>
+						<Col xl={3} lg={3} md={6} sm={12} xs={12}>
 							<div className="overview-item">
-								<h4 className="overview-value">7.7+</h4>
+								<h4 className="overview-value">{totalExperience}</h4>
 								<p className="overview-desc">Years of Experience</p>
 							</div>
 						</Col>
-						<Col xl={4} lg={4} md={12}>
+						<Col xl={3} lg={3} md={6} sm={12} xs={12}>
 							<div className="overview-item">
-								<h4 className="overview-value">3</h4>
+								<h4 className="overview-value">{experience.length}</h4>
 								<p className="overview-desc">Organizations</p>
 							</div>
 						</Col>
-						<Col xl={4} lg={4} md={12}>
+						<Col xl={3} lg={3} md={6} sm={12} xs={12}>
 							<div className="overview-item">
-								<h4 className="overview-value">7+</h4>
-								<p className="overview-desc">Project Delivered</p>
+								<h4 className="overview-value">{completedProjects}</h4>
+								<p className="overview-desc">Projects Delivered</p>
+							</div>
+						</Col>
+						<Col xl={3} lg={3} md={6} sm={12} xs={12}>
+							<div className="overview-item">
+								<h4 className="overview-value">{ongoingProjects}</h4>
+								<p className="overview-desc">Projects Ongoing</p>
 							</div>
 						</Col>
 					</Row>

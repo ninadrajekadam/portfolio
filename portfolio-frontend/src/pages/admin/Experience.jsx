@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { Button, Modal, Table, Form } from "react-bootstrap";
-import { faBriefcase, faPencil, faPlus, faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { Button, Modal, Table, Form, Pagination } from "react-bootstrap";
+import { faAngleLeft, faAngleRight, faAnglesLeft, faAnglesRight, faBriefcase, faPencil, faPlus, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { toast } from "react-toastify";
 import Search from "./Search";
@@ -92,6 +92,8 @@ const Experience = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [editId, setEditId] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   const fetchExperience = async () => {
     try {
@@ -237,6 +239,12 @@ const Experience = () => {
     );
   });
 
+  const totalPages = Math.ceil(filteredExperience.length / itemsPerPage);
+  const currentPageSafe = totalPages > 0 ? Math.min(currentPage, totalPages) : 1;
+  const indexOfLastExperience = currentPageSafe * itemsPerPage;
+  const indexOfFirstExperience = indexOfLastExperience - itemsPerPage;
+  const currentExperience = filteredExperience.slice(indexOfFirstExperience, indexOfLastExperience);
+
   const totalExperience = filteredExperience.reduce((sum, item) => {
     return sum + calculateTotalExp(item.joiningDate, item.exitDate);
   }, 0).toFixed(1);
@@ -265,9 +273,9 @@ const Experience = () => {
           </thead>
           <tbody>
             {
-              filteredExperience.length > 0 && filteredExperience.map((item, index) => (
+              currentExperience.length > 0 && currentExperience.map((item, index) => (
                 <tr key={item._id || item.id}>
-                  <td>{index + 1}</td>
+                  <td>{index + 1 + indexOfFirstExperience}</td>
                   <td>{item.role}</td>
                   <td>{item.company}</td>
                   <td>{formatDateRange(item)}</td>
@@ -298,6 +306,23 @@ const Experience = () => {
             }
           </tbody>
         </Table>
+        {
+          totalPages > 1 && (
+            <Pagination className="justify-content-center">
+              <Pagination.First disabled={currentPageSafe === 1} onClick={() => setCurrentPage(1)}><FontAwesomeIcon icon={faAnglesLeft} /></Pagination.First>
+              <Pagination.Prev disabled={currentPageSafe === 1} onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}><FontAwesomeIcon icon={faAngleLeft} /></Pagination.Prev>
+              {
+                Array.from({ length: totalPages }, (_, idx) => (
+                  <Pagination.Item key={idx + 1} active={currentPageSafe === idx + 1} onClick={() => setCurrentPage(idx + 1)}>
+                    {idx + 1}
+                  </Pagination.Item>
+                ))
+              }
+              <Pagination.Next disabled={currentPageSafe === totalPages} onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}><FontAwesomeIcon icon={faAngleRight} /></Pagination.Next>
+              <Pagination.Last disabled={currentPageSafe === totalPages} onClick={() => setCurrentPage(totalPages)}><FontAwesomeIcon icon={faAnglesRight} /></Pagination.Last>
+            </Pagination>
+          )
+        }
       </div>
       <Modal show={show} onHide={handleClose} centered className="custom-modal">
         <Modal.Header closeButton>

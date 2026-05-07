@@ -22,11 +22,17 @@ const isValidURL = (url) => {
 
 export const addProject = async (req, res) => {
   try {
-    const { projectName, companyName, description, usedSkills, projectUrl } = req.body;
+    const { projectName, companyName, description, usedSkills, projectUrl, projectStatus } = req.body;
 
     if (!projectName || !companyName || !description) {
       return res.status(400).json({
         message: "Project name, company name, and description are required",
+      });
+    }
+
+    if (!projectStatus) {
+      return res.status(400).json({
+        message: "Project status is required",
       });
     }
 
@@ -45,7 +51,7 @@ export const addProject = async (req, res) => {
     }
 
     const image = req.file ? `uploads/projects/${req.file.filename}` : "";
-    const project = await projectService.createProject({ projectName, companyName, description, usedSkills: skillsArray, projectUrl, image });
+    const project = await projectService.createProject({ projectName, companyName, description, usedSkills: skillsArray, projectUrl, projectStatus, image });
 
     res.status(201).json({
       success: true,
@@ -98,7 +104,7 @@ export const updateProject = async (req, res) => {
       });
     }
 
-    const { projectName, companyName, description, usedSkills, projectUrl } = req.body;
+    const { projectName, companyName, description, usedSkills, projectUrl, projectStatus } = req.body;
 
     if (projectUrl && !isValidURL(projectUrl)) {
       return res.status(400).json({
@@ -123,6 +129,7 @@ export const updateProject = async (req, res) => {
       description: description ?? existingProject.description,
       usedSkills: skillsArray,
       projectUrl: projectUrl ?? existingProject.projectUrl,
+      projectStatus: projectStatus ?? existingProject.projectStatus,
       image
     };
 

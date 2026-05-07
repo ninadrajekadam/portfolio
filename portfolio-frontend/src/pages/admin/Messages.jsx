@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
-import { Button, Table, Modal, Form } from "react-bootstrap";
+import { Button, Table, Modal, Form, Pagination } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope, faEnvelopeOpen, faPaperPlane, faReply, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faAngleLeft, faAngleRight, faAnglesLeft, faAnglesRight, faEnvelope, faEnvelopeOpen, faPaperPlane, faReply, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
 import Search from "./Search";
-import { getMessages, markAsRead, deleteMessage } from "../../app/api";
-import { replyToMessage } from "../../app/api";
+import { getMessages, markAsRead, deleteMessage, replyToMessage } from "../../app/api";
 
 const Messages = () => {
 	const [allMessages, setAllMessages] = useState([]);
@@ -13,6 +12,13 @@ const Messages = () => {
 	const [show, setShow] = useState(false);
 	const [selectedMessageId, setSelectedMessageId] = useState(null);
 	const [replyText, setReplyText] = useState("");
+	const [currentPage, setCurrentPage] = useState(1);
+	const itemsPerPage = 10;
+	const totalPages = Math.ceil(allMessages.length / itemsPerPage);
+	const currentPageSafe = totalPages > 0 ? Math.min(currentPage, totalPages) : 1;
+	const indexOfLastMessage = currentPageSafe * itemsPerPage;
+	const indexOfFirstMessage = indexOfLastMessage - itemsPerPage;
+	const currentMessages = allMessages.slice(indexOfFirstMessage, indexOfLastMessage);
 
 	useEffect(() => {
 		const fetchMessages = async () => {
@@ -52,6 +58,10 @@ const Messages = () => {
 			setAllMessages((prev) =>
 				prev.filter((msg) => msg._id !== id)
 			);
+
+			if (currentMessages.length === 1 && currentPage > 1) {
+				setCurrentPage(currentPage - 1);
+			}
 
 			toast.success("Message deleted successfully");
 		} catch (err) {
@@ -123,10 +133,10 @@ const Messages = () => {
 										Loading...
 									</td>
 								</tr>
-							) : allMessages.length > 0 ? (
-								allMessages.map((message, index) => (
+							) : currentMessages.length > 0 ? (
+								currentMessages.map((message, index) => (
 									<tr key={message._id || index}>
-										<td>{index + 1}</td>
+								<td>{index + 1 + indexOfFirstMessage}</td>
 										<td>{new Date(message.createdAt).toLocaleString()}</td>
 										<td>{message.name}</td>
 										<td>{message.email}</td>
@@ -149,6 +159,23 @@ const Messages = () => {
 						}
 					</tbody>
 				</Table>
+				{
+					totalPages > 1 && (
+						<Pagination className="justify-content-center">
+						<Pagination.First disabled={currentPageSafe === 1} onClick={() => setCurrentPage(1)}><FontAwesomeIcon icon={faAnglesLeft} /></Pagination.First>
+						<Pagination.Prev disabled={currentPageSafe === 1} onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}><FontAwesomeIcon icon={faAngleLeft} /></Pagination.Prev>
+						{
+							Array.from({ length: totalPages }, (_, idx) => (
+								<Pagination.Item key={idx + 1} active={currentPageSafe === idx + 1} onClick={() => setCurrentPage(idx + 1)}>
+									{idx + 1}
+								</Pagination.Item>
+							))
+						}
+						<Pagination.Next disabled={currentPageSafe === totalPages} onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}><FontAwesomeIcon icon={faAngleRight} /></Pagination.Next>
+						<Pagination.Last disabled={currentPageSafe === totalPages} onClick={() => setCurrentPage(totalPages)}><FontAwesomeIcon icon={faAnglesRight} /></Pagination.Last>
+						</Pagination>
+					)
+				}
 			</div>
 			<Modal show={show} onHide={handleClose} centered className="custom-modal">
 				<Modal.Header closeButton>

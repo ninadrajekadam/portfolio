@@ -59,6 +59,11 @@ const Projects = () => {
 					{
 						projects && projects.slice(0, 5).map((project, index) => (
 							<div className="project-item" key={index}>
+								{
+									project.projectStatus === "Completed" ? (<span className="project-status completed">Completed</span>) : 
+									project.projectStatus === "Ongoing" ? (<span className="project-status ongoing">Ongoing</span>) : 
+									(<span className="project-status unknown">Unknown Status</span>)
+								}
 								<div className="project-image">
 									<img src={`${BASE_URL}/${project.image}`} alt={project.projectName} onClick={() => setZoomImage(`${BASE_URL}/${project.image}`)} style={{ cursor: "zoom-in" }} />
 								</div>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { Button, Modal, Table, Form } from "react-bootstrap";
-import { faPencil, faPlus, faTrashCan, faTrophy } from "@fortawesome/free-solid-svg-icons";
+import { Button, Modal, Table, Form, Pagination } from "react-bootstrap";
+import { faAngleLeft, faAngleRight, faAnglesLeft, faAnglesRight, faPencil, faPlus, faTrashCan, faTrophy } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getAchievements, addAchievement, updateAchievement, deleteAchievement } from "../../app/api";
 import { toast } from "react-toastify";
@@ -13,6 +13,8 @@ const Achievements = () => {
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   const [formData, setFormData] = useState({
     achievement: "",
@@ -58,6 +60,12 @@ const Achievements = () => {
     item.achievement?.toLowerCase().includes(search.toLowerCase()) ||
     item.companyName?.toLowerCase().includes(search.toLowerCase())
   );
+
+  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+  const currentPageSafe = totalPages > 0 ? Math.min(currentPage, totalPages) : 1;
+  const indexOfLastAchievement = currentPageSafe * itemsPerPage;
+  const indexOfFirstAchievement = indexOfLastAchievement - itemsPerPage;
+  const currentAchievements = filteredData.slice(indexOfFirstAchievement, indexOfLastAchievement);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -150,9 +158,9 @@ const Achievements = () => {
 							) : filteredData.length === 0 ? (
 								<tr><td colSpan="5" className="text-center">Achievement not available</td></tr>
 							) : (
-								filteredData.map((item, index) => (
+								currentAchievements.map((item, index) => (
 									<tr key={item._id}>
-										<td>{index + 1}</td>
+										<td>{index + 1 + indexOfFirstAchievement}</td>
 										<td>{item.achievement}</td>
 										<td>{item.companyName}</td>
 										<td>{item.year}</td>
@@ -167,6 +175,23 @@ const Achievements = () => {
 						}
           </tbody>
         </Table>
+        {
+          totalPages > 1 && (
+            <Pagination className="justify-content-center">
+              <Pagination.First disabled={currentPageSafe === 1} onClick={() => setCurrentPage(1)}><FontAwesomeIcon icon={faAnglesLeft} /></Pagination.First>
+              <Pagination.Prev disabled={currentPageSafe === 1} onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}><FontAwesomeIcon icon={faAngleLeft} /></Pagination.Prev>
+              {
+                Array.from({ length: totalPages }, (_, idx) => (
+                  <Pagination.Item key={idx + 1} active={currentPageSafe === idx + 1} onClick={() => setCurrentPage(idx + 1)}>
+                    {idx + 1}
+                  </Pagination.Item>
+                ))
+              }
+              <Pagination.Next disabled={currentPageSafe === totalPages} onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}><FontAwesomeIcon icon={faAngleRight} /></Pagination.Next>
+              <Pagination.Last disabled={currentPageSafe === totalPages} onClick={() => setCurrentPage(totalPages)}><FontAwesomeIcon icon={faAnglesRight} /></Pagination.Last>
+            </Pagination>
+          )
+        }
       </div>
       <Modal show={show} onHide={handleClose} centered className="custom-modal">
         <Modal.Header closeButton>

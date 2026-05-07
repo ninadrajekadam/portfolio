@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { Button, Modal, Table, Form } from "react-bootstrap";
-import { faFolder, faPencil, faPlus, faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { Button, Modal, Table, Form, Pagination } from "react-bootstrap";
+import { faAngleLeft, faAngleRight, faAnglesLeft, faAnglesRight, faFolder, faPencil, faPlus, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import FileDropzone from "../../components/FileDropzone";
 import { toast } from "react-toastify";
@@ -22,21 +22,22 @@ const Projects = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [editId, setEditId] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
-
+  const [currentPage, setCurrentPage] = useState(1);
   const [projectImage, setProjectImage] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
 	const [existingImage, setExistingImage] = useState("");
 	const [companyName, setCompanyName] = useState("");
   const [projects, setProjects] = useState([]);
+  const itemsPerPage = 10;
 
   const [formData, setFormData] = useState({
     projectName: "",
     companyName: "",
     usedSkills: "",
     description: "",
+    projectStatus: "",
     projectUrl: ""
   });
-
 
   const fetchProjects = async () => {
     try {
@@ -74,6 +75,7 @@ const Projects = () => {
       companyName: "",
       usedSkills: "",
       description: "",
+      projectStatus: "",
       projectUrl: "",
     });
 
@@ -111,6 +113,7 @@ const Projects = () => {
       formDataToSend.append("companyName", formData.companyName);
       formDataToSend.append("description", formData.description);
       formDataToSend.append("usedSkills", formData.usedSkills);
+      formDataToSend.append("projectStatus", formData.projectStatus);
 
       if (formData.projectUrl) {
         formDataToSend.append("projectUrl", formData.projectUrl);
@@ -154,6 +157,7 @@ const Projects = () => {
       companyName: item.companyName,
       usedSkills: item.usedSkills.join(", "),
       description: item.description,
+      projectStatus: item.projectStatus || "",
       projectUrl: item.projectUrl || ""
     });
     
@@ -172,9 +176,16 @@ const Projects = () => {
       item.projectName.toLowerCase().includes(query) ||
       item.companyName.toLowerCase().includes(query) ||
       item.description.toLowerCase().includes(query) ||
+      item.projectStatus.toLowerCase().includes(query) ||
       item.usedSkills.some(skill => skill.toLowerCase().includes(query))
     );
   });
+
+  const totalPages = Math.ceil(filteredProjects.length / itemsPerPage);
+  const currentPageSafe = totalPages > 0 ? Math.min(currentPage, totalPages) : 1;
+  const indexOfLastProject = currentPageSafe * itemsPerPage;
+  const indexOfFirstProject = indexOfLastProject - itemsPerPage;
+  const currentProjects = filteredProjects.slice(indexOfFirstProject, indexOfLastProject);
 
   return (
     <>
@@ -195,18 +206,20 @@ const Projects = () => {
               <th>#</th>
               <th>Project Name</th>
               <th>Company Name</th>
+              <th>Project Status</th>
               <th>Used Skills</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
             {
-							filteredProjects.length > 0 ? (
-								filteredProjects.map((item, index) => (
+							currentProjects.length > 0 ? (
+								currentProjects.map((item, index) => (
 									<tr key={item._id || item.id}>
-										<td>{ index + 1 }</td>
+										<td>{ index + 1 + indexOfFirstProject }</td>
 										<td>{ item.projectName }</td>
 										<td>{ item.companyName }</td>
+										<td>{ item.projectStatus }</td>
 										<td>{ item.usedSkills?.join(", ") }</td>
 										<td>
 											<Button className="btn-primary-custom" onClick={() => handleEdit(item)}><FontAwesomeIcon icon={faPencil} /></Button>
@@ -223,6 +236,23 @@ const Projects = () => {
 						}
           </tbody>
         </Table>
+        {
+          totalPages > 1 && (
+            <Pagination className="justify-content-center">
+              <Pagination.First disabled={currentPageSafe === 1} onClick={() => setCurrentPage(1)}><FontAwesomeIcon icon={faAnglesLeft} /></Pagination.First>
+              <Pagination.Prev disabled={currentPageSafe === 1} onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}><FontAwesomeIcon icon={faAngleLeft} /></Pagination.Prev>
+              {
+                Array.from({ length: totalPages }, (_, idx) => (
+                  <Pagination.Item key={idx + 1} active={currentPageSafe === idx + 1} onClick={() => setCurrentPage(idx + 1)}>
+                    {idx + 1}
+                  </Pagination.Item>
+                ))
+              }
+              <Pagination.Next disabled={currentPageSafe === totalPages} onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}><FontAwesomeIcon icon={faAngleRight} /></Pagination.Next>
+              <Pagination.Last disabled={currentPageSafe === totalPages} onClick={() => setCurrentPage(totalPages)}><FontAwesomeIcon icon={faAnglesRight} /></Pagination.Last>
+            </Pagination>
+          )
+        }
       </div>
       <Modal show={show} onHide={handleClose} centered className="custom-modal">
         <Modal.Header closeButton>
@@ -244,7 +274,6 @@ const Projects = () => {
                   ))
                 }
               </Form.Select>
-              {/* <Form.Control type="text" name="companyName" value={formData.companyName} onChange={handleChange} placeholder="Enter company name"/> */}
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Used Skills</Form.Label>
@@ -253,6 +282,14 @@ const Projects = () => {
             <Form.Group className="mb-3">
               <Form.Label>Description</Form.Label>
               <Form.Control as="textarea" rows={4} name="description" value={formData.description} onChange={handleChange} placeholder="Enter project description" />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Project Status</Form.Label>
+              <Form.Select name="projectStatus" value={formData.projectStatus} onChange={handleChange}>
+                <option value="">Select Status</option>
+                <option value="Completed">Completed</option>
+                <option value="Ongoing">Ongoing</option>
+              </Form.Select>
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Project URL</Form.Label>

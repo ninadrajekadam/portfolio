@@ -8,6 +8,7 @@
     gap: $spacing-md;
   }
   .project-item {
+    position: relative;
     display: flex;
     gap: $spacing-md;
     background: $bg-tertiary;
@@ -23,6 +24,25 @@
       box-shadow: $shadow-lg;
       border-color: rgba($primary, 0.4);
     }
+    .project-status {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: $spacing-xs $spacing-sm;
+      border-radius: 0 0 0 $radius-sm;
+      font-size: $fs-xs;
+      font-weight: $fw-500;
+      &.completed {
+        background: rgba($success, 0.3);
+        color: $success;
+        border: 1px solid rgba($success, 0.3);
+      }
+      &.ongoing {
+        background: rgba($warning, 0.3);
+        color: $warning;
+        border: 1px solid rgba($warning, 0.3);
+      }
+    }
     .project-image {
       width: 200px;
       border-radius: $radius-sm;
@@ -37,8 +57,8 @@
       }
       img {
 				width: 100%;
-        height: 100%;
-        object-fit: fill;
+        // height: 100%;
+        // object-fit: fill;
         transition: transform 0.4s ease;
         border: 1px solid $border-light;
 				border-radius: $radius-sm;
@@ -48,7 +68,6 @@
       flex: 1;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       .project-title {
         font-size: $fs-md;
         font-weight: $fw-700;

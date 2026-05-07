@@ -81,6 +81,7 @@
       font-weight: $fw-500;
       color: $success;
       background: rgba($success, 0.3);
+      border: 1px solid rgba($success, 0.3);
       border-radius: $radius-sm;
       padding: $spacing-xs $spacing-sm;
     }

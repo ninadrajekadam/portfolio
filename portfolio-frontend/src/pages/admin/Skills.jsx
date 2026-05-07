@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { Button, Modal, Table, Form } from "react-bootstrap";
-import { faCode, faPencil, faPlus, faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { Button, Modal, Table, Form, Pagination } from "react-bootstrap";
+import { faAngleLeft, faAngleRight, faAnglesLeft, faAnglesRight, faCode, faPencil, faPlus, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import FileDropzone from "../../components/FileDropzone";
 import { toast } from "react-toastify";
@@ -15,8 +15,10 @@ const Skills = () => {
 	const [isEdit, setIsEdit] = useState(false);
 	const [editId, setEditId] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
   const [previewImage, setPreviewImage] = useState(null);
   const [existingImage, setExistingImage] = useState("");
+  const itemsPerPage = 10;
 
   const [formData, setFormData] = useState({
     name: "",
@@ -136,12 +138,18 @@ const Skills = () => {
     );
   });
 
+  const totalPages = Math.ceil(filteredSkills.length / itemsPerPage);
+  const currentPageSafe = totalPages > 0 ? Math.min(currentPage, totalPages) : 1;
+  const indexOfLastSkill = currentPageSafe * itemsPerPage;
+  const indexOfFirstSkill = indexOfLastSkill - itemsPerPage;
+  const currentSkills = filteredSkills.slice(indexOfFirstSkill, indexOfLastSkill);
+
   return (
     <>
       <div className="heading-btn-wrapper">
         <div className="heading-wrapper">
           <div className="heading-icon"><FontAwesomeIcon icon={faCode} /></div>
-          <div className="heading"><h2 className="layout-heading">Skills</h2></div>
+          <div className="heading"><h2 className="layout-heading">Tech Stacks</h2></div>
         </div>
         <Button className="btn-primary-custom add-btn" onClick={handleShow}><FontAwesomeIcon icon={faPlus} /> Add</Button>
       </div>
@@ -159,11 +167,11 @@ const Skills = () => {
           </thead>
           <tbody>
             {
-							filteredSkills?.length > 0 ? (
-								filteredSkills.map((item, index) => (
+							currentSkills?.length > 0 ? (
+								currentSkills.map((item, index) => (
 									<tr key={item._id}>
-										<td>{index + 1}</td>
-										<td><img src={`${BASE_URL}${item.skillImage}`} alt={item.skillName} className="skill-img"/>{" "}{item.skillName}</td>
+										<td>{index + 1 + indexOfFirstSkill}</td>
+										<td><img src={`${BASE_URL}${item.skillImage}`} alt={item.skillName} className={`skill-img ${item.skillName === "ExpressJs" ? "filter" : ""}`} />{" "}{item.skillName}</td>
 										<td>{item.category}</td>
 										<td>{item.proficiency}%</td>
 										<td>
@@ -179,6 +187,23 @@ const Skills = () => {
 						}
           </tbody>
         </Table>
+        {
+          totalPages > 1 && (
+            <Pagination className="justify-content-center">
+              <Pagination.First disabled={currentPageSafe === 1} onClick={() => setCurrentPage(1)}><FontAwesomeIcon icon={faAnglesLeft} /></Pagination.First>
+              <Pagination.Prev disabled={currentPageSafe === 1} onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}><FontAwesomeIcon icon={faAngleLeft} /></Pagination.Prev>
+              {
+                Array.from({ length: totalPages }, (_, idx) => (
+                  <Pagination.Item key={idx + 1} active={currentPageSafe === idx + 1} onClick={() => setCurrentPage(idx + 1)}>
+                    {idx + 1}
+                  </Pagination.Item>
+                ))
+              }
+              <Pagination.Next disabled={currentPageSafe === totalPages} onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}><FontAwesomeIcon icon={faAngleRight} /></Pagination.Next>
+              <Pagination.Last disabled={currentPageSafe === totalPages} onClick={() => setCurrentPage(totalPages)}><FontAwesomeIcon icon={faAnglesRight} /></Pagination.Last>
+            </Pagination>
+          )
+        }
       </div>
       <Modal show={show} onHide={handleClose} centered className="custom-modal">
         <Modal.Header closeButton>
