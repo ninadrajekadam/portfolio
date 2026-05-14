@@ -5,7 +5,8 @@
   "scripts": {
     "frontend": "npm run dev --prefix portfolio-frontend",
     "backend": "nodemon portfolio-backend/src/server.js",
-    "dev": "concurrently \"npm run backend\" \"npm run frontend\""
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
+    "start": "node portfolio-backend/src/server.js"
   },
   "keywords": [
     "portfolio",
