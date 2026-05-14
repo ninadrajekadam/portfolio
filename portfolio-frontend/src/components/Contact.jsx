@@ -56,7 +56,7 @@ const Contact = () => {
     }, []);
 
   const contactInfo = [
-    { icon: faPhone, text: "+91 9876543210", url: "tel:9876543210" },
+    { icon: faPhone, text: "+91 9167470545", url: "tel:9167470545" },
     { icon: faEnvelopeOpen, text: "tech.ninadkadam@gmail.com", url: "mailto:tech.ninadkadam@gmail.com" },
     { icon: faLocationArrow, text: "Mumbai, Maharashtra, India", url: "https://www.google.com/maps/place/Mumbai,+Maharashtra/@19.0760903,72.8777267,12z/data=!3m1!4b1!4m5!3m4!1s0x3be7c63f6c0f70a1:0x2c3e6b9c0ea5b4a0!8m2!3d19.0760903!4d72.8777267" },
     { icon: faDownload, text: "Download CV", url: `${BASE_URL}/uploads/pdf/${existingCV}` },
