@@ -1,4 +1,4 @@
-import Certification from "../models/certification.js";
+import Certification from "../models/Certification.js";
 
 export const createCertification = (data) => {
   return Certification.create(data);
