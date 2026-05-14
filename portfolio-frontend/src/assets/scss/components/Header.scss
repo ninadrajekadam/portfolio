@@ -2,7 +2,6 @@
 @import "../mixins.scss";
 
 .navbar-glass {
-  // border-bottom: 1px solid $border-color;
   box-shadow: $shadow-md;
   backdrop-filter: blur(12px);
   background: $bg-glass;
@@ -12,10 +11,6 @@
     &::after {
       background: $primary;
     }
-    // &:hover,
-    // &.active {
-    //   color: $primary;
-    // }
   }
   .theme-btn {
     background: $bg-tertiary;

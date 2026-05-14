@@ -173,6 +173,7 @@ a.btn-primary-custom {
   }
 }
 .gradient-text {
+  font-size: $fs-xl;
   background: linear-gradient(90deg, $primary, $accent);
   background-clip: text;
   -webkit-background-clip: text;

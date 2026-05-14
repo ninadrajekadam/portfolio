@@ -188,11 +188,13 @@
   }
   .hero-desc {
     font-size: $fs-sm;
+    font-weight: $fw-500;
     color: $text-secondary;
-    max-width: 500px;
+    max-width: 550px;
     margin-bottom: $spacing-md;
     line-height: 1.6;
     @include respond-down(md) {
+      max-width: 100%;
       margin-bottom: $spacing-sm;
     }
     @include respond-down(sm) {

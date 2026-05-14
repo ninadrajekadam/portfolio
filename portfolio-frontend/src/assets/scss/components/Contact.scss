@@ -39,4 +39,40 @@
 			filter: grayscale(1) invert(0.9);
 		}
 	}
+	.contact-info {
+		display: grid;
+		grid-auto-flow: column;
+		grid-template-rows: repeat(4, auto);
+		gap: 16px;
+		.info-item {
+			display: flex;
+			align-items: center;
+			gap: $spacing-sm;
+			text-decoration: none;
+			color: $text-secondary;
+			&:hover {
+				.info-icon {
+					color: $primary;
+					border-color: $primary;
+				}
+			}
+		}
+		.info-icon {
+			width: 40px;
+			height: 40px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: 18px;
+			background: $bg-glass;
+			border: 1px solid $border-color;
+			border-radius: $radius-sm;
+			padding: $spacing-sm;
+		}
+		.info-text {
+			font-size: $fs-sm;
+			font-weight: $fw-600;
+			margin-bottom: 0;
+		}
+	}
 }

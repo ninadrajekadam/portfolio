@@ -43,7 +43,7 @@ const About = () => {
 			<p className="section-description">{form.profileabout}</p>
 			<div className="about-options">
 				<div className="about-option">
-					<h4 className="option-title">{totalExperience}</h4>
+					<h4 className="option-title">{totalExperience}+</h4>
 					<p className="option-description">Years of Experience</p>
 				</div>
 				<div className="about-option">

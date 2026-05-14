@@ -1,12 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Row, Col, Form, Button } from "react-bootstrap";
-import { faAddressCard } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFacebook, faGithub, faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import { faAddressCard, faEnvelopeOpen } from "@fortawesome/free-regular-svg-icons";
+import { faDownload, faLocationArrow, faPhone } from "@fortawesome/free-solid-svg-icons";
 import "../assets/scss/components/Contact.scss";
 import { toast } from "react-toastify";
-import { sendMessage } from "../app/api";
+import { sendMessage, getProfile } from "../app/api";
+
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const Contact = () => {
+  const [existingCV, setExistingCV] = useState("");
   const [formData, setFormData] = useState({
     type: "",
     name: "",
@@ -42,12 +47,31 @@ const Contact = () => {
     }
   };
 
+  useEffect(() => {
+      getProfile().then((res) => {
+        if (res) {
+          setExistingCV(res.cvFile);
+        }
+      });
+    }, []);
+
+  const contactInfo = [
+    { icon: faPhone, text: "+91 9876543210", url: "tel:9876543210" },
+    { icon: faEnvelopeOpen, text: "tech.ninadkadam@gmail.com", url: "mailto:tech.ninadkadam@gmail.com" },
+    { icon: faLocationArrow, text: "Mumbai, Maharashtra, India", url: "https://www.google.com/maps/place/Mumbai,+Maharashtra/@19.0760903,72.8777267,12z/data=!3m1!4b1!4m5!3m4!1s0x3be7c63f6c0f70a1:0x2c3e6b9c0ea5b4a0!8m2!3d19.0760903!4d72.8777267" },
+    { icon: faDownload, text: "Download CV", url: `${BASE_URL}/uploads/pdf/${existingCV}` },
+    { icon: faGithub, text: "GitHub", url: "https://github.com/ninadrajekadam" },
+    { icon: faLinkedin, text: "LinkedIn", url: "https://in.linkedin.com/in/ninadrajekadam" },
+    { icon: faFacebook, text: "Facebook", url: "https://www.facebook.com/ninadrajekadam/" },
+    { icon: faInstagram, text: "Instagram", url: "https://www.instagram.com/ninadrajekadam/" },
+  ];
+
   return (
     <section className="contact-section" id="contact">
       <h3 className="section-title"><FontAwesomeIcon icon={faAddressCard} /> Get in Touch</h3>
       <div className="contact-wrapper">
-        <Row className="contact-divider">
-          <Col xl={6} lg={9} md={12}>
+        <Row>
+          <Col xl={7} lg={9} md={12}>
             <Form className="contact-form" onSubmit={handleSubmit}>
               <Row>
                 <Col lg={12}>
@@ -56,12 +80,12 @@ const Contact = () => {
                     <Form.Check inline label="Message" id="message" name="contactType" type="radio" value="message" checked={formData.type === "message"} onChange={() =>setFormData((prev) => ({ ...prev, type: "message" }))} />
                   </Form.Group>
                 </Col>
-                <Col lg={12}>
+                <Col lg={6}>
 									<Form.Group className="form-group">
                   	<Form.Control type="text" name="name" placeholder="Enter your name" value={formData.name} onChange={handleChange} required />
 									</Form.Group>
                 </Col>
-                <Col lg={12}>
+                <Col lg={6}>
 									<Form.Group className="form-group">
                   	<Form.Control type="email" name="email" placeholder="Enter your email" value={formData.email} onChange={handleChange} required />
 									</Form.Group>
@@ -79,8 +103,19 @@ const Contact = () => {
               </Row>
             </Form>
           </Col>
-          <Col xl={6} lg={3} md={12}>
-            Coming soon...
+          <Col xl={5} lg={3} md={12}>
+            <div className="contact-info">
+              {
+                contactInfo && contactInfo.map((item, index) => (
+                  <a href={item.url} className="info-item" target="_blank" key={index}>
+                    <div className="info-icon">
+                      <FontAwesomeIcon icon={item.icon} />
+                    </div>
+                    <p className="info-text">{item.text}</p>
+                  </a>
+                ))
+              }
+            </div>
           </Col>
         </Row>
       </div>
