@@ -9,13 +9,13 @@ dotenv.config({ path: path.resolve(__dirname, "../../.env") });
 
 const isProd = process.env.NODE_ENV === "production";
 
-const requiredEnvVars = ["MONGO_URI", "JWT_SECRET"];
-requiredEnvVars.forEach((key) => {
-  if (!process.env[key]) {
-    console.error(`❌ Missing environment variable: ${key}`);
-    process.exit(1);
-  }
-});
+// const requiredEnvVars = ["MONGO_URI", "JWT_SECRET"];
+// requiredEnvVars.forEach((key) => {
+//   if (!process.env[key]) {
+//     console.error(`❌ Missing environment variable: ${key}`);
+//     process.exit(1);
+//   }
+// });
 
 const env = {
   PORT: isProd ? parseInt(process.env.PORT, 10) || 8080 : parseInt(process.env.PORT, 10) || 5000,

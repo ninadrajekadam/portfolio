@@ -25,7 +25,6 @@ io.on("connection", (socket) => {
   console.log("Socket connected:", socket.id);
 });
 
-
 app.listen(env.PORT, () => {
   console.log(`🚀 Server running on port ${env.PORT}`);
 });
