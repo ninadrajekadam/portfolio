@@ -18,7 +18,7 @@ const isProd = process.env.NODE_ENV === "production";
 // });
 
 const env = {
-  PORT: isProd ? parseInt(process.env.PORT, 10) || 8080 : parseInt(process.env.PORT, 10) || 5000,
+  PORT: isProd ? parseInt(process.env.PORT, 10) || 8080 : parseInt(process.env.PORT, 10) || 8080,
   MONGO_URI: process.env.MONGO_URI,
   JWT_SECRET: process.env.JWT_SECRET,
   CORS_ORIGIN: isProd ? process.env.CORS_ORIGIN_PROD : process.env.CORS_ORIGIN_DEV,
