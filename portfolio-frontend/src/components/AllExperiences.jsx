@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { toast } from "react-toastify";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBarsStaggered } from "@fortawesome/free-solid-svg-icons";
-import Header from "./Header";
-import Footer from "./Footer";
 import { getExperience, getProjects } from "../app/api";
 import "../assets/scss/components/Experience.scss";
 import "../assets/scss/components/ExperienceProject.scss";
+import Header from "./Header";
+import Footer from "./Footer";
 
 const AllExperiences = () => {
 	const [headerHeight, setHeaderHeight] = useState(0);
@@ -20,7 +19,7 @@ const AllExperiences = () => {
         const res = await getExperience();
         setExperience(res?.data || []);
       } catch (err) {
-        toast.error(err.message || "Failed to load data");
+        err.message
       }
     };
 
@@ -33,7 +32,7 @@ const AllExperiences = () => {
         const res = await getProjects();
         setProjects(res?.data || []);
       } catch (err) {
-        toast.error(err.message || "Failed to load data");
+        err.message
       }
     };
 

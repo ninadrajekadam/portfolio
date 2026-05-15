@@ -50,7 +50,7 @@ const Contact = () => {
         message: "",
       });
     } catch (err) {
-			toast.error(err.message);
+			err.message;
     }
   };
 
@@ -70,9 +70,6 @@ const Contact = () => {
       }
     });
   }, []);
-
-  console.log(info);
-    
 
   const contactInfo = [
     { icon: faPhone, text: `+91 ${info.mobile}`, url: `tel:+91${info.mobile}` },

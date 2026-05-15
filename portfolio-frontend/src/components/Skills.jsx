@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCode } from "@fortawesome/free-solid-svg-icons";
 import "../assets/scss/components/Skills.scss";
 import { getSkills } from "../app/api";
-import { toast } from "react-toastify";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -18,7 +17,7 @@ const Skills = () => {
 				]);
 				setSkills(skillsRes?.data || []);
 			} catch (err) {
-				toast.error(err.message || "Failed to load data");
+				err.message
 			}
 		};
 

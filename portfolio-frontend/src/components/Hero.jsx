@@ -5,7 +5,6 @@ import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faFacebook, faGithub, faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { getProfile, getExperience } from "../app/api";
 import "../assets/scss/components/Hero.scss";
-import { toast } from "react-toastify";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -25,7 +24,7 @@ const Hero = ({ headerHeight }) => {
 			const res = await getExperience();
 			setExperience(res.data || []);
 		} catch (err) {
-			toast.error(err.message);
+			err.message
 		}
 	};
 

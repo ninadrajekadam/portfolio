@@ -5,7 +5,6 @@ import { faFolderClosed } from "@fortawesome/free-regular-svg-icons";
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
 import { getProjects } from "../app/api";
-import { toast } from "react-toastify";
 import "../assets/scss/components/Projects.scss";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -23,7 +22,7 @@ const Projects = () => {
 				]);
 				setProjects(projectsRes?.data || []);
 			} catch (err) {
-				toast.error(err.message || "Failed to load data");
+				err.message
 			}
 		};
 

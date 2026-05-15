@@ -3,7 +3,6 @@ import "../assets/scss/components/About.scss";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { useEffect, useState } from "react";
 import { getProfile, getExperience, getProjects } from "../app/api";
-import { toast } from "react-toastify";
 
 const About = () => {
 	const [experience, setExperience] = useState([]);
@@ -28,7 +27,7 @@ const About = () => {
 				setExperience(experienceRes?.data || []);
 				setProjects(projectsRes?.data || []);
 			} catch (err) {
-				toast.error(err.message || "Failed to load data");
+				err.message;
 			}
 		};
 

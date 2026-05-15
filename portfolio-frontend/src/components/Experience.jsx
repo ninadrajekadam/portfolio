@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { faArrowUpRightFromSquare, faBriefcase } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { toast } from "react-toastify";
 import "../assets/scss/components/Experience.scss";
 import { getExperience } from "../app/api";
 import { Link } from "react-router-dom";
@@ -18,7 +17,7 @@ const Experience = () => {
 				]);
 				setExperience(experienceRes?.data || []);
 			} catch (err) {
-				toast.error(err.message || "Failed to load data");
+				err.message
 			}
 		};
 

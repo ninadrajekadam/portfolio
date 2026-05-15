@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpRightFromSquare, faBarsStaggered } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
 import { getExperience, getProjects } from "../app/api";
-import { toast } from "react-toastify";
 import "../assets/scss/components/Projects.scss";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -24,7 +23,7 @@ const AllProjects = () => {
 				const res = await getExperience();
 				setExperience(res?.data || []);
 			} catch (err) {
-				toast.error(err.message || "Failed to load data");
+				err.message
 			}
 		};
 
@@ -37,7 +36,7 @@ const AllProjects = () => {
 				const res = await getProjects();
 				setProjects(res?.data || []);
 			} catch (err) {
-				toast.error(err.message || "Failed to load data");
+				err.message
 			}
 		};
 
