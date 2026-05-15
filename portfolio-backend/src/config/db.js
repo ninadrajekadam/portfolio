@@ -1,18 +1,6 @@
 import mongoose from "mongoose";
 import env from "./env.js";
 
-// const connectDB = async () => {
-//   try {
-//     await mongoose.connect(env.MONGO_URI);
-//     console.log("MongoDB Connected");
-//   } catch (error) {
-//     console.error("MongoDB connection failed:", error.message);
-//     process.exit(1);
-//   }
-// };
-// export default connectDB;
-
-
 let isConnected = false;
 
 const connectDB = async () => {
@@ -23,7 +11,7 @@ const connectDB = async () => {
 
   try {
     const conn = await mongoose.connect(env.MONGO_URI, {
-      maxPoolSize: 10, // optional but good
+      maxPoolSize: 10,
     });
 
     isConnected = conn.connection.readyState === 1;

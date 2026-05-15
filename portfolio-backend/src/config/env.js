@@ -6,18 +6,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 dotenv.config({ path: path.resolve(__dirname, "../../.env") });
-
-
-// const requiredEnvVars = ["MONGO_URI", "JWT_SECRET"];
-// requiredEnvVars.forEach((key) => {
-  //   if (!process.env[key]) {
-    //     console.error(`❌ Missing environment variable: ${key}`);
-    //     process.exit(1);
-    //   }
-    // });
     
 const isProd = process.env.NODE_ENV === "production";
-
 const env = {
   PORT: parseInt(process.env.PORT, 10) || 8080,
 

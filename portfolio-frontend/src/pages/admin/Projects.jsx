@@ -162,7 +162,6 @@ const Projects = () => {
     });
     
     setExistingImage(item.image);
-    console.log(item.image);
     setPreviewImage(null);
     setShow(true);
   };

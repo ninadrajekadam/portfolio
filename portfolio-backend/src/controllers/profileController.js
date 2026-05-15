@@ -11,8 +11,7 @@ export const getProfile = async (req, res) => {
 
 export const saveProfile = async (req, res) => {
   try {
-    const { name, email, role, about } = req.body;
-
+    const { name, role, email, mobile, whatsapp, city, github, linkedin, facebook, instagram, about } = req.body;
     const profileImage = req.files?.profileImage?.[0]? `profile/${req.files.profileImage[0].filename}`: undefined;
     const cvFile = req.files?.cvFile?.[0]? `pdf/${req.files.cvFile[0].filename}`: undefined;
 
@@ -20,8 +19,15 @@ export const saveProfile = async (req, res) => {
 
     if (profile) {
       profile.name = name;
-      profile.email = email;
       profile.role = role;
+      profile.email = email;
+      profile.mobile = mobile;
+      profile.whatsapp = whatsapp;
+      profile.city = city;
+      profile.github = github;
+      profile.linkedin = linkedin;
+      profile.facebook = facebook;
+      profile.instagram = instagram;
       profile.about = about;
 
       if (profileImage) profile.profileImage = profileImage;
@@ -29,20 +35,13 @@ export const saveProfile = async (req, res) => {
 
       await profile.save();
     } else {
-      profile = await Profile.create({
-        name,
-        email,
-        role,
-        about,
-        profileImage,
-        cvFile,
-      });
+      profile = await Profile.create({ name, role, email, mobile, whatsapp, city, github, linkedin, facebook, instagram, about, profileImage, cvFile });
     }
 
     res.json({
       success: true,
       message: "Profile saved successfully",
-      profile,
+      profile
     });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -51,11 +50,9 @@ export const saveProfile = async (req, res) => {
 
 export const updateProfile = async (req, res) => {
   try {
-    const { name, email, role, about } = req.body;
-
+    const { name, role, email, mobile, whatsapp, city, github, linkedin, facebook, instagram, about } = req.body;
     const profileImage = req.files?.profileImage?.[0]? `profile/${req.files.profileImage[0].filename}`: undefined;
     const cvFile = req.files?.cvFile?.[0]? `pdf/${req.files.cvFile[0].filename}`: undefined;
-    console.log("Received files:", req.files);
 
     let profile = await Profile.findOne();
 
@@ -64,8 +61,15 @@ export const updateProfile = async (req, res) => {
     }
 
     profile.name = name;
-    profile.email = email;
     profile.role = role;
+    profile.email = email;
+    profile.mobile = mobile;
+    profile.whatsapp = whatsapp;
+    profile.city = city;
+    profile.github = github;
+    profile.linkedin = linkedin;
+    profile.facebook = facebook;
+    profile.instagram = instagram;
     profile.about = about;
 
     if (profileImage) profile.profileImage = profileImage;

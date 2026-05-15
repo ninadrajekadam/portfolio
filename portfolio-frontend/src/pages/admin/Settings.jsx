@@ -9,19 +9,26 @@ import { toast } from "react-toastify";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const Settings = () => {
-	const [form, setForm] = useState({
-		name: "",
-		email: "",
-		role: "",
-		about: ""
+	const [form, setForm] = useState({ 
+		name: "", 
+		role: "", 
+		email: "", 
+		mobile: "", 
+		whatsapp: "", 
+		city: "", 
+		github: "", 
+		linkedin: "", 
+		facebook: "", 
+		instagram: "", 
+		about: "" 
 	});
-
+	
 	const [passwordForm, setPasswordForm] = useState({
 		currentPassword: "",
 		newPassword: "",
 		confirmPassword: ""
 	});
-
+	
 	const [showPassword, setShowPassword] = useState({
 		current: false,
 		new: false,
@@ -42,8 +49,15 @@ const Settings = () => {
 				if (res) {
 					setForm({
 						name: res.name || "",
-						email: res.email || "",
 						role: res.role || "",
+						email: res.email || "",
+						mobile: res.mobile || "",
+						whatsapp: res.whatsapp || "",
+						city: res.city || "",
+						github: res.github || "",
+						linkedin: res.linkedin || "",
+						facebook: res.facebook || "",
+						instagram: res.instagram || "",
 						about: res.about || ""
 					});
 
@@ -67,6 +81,10 @@ const Settings = () => {
 		if (profileImage) data.append("profileImage", profileImage);
 		if (cvFile) data.append("cvFile", cvFile);
 
+		if (form.mobile && form.mobile.length !== 10) {
+			return toast.error("Mobile number must be 10 digits");
+		}
+
 		try {
 			await updateProfile(data);
 
@@ -77,8 +95,15 @@ const Settings = () => {
 			if (res) {
 				setForm({
 					name: res.name || "",
-					email: res.email || "",
 					role: res.role || "",
+					email: res.email || "",
+					mobile: res.mobile || "",
+					whatsapp: res.whatsapp || "",
+					city: res.city || "",
+					github: res.github || "",
+					linkedin: res.linkedin || "",
+					facebook: res.facebook || "",
+					instagram: res.instagram || "",
 					about: res.about || ""
 				});
 
@@ -162,13 +187,6 @@ const Settings = () => {
 		}
 	};
 
-	// const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{6,}$/;
-	// const newPasswordSafe = passwordForm.newPassword || "";
-
-	// if (newPasswordSafe && !passwordRegex.test(newPasswordSafe)) {
-	// 	// optional silent check (no return to avoid breaking render)
-	// }
-
 	const strength = getPasswordStrength(passwordForm.newPassword);
 	const isMatch = passwordForm.confirmPassword && passwordForm.newPassword === passwordForm.confirmPassword;
 	const isNotMatch = passwordForm.confirmPassword && passwordForm.newPassword !== passwordForm.confirmPassword;
@@ -203,15 +221,71 @@ const Settings = () => {
 										</Col>
 									</Row>
 								</Form.Group>
-								<Form.Group className="form-group">
-									<Form.Control type="text" placeholder="Name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
-								</Form.Group>
-								<Form.Group className="form-group">
-									<Form.Control type="text" placeholder="Role" value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value })} />
-								</Form.Group>
-								<Form.Group className="form-group">
-									<Form.Control type="email" placeholder="Email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value }) } />
-								</Form.Group>
+								<Row>
+									<Col xl={6} lg={6} md={6} sm={12} xs={12}>
+										<Form.Group className="form-group">
+											<Form.Control type="text" placeholder="Name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
+										</Form.Group>
+									</Col>
+									<Col xl={6} lg={6} md={6} sm={12} xs={12}>
+										<Form.Group className="form-group">
+											<Form.Control type="text" placeholder="Role" value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value })} />
+										</Form.Group>
+									</Col>
+								</Row>
+								<Row>
+									<Col xl={6} lg={6} md={6} sm={12} xs={12}>
+										<Form.Group className="form-group">
+											<Form.Control type="email" placeholder="Email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value }) } />
+										</Form.Group>
+									</Col>
+									<Col xl={6} lg={6} md={6} sm={12} xs={12}>
+										<Form.Group className="form-group">
+											<Form.Control type="text" placeholder="City" value={form.city} onChange={(e) => setForm({ ...form, city: e.target.value }) } />
+										</Form.Group>
+									</Col>
+								</Row>
+								<Row>
+									<Col xl={6} lg={6} md={6} sm={12} xs={12}>
+										<Form.Group className="form-group">
+											<Form.Control type="text" placeholder="Mobile number" value={form.mobile} maxLength={10} onChange={(e) => {
+												const value = e.target.value;
+												if (/^\d*$/.test(value)) {
+													setForm({ ...form, mobile: value });
+												}
+											}} />
+										</Form.Group>
+									</Col>
+									<Col xl={6} lg={6} md={6} sm={12} xs={12}>
+										<Form.Group className="form-group">
+											<Form.Control type="url" placeholder="Whatsapp URL" value={form.whatsapp} onChange={(e) => setForm({ ...form, whatsapp: e.target.value }) } />
+										</Form.Group>
+									</Col>
+								</Row>
+								<Row>
+									<Col xl={6} lg={6} md={6} sm={12} xs={12}>
+										<Form.Group className="form-group">
+											<Form.Control type="url" placeholder="Github" value={form.github} onChange={(e) => setForm({ ...form, github: e.target.value }) } />
+										</Form.Group>
+									</Col>
+									<Col xl={6} lg={6} md={6} sm={12} xs={12}>
+										<Form.Group className="form-group">
+											<Form.Control type="url" placeholder="LinkedIn" value={form.linkedin} onChange={(e) => setForm({ ...form, linkedin: e.target.value }) } />
+										</Form.Group>
+									</Col>
+								</Row>
+								<Row>
+									<Col xl={6} lg={6} md={6} sm={12} xs={12}>
+										<Form.Group className="form-group">
+											<Form.Control type="url" placeholder="Facebook" value={form.facebook} onChange={(e) => setForm({ ...form, facebook: e.target.value }) } />
+										</Form.Group>
+									</Col>
+									<Col xl={6} lg={6} md={6} sm={12} xs={12}>
+										<Form.Group className="form-group">
+											<Form.Control type="url" placeholder="Instagram" value={form.instagram} onChange={(e) => setForm({ ...form, instagram: e.target.value }) } />
+										</Form.Group>
+									</Col>
+								</Row>
 								<Form.Group className="form-group">
 									<Form.Control as="textarea" rows={6} placeholder="Enter about" value={form.about} onChange={(e) =>setForm({ ...form, about: e.target.value })} />
 								</Form.Group>

@@ -1,17 +1,24 @@
 import { useEffect, useState } from "react";
 import { Row, Col, Form, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebook, faGithub, faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import { faFacebook, faGithub, faInstagram, faLinkedin, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import { faAddressCard, faEnvelopeOpen } from "@fortawesome/free-regular-svg-icons";
-import { faDownload, faLocationArrow, faPhone } from "@fortawesome/free-solid-svg-icons";
+import { faLocationArrow, faPhone } from "@fortawesome/free-solid-svg-icons";
 import "../assets/scss/components/Contact.scss";
 import { toast } from "react-toastify";
 import { sendMessage, getProfile } from "../app/api";
 
-const BASE_URL = import.meta.env.VITE_BASE_URL;
-
 const Contact = () => {
-  const [existingCV, setExistingCV] = useState("");
+  const [info, setInfo] = useState({
+    email: "",
+    mobile: "",
+    whatsapp: "",
+    city: "",
+    github: "",
+    linkedin: "",
+    facebook: "",
+    instagram: ""
+  })
   const [formData, setFormData] = useState({
     type: "",
     name: "",
@@ -48,22 +55,34 @@ const Contact = () => {
   };
 
   useEffect(() => {
-      getProfile().then((res) => {
-        if (res) {
-          setExistingCV(res.cvFile);
-        }
-      });
-    }, []);
+    getProfile().then((res) => {
+      if (res) {
+        setInfo({
+          email: res.email || "",
+          mobile: res.mobile || "",
+          whatsapp: res.whatsapp || "",
+          city: res.city || "",
+          github: res.github || "",
+          linkedin: res.email || "",
+          facebook: res.email || "",
+          instagram: res.email || ""
+        });
+      }
+    });
+  }, []);
+
+  console.log(info);
+    
 
   const contactInfo = [
-    { icon: faPhone, text: "+91 9167470545", url: "tel:9167470545" },
-    { icon: faEnvelopeOpen, text: "tech.ninadkadam@gmail.com", url: "mailto:tech.ninadkadam@gmail.com" },
-    { icon: faLocationArrow, text: "Mumbai, Maharashtra, India", url: "https://www.google.com/maps/place/Mumbai,+Maharashtra/@19.0760903,72.8777267,12z/data=!3m1!4b1!4m5!3m4!1s0x3be7c63f6c0f70a1:0x2c3e6b9c0ea5b4a0!8m2!3d19.0760903!4d72.8777267" },
-    { icon: faDownload, text: "Download CV", url: `${BASE_URL}/uploads/pdf/${existingCV}` },
-    { icon: faGithub, text: "GitHub", url: "https://github.com/ninadrajekadam" },
-    { icon: faLinkedin, text: "LinkedIn", url: "https://in.linkedin.com/in/ninadrajekadam" },
-    { icon: faFacebook, text: "Facebook", url: "https://www.facebook.com/ninadrajekadam/" },
-    { icon: faInstagram, text: "Instagram", url: "https://www.instagram.com/ninadrajekadam/" },
+    { icon: faPhone, text: `+91 ${info.mobile}`, url: `tel:+91${info.mobile}` },
+    { icon: faWhatsapp, text: `+91 ${info.mobile}`, url: `${info.whatsapp}` },
+    { icon: faEnvelopeOpen, text: `${info.email}`, url: `mailto:${info.email}` },
+    { icon: faLocationArrow, text: `${info.city}`, url: "https://www.google.com/maps/place/Mumbai,+Maharashtra/@19.0760903,72.8777267,12z/data=!3m1!4b1!4m5!3m4!1s0x3be7c63f6c0f70a1:0x2c3e6b9c0ea5b4a0!8m2!3d19.0760903!4d72.8777267" },
+    { icon: faGithub, text: "GitHub", url: `${info.github}` },
+    { icon: faLinkedin, text: "LinkedIn", url: `${info.linkedin}` },
+    { icon: faFacebook, text: "Facebook", url: `${info.facebook}` },
+    { icon: faInstagram, text: "Instagram", url: `${info.instagram}` },
   ];
 
   return (

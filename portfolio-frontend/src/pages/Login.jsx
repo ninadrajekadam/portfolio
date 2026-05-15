@@ -154,7 +154,6 @@ const Login = () => {
             <Button variant="secondary" onClick={() => setShowModal(false)}>Cancel</Button>
             <Button className="btn-primary-custom"
               onClick={() => {
-                console.log("Send reset link to:", resetEmail);
                 setShowModal(false);
               }}>Send Link</Button>
           </Modal.Footer>

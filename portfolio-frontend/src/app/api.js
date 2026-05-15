@@ -202,21 +202,13 @@ export const deleteAchievement = async (id) => {
 };
 
 export const incrementProfileView = async () => {
-  try {
-    await api.post("/view/addProfileView");
-  } catch (error) {
-    console.error(error);
-  }
+  const { data } = await api.post("/view/addProfileView");
+  return data;
 };
 
 export const getProfileStats = async () => {
-  try {
-    const { data } = await api.get("/view/getProfileStats");
-    return data;
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
+  const { data } = await api.get("/view/getProfileStats");
+  return data;
 };
 
 export const changePassword = async (passwordData) => {
