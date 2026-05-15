@@ -3,6 +3,7 @@ import cors from "cors";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import path from "path";
+import env from "./config/env.js";
 
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
@@ -22,17 +23,35 @@ app.use(cookieParser());
 
 app.use("/uploads", express.static(path.join(process.cwd(), "portfolio-backend/uploads")));
 
-const allowedOrigins = [process.env.CORS_ORIGIN, "http://localhost:5173"].filter(Boolean);
+const allowedOrigins = [env.CORS_ORIGIN, "http://localhost:5173"].filter(Boolean);
 
-const corsOptions = {
-  origin: allowedOrigins,
+// const corsOptions = {
+//   origin: allowedOrigins,
+//   credentials: true,
+//   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+//   allowedHeaders: ["Content-Type", "Authorization"],
+//   optionsSuccessStatus: 204,
+// };
+
+// app.use(cors(corsOptions));
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true);
+
+    if (
+      origin.includes("vercel.app") ||
+      origin.includes("localhost")
+    ) {
+      return callback(null, true);
+    }
+
+    console.log("❌ Blocked by CORS:", origin);
+    return callback(new Error("Not allowed by CORS"));
+  },
   credentials: true,
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-  optionsSuccessStatus: 204,
-};
+}));
 
-app.use(cors(corsOptions));
 app.use(morgan("dev"));
 
 app.use("/api/auth", authRoutes);
