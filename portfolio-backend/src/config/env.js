@@ -24,11 +24,9 @@ const env = {
   MONGO_URI: process.env.MONGO_URI,
   JWT_SECRET: process.env.JWT_SECRET,
 
-  CORS_ORIGIN: isProd
-    ? process.env.CORS_ORIGIN_PROD || "https://ninadkadam-portfolio.vercel.app"
-    : process.env.CORS_ORIGIN_DEV || "http://localhost:5173",
-    
-  NODE_ENV: process.env.NODE_ENV || "development",
+  CORS_ORIGIN: isProd ? process.env.CORS_ORIGIN_PROD || "https://ninadkadam-portfolio.vercel.app" : process.env.CORS_ORIGIN_DEV || "http://localhost:5173",
+  
+  NODE_ENV: process.env.NODE_ENV || "development"
 };
 
 export default env;
