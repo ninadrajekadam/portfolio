@@ -22,7 +22,7 @@ app.use(cookieParser());
 
 app.use("/uploads", express.static(path.join(process.cwd(), "portfolio-backend/uploads")));
 
-const allowedOrigins = [env.CORS_ORIGIN, "http://localhost:5173"].filter(Boolean);
+const allowedOrigins = [process.env.CORS_ORIGIN, "http://localhost:5173"].filter(Boolean);
 
 const corsOptions = {
   origin: allowedOrigins,
