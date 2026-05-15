@@ -26,8 +26,6 @@ io.on("connection", (socket) => {
   console.log("Socket connected:", socket.id);
 });
 
-console.log("CORS ORIGIN:", env.CORS_ORIGIN);
-
 app.listen(env.PORT, () => {
   console.log(`🚀 Server running on port ${env.PORT}`);
 });
