@@ -11,7 +11,7 @@
     gap: 13px;
   }
   @include respond-down(xs) {
-    gap: $spacing-sm;
+    gap: $spacing-md;
   }
   .skill-item {
     width: 100%;
@@ -25,14 +25,14 @@
     box-shadow: $shadow-sm;
     background: $bg-tertiary;
     transition: $transition;
-     @include respond-down(lg) {
+    @include respond-down(lg) {
       max-width: calc(100% / 4 - 10px);
     }
     @include respond-down(sm) {
       max-width: calc(100% / 2 - 10px);
     }
     @include respond-down(xs) {
-      max-width: calc(50% - 4px);
+      max-width: calc(50% - 10px);
       margin-right: 0;
     }
     .skill-name {

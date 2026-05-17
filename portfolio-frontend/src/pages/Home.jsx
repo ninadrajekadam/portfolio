@@ -23,23 +23,27 @@ const Home = () => {
 			<Header setHeaderHeight={setHeaderHeight} />
       <Hero headerHeight={headerHeight} />
 			<Container>
-				<div className="home-box" id="about">
-					<Row className="divider">
-						<Col xl={5} lg={5} md={12} sm={12} xs={12}><About /></Col>
-						<Col xl={7} lg={7} md={12} sm={12} xs={12}><Skills /></Col>
-					</Row>
-				</div>
-				<div className="home-box" id="experience">
-					<Row className="divider">
-						<Col xl={5} lg={5} md={12} sm={12} xs={12}><Experience /></Col>
-						<Col xl={7} lg={7} md={12} sm={12} xs={12}><Projects /></Col>
-					</Row>
-				</div>
-				<div className="home-box" id="contact">
-					<Row>
-						<Col xl={12} lg={12} md={12} sm={12} xs={12}><Contact /></Col>
-					</Row>
-				</div>
+				<Row>
+					<Col xl={5} lg={5} md={12} sm={12} xs={12}>
+						<div className="home-box" id="about"><About /></div>
+					</Col>
+					<Col xl={7} lg={7} md={12} sm={12} xs={12}>
+						<div className="home-box" id="skills"><Skills /></div>
+					</Col>
+				</Row>
+				<Row>
+					<Col xl={5} lg={5} md={12} sm={12} xs={12}>
+						<div className="home-box" id="experience"><Experience /></div>
+					</Col>
+					<Col xl={7} lg={7} md={12} sm={12} xs={12}>
+						<div className="home-box" id="projects"><Projects /></div>
+					</Col>
+				</Row>
+				<Row>
+					<Col xl={12} lg={12} md={12} sm={12} xs={12}>
+						<div className="home-box" id="contact"><Contact /></div>
+					</Col>
+				</Row>
 			</Container>
 			<Footer />
 		</>

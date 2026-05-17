@@ -2,7 +2,6 @@
 
 .footer {
   padding: $spacing-md 0;
-  margin-top: $spacing-lg;
   background: $bg-tertiary;
   box-shadow: $shadow-md;
   font-size: $fs-sm;
@@ -44,5 +43,8 @@
         transform: translateY(-3px);
       }
     }
+  }
+  .row > * {
+    margin-bottom: 0;
   }
 } 

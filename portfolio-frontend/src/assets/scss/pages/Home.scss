@@ -2,17 +2,17 @@
 @import "../mixins.scss";
 
 .home-box {
+  height: 100%;
   background: $bg-secondary;
   border-radius: $radius-md;
   padding: $spacing-lg;
-  margin-top: $spacing-xl;
   box-shadow: $shadow-sm;
   border: 1px solid $border-light;
   transition: $transition;
-  &:first-child {
-    margin-top: 0;
+	@include respond-down(sm){
+    padding: $spacing-md;
   }
-	.divider {
+  .divider {
     position: relative;
     &::after {
       content: "";
@@ -35,4 +35,7 @@
       }
     }
   }
+}
+.row > * {
+  margin-bottom: $spacing-lg;
 }

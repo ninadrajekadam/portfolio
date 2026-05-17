@@ -46,12 +46,21 @@
       font-weight: $fw-700;
       color: $text-primary;
       margin-bottom: $spacing-xs;
+      @include respond-down(sm){
+        font-size: $fs-md;
+        font-weight: $fw-600;
+        margin-bottom: $spacing-sm;
+      }
     }
     .experience-company {
       font-size: $fs-md;
       font-weight: $fw-600;
       color: $primary;
       margin-bottom: $spacing-xs;
+      @include respond-down(sm){
+        font-size: $fs-sm;
+        font-weight: $fw-600;
+      }
     }
     .experience-duration {
       display: block;
@@ -84,6 +93,9 @@
       border: 1px solid rgba($success, 0.3);
       border-radius: $radius-sm;
       padding: $spacing-xs $spacing-sm;
+      @include respond-down(sm) {
+        font-size: 10px;
+      }
     }
   }
   &.all-experiences {

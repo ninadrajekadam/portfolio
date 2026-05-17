@@ -44,6 +44,9 @@
 		grid-auto-flow: column;
 		grid-template-rows: repeat(4, auto);
 		gap: 16px;
+		@include respond-down(sm) {
+			grid-auto-flow: row;
+		}
 		.info-item {
 			display: flex;
 			align-items: center;
