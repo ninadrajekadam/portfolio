@@ -44,7 +44,7 @@ const Header = ({ setHeaderHeight }) => {
 
   return (
     <>
-      <Navbar variant="light" expand="lg" fixed="top" className="navbar-glass" ref={headerRef}>
+      <Navbar variant="dark" expand="lg" fixed="top" className="navbar-glass" ref={headerRef}>
         <Container>
           <Navbar.Brand as={Link} to="/" className="gradient-text fw-bold">Ninad Kadam</Navbar.Brand>
           <Navbar.Toggle aria-controls="menu" />
