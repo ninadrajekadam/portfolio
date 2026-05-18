@@ -42,6 +42,7 @@
       box-shadow: 0 0 6px rgba($primary, 0.5);
     }
     .experience-title {
+      position: relative;
       font-size: $fs-lg;
       font-weight: $fw-700;
       color: $text-primary;
@@ -50,6 +51,27 @@
         font-size: $fs-md;
         font-weight: $fw-600;
         margin-bottom: $spacing-sm;
+      }
+      .experience-badge {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        font-size: 10px;
+        font-weight: $fw-500;
+        letter-spacing: 1px;
+        border-radius: $radius-sm;
+        padding: $spacing-xs $spacing-sm;
+        &.current {
+          background: rgba($success, .7);
+          border: 1px solid rgba($success, .7);
+          &::before {
+            content: "Current";
+          }
+        }
+        @include respond-down(sm) {
+          font-size: 10px;
+        }
       }
     }
     .experience-company {
@@ -83,20 +105,6 @@
         }
       }
     }
-    .experience-badge {
-      position: absolute;
-      right: 0;
-      font-size: $fs-xs;
-      font-weight: $fw-500;
-      color: $success;
-      background: rgba($success, 0.3);
-      border: 1px solid rgba($success, 0.3);
-      border-radius: $radius-sm;
-      padding: $spacing-xs $spacing-sm;
-      @include respond-down(sm) {
-        font-size: 10px;
-      }
-    }
   }
   &.all-experiences {
     .experience-list {
@@ -124,10 +132,6 @@
     }
     .experience-date {
       font-weight: $fw-600;
-    }
-    .experience-badge {
-      top: $spacing-md;
-      right: $spacing-md;
     }
   }
 }

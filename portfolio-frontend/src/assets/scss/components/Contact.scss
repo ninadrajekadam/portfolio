@@ -78,4 +78,10 @@
 			margin-bottom: 0;
 		}
 	}
+	.contact-form {
+		margin-bottom: $spacing-md;
+	}
+	.row > * {
+		margin-bottom: 0 !important;
+	}
 }

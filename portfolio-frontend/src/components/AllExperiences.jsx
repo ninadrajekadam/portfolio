@@ -79,10 +79,12 @@ const AllExperiences = () => {
 										<div className="experience-card">
 											<div className="experience-header">
 												<div>
-													<h4 className="experience-title">{item.role}</h4>
+													<h4 className="experience-title">
+														{ item.role }
+														{ item.exitDate === null && (<span className="experience-badge current"></span>) }
+													</h4>
 													<p className="experience-company">{item.company}</p>
 												</div>
-												{ (item.isPresent || item.exitDate === null) && (<span className="experience-badge">Current</span>) }
 											</div>
 											<ul className="experience-responsibilities">
 												{ item.responsibilities?.map((resp, i) => (<li key={i} className="responsibility-item">{resp}</li>)) }

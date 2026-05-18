@@ -36,6 +36,8 @@
     }
   }
 }
-.row > * {
-  margin-bottom: $spacing-lg;
+.main-content {
+  .row > * {
+    margin-bottom: $spacing-lg;
+  }
 }

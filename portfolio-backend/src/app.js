@@ -25,16 +25,6 @@ app.use("/uploads", express.static(path.join(process.cwd(), "portfolio-backend/u
 
 const allowedOrigins = [env.CORS_ORIGIN, "http://localhost:5173"].filter(Boolean);
 
-// const corsOptions = {
-//   origin: allowedOrigins,
-//   credentials: true,
-//   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-//   allowedHeaders: ["Content-Type", "Authorization"],
-//   optionsSuccessStatus: 204,
-// };
-
-// app.use(cors(corsOptions));
-
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin) return callback(null, true);

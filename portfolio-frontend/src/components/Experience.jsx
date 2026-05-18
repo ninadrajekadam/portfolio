@@ -44,8 +44,10 @@ const Experience = () => {
 					{
 						experience && experience.slice(0, 3).map((item, index) => (
 							<li key={index} className="experience-item">
-								{ item.exitDate === null && (<span className="experience-badge">Current</span>) }
-								<h4 className="experience-title">{item.role}</h4>
+								<h4 className="experience-title">
+									{ item.role }
+									{ item.exitDate === null && (<span className="experience-badge current"></span>) }
+								</h4>
 								<p className="experience-company">{item.company}</p>
 								<span className="experience-duration">{formatDate(item.joiningDate)} - {item.isPresent ? "Present" : formatDate(item.exitDate)}</span>
 								<ul className="experience-responsibilities">

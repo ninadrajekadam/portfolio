@@ -5,17 +5,14 @@
   padding: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: $spacing-sm;
+  gap: $spacing-md;
   margin-bottom: 0;
   @include respond-down(md) {
     gap: 13px;
   }
-  @include respond-down(xs) {
-    gap: $spacing-md;
-  }
   .skill-item {
     width: 100%;
-    max-width: calc(100% / 4 - 6px);
+    max-width: calc(100% / 4 - 12px);
     display: flex;
     align-items: center;
     gap: $spacing-sm;
@@ -25,15 +22,14 @@
     box-shadow: $shadow-sm;
     background: $bg-tertiary;
     transition: $transition;
-    @include respond-down(lg) {
+    @include respond-down(xl) {
+      max-width: calc(100% / 3 - 11px);
+    }
+    @include respond-down(md) {
       max-width: calc(100% / 4 - 10px);
     }
     @include respond-down(sm) {
-      max-width: calc(100% / 2 - 10px);
-    }
-    @include respond-down(xs) {
-      max-width: calc(50% - 10px);
-      margin-right: 0;
+      max-width: calc(100% / 2 - 7px);
     }
     .skill-name {
       font-weight: $fw-600;

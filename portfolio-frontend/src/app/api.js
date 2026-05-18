@@ -1,3 +1,4 @@
+import { startLoader, stopLoader } from "./loaderHandler";
 import axios from "axios";
 
 const api = axios.create({
@@ -7,6 +8,10 @@ const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
+  if (config.method === "get") {
+    startLoader();
+  }
+
   const token = localStorage.getItem("token");
 
   if (token) {
@@ -19,6 +24,20 @@ api.interceptors.request.use((config) => {
 
   return config;
 });
+
+api.interceptors.response.use((response) => {
+    if (response.config.method === "get") {
+      stopLoader();
+    }
+    
+    return response;
+  }, (error) => {
+    if (error.config?.method === "get") {
+      stopLoader();
+    }
+    return Promise.reject(error);
+  }
+);
 
 export const setAuthToken = (token) => {
   if (token) {

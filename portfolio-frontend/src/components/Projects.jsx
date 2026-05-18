@@ -58,11 +58,6 @@ const Projects = () => {
 					{
 						projects && projects.slice(0, 5).map((project, index) => (
 							<div className="project-item" key={index}>
-								{
-									project.projectStatus === "Completed" ? (<span className="project-status completed">Completed</span>) : 
-									project.projectStatus === "Ongoing" ? (<span className="project-status ongoing">Ongoing</span>) : 
-									(<span className="project-status unknown">Unknown Status</span>)
-								}
 								<div className="project-image">
 									<img src={`${BASE_URL}/uploads/${project.image}`} alt={project.projectName} onClick={() => setZoomImage(`${BASE_URL}/uploads/${project.image}`)} style={{ cursor: "zoom-in" }} />
 								</div>
@@ -71,9 +66,15 @@ const Projects = () => {
 										project.projectUrl ? (
 											<Link to={project.projectUrl} className="project-title" target="_blank" rel="noopener noreferrer">
 												{project.projectName} <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+												{ project.projectStatus === "Completed" && (<span className="project-status completed"></span>) }
+												{ project.projectStatus === "Ongoing" && (<span className="project-status ongoing"></span>) }
 											</Link>
 										) : (
-											<span className="project-title">{project.projectName}</span>
+											<>
+												<span className="project-title">{project.projectName}</span>
+												{ project.projectStatus === "Completed" && (<span className="project-status completed"></span>) }
+												{ project.projectStatus === "Ongoing" && (<span className="project-status ongoing"></span>) }
+											</>
 										)
 									}
 									<div className="project-stack">

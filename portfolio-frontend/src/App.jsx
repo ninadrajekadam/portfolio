@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -16,10 +16,31 @@ import Messages from "./pages/admin/Messages";
 import Settings from "./pages/admin/Settings";
 import AllExperiences from "./components/AllExperiences";
 import AllProjects from "./components/AllProjects";
+import { useEffect } from "react";
+import { setLoaderHandlers } from "./app/loaderHandler";
+import { useLoader } from "./hooks/useLoader";
 
 const App = () => {
+  const { showLoader, hideLoader, loadingCount } = useLoader();
+  const location = useLocation();
+
+  useEffect(() => {
+    setLoaderHandlers(showLoader, hideLoader);
+  }, [showLoader, hideLoader]);
+
+  useEffect(() => {
+    showLoader();
+
+    const timer = setTimeout(() => {
+      hideLoader();
+    }, 800);
+
+    return () => clearTimeout(timer);
+  }, [location.pathname, showLoader, hideLoader]);
+
   return (
     <>
+      { loadingCount > 0 && (<div className="global-loader"><div className="spinner"></div></div>) }
       <ToastContainer position="top-right" autoClose={2000} theme="dark" hideProgressBar={false} newestOnTop closeOnClick />
       <Routes>
         <Route path="/" element={<Home />} />

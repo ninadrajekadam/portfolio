@@ -22,7 +22,7 @@ const Home = () => {
 		<>
 			<Header setHeaderHeight={setHeaderHeight} />
       <Hero headerHeight={headerHeight} />
-			<Container>
+			<Container className="main-content">
 				<Row>
 					<Col xl={5} lg={5} md={12} sm={12} xs={12}>
 						<div className="home-box" id="about"><About /></div>
