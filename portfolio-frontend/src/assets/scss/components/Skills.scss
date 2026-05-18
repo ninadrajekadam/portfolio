@@ -22,9 +22,9 @@
     box-shadow: $shadow-sm;
     background: $bg-tertiary;
     transition: $transition;
-    @include respond-down(xl) {
-      max-width: calc(100% / 3 - 11px);
-    }
+    // @include respond-down(xl) {
+    //   max-width: calc(100% / 3 - 11px);
+    // }
     @include respond-down(md) {
       max-width: calc(100% / 4 - 10px);
     }

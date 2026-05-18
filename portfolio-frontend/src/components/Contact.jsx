@@ -87,7 +87,7 @@ const Contact = () => {
       <h3 className="section-title"><FontAwesomeIcon icon={faAddressCard} /> Get in Touch</h3>
       <div className="contact-wrapper">
         <Row>
-          <Col xl={7} lg={9} md={12}>
+          <Col xl={7} lg={6} md={12}>
             <Form className="contact-form" onSubmit={handleSubmit}>
               <Row>
                 <Col lg={12}>
@@ -119,7 +119,7 @@ const Contact = () => {
               </Row>
             </Form>
           </Col>
-          <Col xl={5} lg={3} md={12}>
+          <Col xl={5} lg={6} md={12}>
             <div className="contact-info">
               {
                 contactInfo && contactInfo.map((item, index) => (

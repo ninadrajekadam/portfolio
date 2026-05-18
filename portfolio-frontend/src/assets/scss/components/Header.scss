@@ -7,9 +7,19 @@
   background: $bg-glass;
   padding: $spacing-sm 0;
   .nav-link {
-    color: $text-primary;
+    color: $text-secondary;
+    &:hover {
+      color: $text-primary;
+    }
     &::after {
       background: $primary;
+    }
+    &.active {
+      font-weight: $fw-700;
+      background: $gradient-primary;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
   }
   .theme-btn {

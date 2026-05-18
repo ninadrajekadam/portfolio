@@ -24,18 +24,18 @@ const Home = () => {
       <Hero headerHeight={headerHeight} />
 			<Container className="main-content">
 				<Row>
-					<Col xl={5} lg={5} md={12} sm={12} xs={12}>
+					<Col xl={5} lg={12} md={12} sm={12} xs={12}>
 						<div className="home-box" id="about"><About /></div>
 					</Col>
-					<Col xl={7} lg={7} md={12} sm={12} xs={12}>
+					<Col xl={7} lg={12} md={12} sm={12} xs={12}>
 						<div className="home-box" id="skills"><Skills /></div>
 					</Col>
 				</Row>
 				<Row>
-					<Col xl={5} lg={5} md={12} sm={12} xs={12}>
+					<Col xl={5} lg={12} md={12} sm={12} xs={12}>
 						<div className="home-box" id="experience"><Experience /></div>
 					</Col>
-					<Col xl={7} lg={7} md={12} sm={12} xs={12}>
+					<Col xl={7} lg={12} md={12} sm={12} xs={12}>
 						<div className="home-box" id="projects"><Projects /></div>
 					</Col>
 				</Row>
