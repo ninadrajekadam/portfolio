@@ -3,6 +3,7 @@ import "../assets/scss/components/About.scss";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { useEffect, useState } from "react";
 import { getProfile, getExperience, getProjects } from "../app/api";
+import { calculateTotalExperience } from "../utils/totalExperiene";
 
 const About = () => {
 	const [experience, setExperience] = useState([]);
@@ -34,7 +35,7 @@ const About = () => {
 		fetchAllData();
 	}, []);
 
-	const totalExperience = experience.reduce((total, exp) => total + (exp.totalExp || 0), 0).toFixed(1);
+	const totalExperience = calculateTotalExperience(experience).formatted;
 
 	return (
 		<section className="about-section">
@@ -42,7 +43,7 @@ const About = () => {
 			<p className="section-description">{form.profileabout}</p>
 			<div className="about-options">
 				<div className="about-option">
-					<h4 className="option-title">{totalExperience}+</h4>
+					<h4 className="option-title">{totalExperience}</h4>
 					<p className="option-description">Years of Experience</p>
 				</div>
 				<div className="about-option">

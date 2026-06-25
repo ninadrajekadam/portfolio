@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { toast } from "react-toastify";
 import Search from "./Search";
 import { addExperience, deleteExperience, getExperience, updateExperience } from "../../app/api";
+import { calculateTotalExperience, calculateSingleExp } from "../../utils/totalExperiene";
 
 const formatDateRange = (item) => {
   const { joiningDate, exitDate, duration } = item;
@@ -54,22 +55,6 @@ const formatDateRange = (item) => {
   }
 
   return "No date information";
-};
-
-const calculateTotalExp = (joiningDate, exitDate) => {
-  if (!joiningDate) return 0;
-
-  const start = new Date(joiningDate);
-  if (isNaN(start.getTime())) return 0;
-
-  let end = exitDate ? new Date(exitDate) : new Date();
-  if (isNaN(end.getTime())) return 0;
-
-  const diffTime = Math.abs(end - start);
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  const years = diffDays / 365.25;
-
-  return Number(years.toFixed(1));
 };
 
 const normalizeResponsibilities = (text) => {
@@ -149,7 +134,7 @@ const Experience = () => {
         joiningDate: formData.joiningDate,
         exitDate: formData.present ? null : formData.exitDate,
         responsibilities,
-        totalExp: calculateTotalExp(formData.joiningDate, formData.present ? null : formData.exitDate),
+        totalExp: calculateSingleExp(formData.joiningDate, formData.present ? null : formData.exitDate),
       };
 
       if (isEdit) {
@@ -245,9 +230,8 @@ const Experience = () => {
   const indexOfFirstExperience = indexOfLastExperience - itemsPerPage;
   const currentExperience = filteredExperience.slice(indexOfFirstExperience, indexOfLastExperience);
 
-  const totalExperience = filteredExperience.reduce((sum, item) => {
-    return sum + calculateTotalExp(item.joiningDate, item.exitDate);
-  }, 0).toFixed(1);
+
+  const totalExperience = calculateTotalExperience(experience).formatted;
 
   return (
     <>
@@ -279,7 +263,7 @@ const Experience = () => {
                   <td>{item.role}</td>
                   <td>{item.company}</td>
                   <td>{formatDateRange(item)}</td>
-                  <td>{calculateTotalExp(item.joiningDate, item.exitDate).toFixed(1)} yrs</td>
+                  <td>{calculateSingleExp(item.joiningDate, item.exitDate)}</td>
                   <td>
                     <Button className="btn-primary-custom" onClick={() => handleEdit(item)}><FontAwesomeIcon icon={faPencil} /></Button>
                     <span className="px-2"></span>

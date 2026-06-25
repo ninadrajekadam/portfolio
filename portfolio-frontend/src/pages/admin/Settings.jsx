@@ -294,7 +294,7 @@ const Settings = () => {
 									{ cvFile && (<p className="mt-2">{cvFile.name}</p>) }
 									{
 										existingCV && !cvFile && (
-											<a className="btn-primary-custom" href={`${BASE_URL}/uploads/pdf/${existingCV}`} target="_blank" rel="noreferrer">
+											<a className="btn-primary-custom" href={`${BASE_URL}/uploads/${existingCV}`} target="_blank" rel="noreferrer">
 												<FontAwesomeIcon icon={faDownload}/> View CV
 											</a>
 										)
