@@ -1,14 +1,14 @@
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 
-const COLORS = ["#4f46e5", "#8b5cf6", "#c7d2fe"];
+const COLORS = ["#4f46e5", "#c7d2fe"];
 
 const ProfileViewsChart = ({ stats }) => {
   if (!stats) return <p>Loading...</p>;
 
   const data = [
-    { name: "This Month", value: stats.thisMonth },
     { name: "Last Month", value: stats.lastMonth },
-    { name: "This Year", value: stats.thisYear }
+    { name: "This Month", value: stats.thisMonth },
+    // { name: "This Year", value: stats.thisYear }
   ];
 
   return (
