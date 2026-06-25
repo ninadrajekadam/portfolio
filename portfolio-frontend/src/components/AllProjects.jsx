@@ -7,6 +7,7 @@ import { getExperience, getProjects } from "../app/api";
 import "../assets/scss/components/Projects.scss";
 import Header from "./Header";
 import Footer from "./Footer";
+import { calculateTotalExperience } from "../utils/totalExperiene";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -61,7 +62,7 @@ const AllProjects = () => {
 		return () => document.body.style.overflow = "auto";
 	}, [zoomImage]);
 
-	const totalExperience = experience.reduce((total, exp) => total + (exp.totalExp || 0), 0).toFixed(1);
+	const totalExperience = calculateTotalExperience(experience).formatted;
 	const completedProjects = projects.filter(project => project.projectStatus === "Completed").length;
 	const ongoingProjects = projects.filter(project => project.projectStatus === "Ongoing").length;
 
@@ -84,8 +85,8 @@ const AllProjects = () => {
 							projects && projects.map((project, index) => (
 								<div className="project-item" key={index}>
 									{
-										project.projectStatus === "Completed" ? (<span className="project-status completed">Completed</span>) : 
-										project.projectStatus === "Ongoing" ? (<span className="project-status ongoing">Ongoing</span>) : 
+										project.projectStatus === "Completed" ? (<span className="project-status completed"></span>) : 
+										project.projectStatus === "Ongoing" ? (<span className="project-status ongoing"></span>) : 
 										(<span className="project-status unknown">Unknown Status</span>)
 									}
 									<div className="project-image">

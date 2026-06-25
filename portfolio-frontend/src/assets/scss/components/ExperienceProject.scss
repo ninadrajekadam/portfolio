@@ -109,4 +109,9 @@
 			margin-bottom: 0;
 		}
 	}
+	@include respond-down(md) {
+		.row>* {
+			margin-bottom: $spacing-md;
+		}
+	}
 }

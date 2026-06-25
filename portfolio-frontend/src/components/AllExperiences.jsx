@@ -7,6 +7,7 @@ import "../assets/scss/components/Experience.scss";
 import "../assets/scss/components/ExperienceProject.scss";
 import Header from "./Header";
 import Footer from "./Footer";
+import { calculateTotalExperience } from "../utils/totalExperiene";
 
 const AllExperiences = () => {
 	const [headerHeight, setHeaderHeight] = useState(0);
@@ -48,7 +49,7 @@ const AllExperiences = () => {
     });
   };
 
-	const totalExperience = experience.reduce((total, exp) => total + (exp.totalExp || 0), 0).toFixed(1);
+	const totalExperience = calculateTotalExperience(experience).formatted;
 	const completedProjects = projects.filter(project => project.projectStatus === "Completed").length;
 	const ongoingProjects = projects.filter(project => project.projectStatus === "Ongoing").length;
 

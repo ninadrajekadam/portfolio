@@ -48,7 +48,7 @@
       color: $text-primary;
       margin-bottom: $spacing-xs;
       @include respond-down(sm){
-        font-size: $fs-md;
+        font-size: 15px;
         font-weight: $fw-600;
         margin-bottom: $spacing-sm;
       }
