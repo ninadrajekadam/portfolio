@@ -273,6 +273,7 @@ const Projects = () => {
                     <option key={index} value={item}>{item}</option>
                   ))
                 }
+                <option value="Personal">Personal</option>
               </Form.Select>
             </Form.Group>
             <Form.Group className="mb-3">
