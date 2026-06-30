@@ -27,6 +27,7 @@ const experienceSchema = new mongoose.Schema(
     },
     responsibilities: {
       type: String,
+      required: true,
     },
   },
   {
