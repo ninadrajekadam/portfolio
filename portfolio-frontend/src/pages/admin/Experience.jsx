@@ -117,7 +117,7 @@ const Experience = () => {
 
   const handleSubmit = async () => {
     try {
-      if (!formData.company || !formData.role || !formData.joiningDate || !formData.responsibilities.length) {
+      if (!formData.company || !formData.role || !formData.joiningDate || !formData.responsibilities) {
         toast.error("Please fill out all fields and responsibilities");
         return;
       }
