@@ -57,11 +57,6 @@ const formatDateRange = (item) => {
   return "No date information";
 };
 
-const normalizeResponsibilities = (text) => {
-  if (!text) return [];
-  return text.split(/\r?\n/).map((item) => item.trim()).filter(Boolean);
-};
-
 const Experience = () => {
   const [show, setShow] = useState(false);
   const [formData, setFormData] = useState({
@@ -122,8 +117,7 @@ const Experience = () => {
 
   const handleSubmit = async () => {
     try {
-      const responsibilities = normalizeResponsibilities(formData.responsibilities);
-      if (!formData.company || !formData.role || !formData.joiningDate || !responsibilities.length) {
+      if (!formData.company || !formData.role || !formData.joiningDate || !formData.responsibilities.length) {
         toast.error("Please fill out all fields and responsibilities");
         return;
       }
@@ -133,7 +127,7 @@ const Experience = () => {
         role: formData.role,
         joiningDate: formData.joiningDate,
         exitDate: formData.present ? null : formData.exitDate,
-        responsibilities,
+        responsibilities: formData.responsibilities,
         totalExp: calculateSingleExp(formData.joiningDate, formData.present ? null : formData.exitDate),
       };
 
@@ -210,7 +204,7 @@ const Experience = () => {
       joiningDate,
       exitDate,
       present,
-      responsibilities: item.responsibilities.join("\n")
+      responsibilities: item.responsibilities
     });
     setShow(true);
   };
@@ -338,7 +332,7 @@ const Experience = () => {
               <Form.Check type="checkbox" id="present-checkbox" name="present" label="Present" checked={formData.present} onChange={handleChange} />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Responsibilities (one per line)</Form.Label>
+              <Form.Label>Responsibilities</Form.Label>
               <Form.Control as="textarea" rows={7} name="responsibilities" placeholder="Enter each responsibility in new line" value={formData.responsibilities} onChange={handleChange} />
             </Form.Group>
           </Form>
