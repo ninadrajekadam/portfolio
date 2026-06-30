@@ -76,13 +76,17 @@ export const updateExperience = async (req, res) => {
     const { role, company, joiningDate, exitDate, responsibilities, totalExp } = req.body;
     const parsedTotalExp = Number(totalExp);
 
+    if (!responsibilities.length) {
+      return res.status(400).json({ message: "Please provide responsibilities" });
+    }
+
     const updatedData = {
       role: role ?? existing.role,
       company: company ?? existing.company,
       joiningDate: joiningDate ? new Date(joiningDate) : existing.joiningDate,
       exitDate: exitDate ? new Date(exitDate) : (exitDate === null ? null : existing.exitDate),
-      responsibilities: responsibilities,
       totalExp: Number.isFinite(parsedTotalExp) && parsedTotalExp > 0 ? parsedTotalExp : computeTotalExp(joiningDate ?? existing.joiningDate, exitDate ?? existing.exitDate),
+      responsibilities: responsibilities,
     };
 
     const updatedExperience = await experienceService.updateExperience(req.params.id, updatedData);
