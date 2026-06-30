@@ -87,9 +87,7 @@ const AllExperiences = () => {
 													<p className="experience-company">{item.company}</p>
 												</div>
 											</div>
-											<ul className="experience-responsibilities">
-												{ item.responsibilities?.map((resp, i) => (<li key={i} className="responsibility-item">{resp}</li>)) }
-											</ul>
+											<p className="responsibilities">{ item.responsibilities }</p>
 										</div>
 									</li>
 								))

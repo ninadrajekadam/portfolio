@@ -92,17 +92,13 @@
       white-space: nowrap;
       margin-bottom: $spacing-xs;
     }
-    .experience-responsibilities {
-      margin: 0;
-      padding-left: 18px;
-      .responsibility-item {
-        font-size: $fs-xs;
-        font-weight: $fw-500;
+    .responsibilities {
+      font-size: $fs-xs;
+      font-weight: $fw-500;
+      color: $text-secondary;
+      line-height: 1.6;
+      &::marker {
         color: $text-secondary;
-        line-height: 1.6;
-        &::marker {
-          color: $text-secondary;
-        }
       }
     }
   }

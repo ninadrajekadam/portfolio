@@ -1,10 +1,10 @@
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { faArrowUpRightFromSquare, faBriefcase } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "../assets/scss/components/Experience.scss";
 import { getExperience } from "../app/api";
-import { Link } from "react-router-dom";
+import "../assets/scss/components/Experience.scss";
 
 const Experience = () => {
 	const [experience, setExperience] = useState([]);
@@ -42,7 +42,7 @@ const Experience = () => {
 				</div>
 				<ul className="experience-list">
 					{
-						experience && experience.slice(0, 3).map((item, index) => (
+						experience && experience.map((item, index) => (
 							<li key={index} className="experience-item">
 								<h4 className="experience-title">
 									{ item.role }
@@ -50,9 +50,7 @@ const Experience = () => {
 								</h4>
 								<p className="experience-company">{item.company}</p>
 								<span className="experience-duration">{formatDate(item.joiningDate)} - {item.isPresent ? "Present" : formatDate(item.exitDate)}</span>
-								<ul className="experience-responsibilities">
-									{ item.responsibilities.map((resp, respIndex) => (<li className="responsibility-item" key={respIndex}>{resp}</li>)) }
-								</ul>
+								<p className="responsibilities">{ item.responsibilities }</p>
 							</li>
 						))
 					}
