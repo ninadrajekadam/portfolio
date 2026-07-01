@@ -52,11 +52,11 @@ const Projects = () => {
 			<section className="projects-section">
 				<div className="title-wrapper">
 					<h3 className="section-title"><FontAwesomeIcon icon={faFolderClosed} /> Projects</h3>
-					{ projects.length > 4 && (<Button as={Link} to="/projects" className="btn-link-arrow view-all mt-2">View All <FontAwesomeIcon icon={faArrowUpRightFromSquare} /></Button>) }
+					{ projects.length > 3 && (<Button as={Link} to="/projects" className="btn-link-arrow view-all mt-2">View All <FontAwesomeIcon icon={faArrowUpRightFromSquare} /></Button>) }
 				</div>
 				<div className="projects-list">
 					{
-						projects && projects.slice(0, 4).map((project, index) => (
+						projects && projects.slice(0, 3).map((project, index) => (
 							<div className="project-item" key={index}>
 								<div className="project-image">
 									<img src={`${BASE_URL}/uploads/${project.image}`} alt={project.projectName} onClick={() => setZoomImage(`${BASE_URL}/uploads/${project.image}`)} style={{ cursor: "zoom-in" }} />

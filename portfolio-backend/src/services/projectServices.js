@@ -16,14 +16,21 @@ const normalizeSkills = (skills) => {
 };
 
 export const createProject = async (projectData) => {
+  console.log(projectData);
+  
   const project = new Project({
     projectName: projectData.projectName,
     companyName: projectData.companyName,
     description: projectData.description,
-    usedSkills: normalizeSkills(projectData.usedSkills),
+    // usedSkills: normalizeSkills(projectData.usedSkills),
+    usedSkills: projectData.usedSkills,
     projectUrl: projectData.projectUrl || "",
+    projectStatus: projectData.projectStatus,
     image: projectData.image || ""
   });
+  
+  console.log(project);
+
   return await project.save();
 };
 

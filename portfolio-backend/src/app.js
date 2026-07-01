@@ -2,7 +2,9 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
+import multer from "multer";
 import path from "path";
+import { fileURLToPath } from "url";
 import env from "./config/env.js";
 
 import authRoutes from "./routes/authRoutes.js";
@@ -17,11 +19,14 @@ import achievementRoutes from "./routes/achievementRoutes.js";
 import profileViewRoutes from "./routes/profileViewRoutes.js";
 
 const app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.use("/uploads", express.static(path.join(process.cwd(), "portfolio-backend/uploads")));
+app.use("/uploads", express.static(path.resolve(__dirname, "..", "uploads")));
 
 const allowedOrigins = [env.CORS_ORIGIN, "http://localhost:5173"].filter(Boolean);
 
@@ -57,6 +62,28 @@ app.use("/api/view", profileViewRoutes);
 
 app.get("/", (req, res) => {
   res.send("API is running...");
+});
+
+app.use((err, req, res, next) => {
+  console.error("Unhandled error:", err);
+
+  if (err instanceof multer.MulterError) {
+    return res.status(400).json({
+      success: false,
+      message: err.code === "LIMIT_FILE_SIZE"
+        ? "File too large. Maximum size is 5MB."
+        : err.message,
+    });
+  }
+
+  if (err) {
+    return res.status(400).json({
+      success: false,
+      message: err.message || "Something went wrong",
+    });
+  }
+
+  next();
 });
 
 export default app;

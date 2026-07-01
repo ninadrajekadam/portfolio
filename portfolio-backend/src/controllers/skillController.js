@@ -1,6 +1,11 @@
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from "url";
 import * as skillService from "../services/skillServices.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const uploadsBasePath = path.resolve(__dirname, "..", "..", "uploads");
 
 export const addSkill = async (req, res) => {
   try {
@@ -50,7 +55,7 @@ export const updateSkill = async (req, res) => {
 
     if (req.file) {
       if (skill.skillImage) {
-        const oldPath = path.join(process.cwd(), "/portfolio-backend/uploads", skill.skillImage);
+        const oldPath = path.join(uploadsBasePath, skill.skillImage);
         if (fs.existsSync(oldPath)) {
           fs.unlinkSync(oldPath);
         }
@@ -83,7 +88,7 @@ export const deleteSkill = async (req, res) => {
     }
 
     if (skill.skillImage) {
-      const filePath = path.join(process.cwd(), "/portfolio-backend/uploads", skill.skillImage);
+      const filePath = path.join(uploadsBasePath, skill.skillImage);
       if (fs.existsSync(filePath)) {
         fs.unlinkSync(filePath);
       }

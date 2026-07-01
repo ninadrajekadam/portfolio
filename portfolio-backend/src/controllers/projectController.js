@@ -1,6 +1,11 @@
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from "url";
 import * as projectService from "../services/projectServices.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const uploadsBasePath = path.resolve(__dirname, "..", "..", "uploads");
 
 const normalizeSkills = (skills) => {
   if (Array.isArray(skills)) {
@@ -51,6 +56,9 @@ export const addProject = async (req, res) => {
       });
     }
 
+    console.log("req.body:", req.body);
+    console.log("req.file:", req.file);
+
     const image = req.file ? `projects/${req.file.filename}` : "";
     const project = await projectService.createProject({ projectName, companyName, description, usedSkills: skillsArray, projectUrl, projectStatus, image });
 
@@ -60,7 +68,16 @@ export const addProject = async (req, res) => {
       data: project,
     });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    // res.status(500).json({ message: error.message });
+
+    console.error("Add Project Error:");
+    console.error(error);
+    console.error(error.stack);
+
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 
@@ -119,7 +136,7 @@ export const updateProject = async (req, res) => {
 
     if (req.file) {
       if (existingProject.image) {
-        const oldPath = path.join(process.cwd(), "/portfolio-backend/uploads", existingProject.image);
+        const oldPath = path.join(uploadsBasePath, existingProject.image);
         if (fs.existsSync(oldPath)) {
           fs.unlinkSync(oldPath);
         }
@@ -165,7 +182,7 @@ export const deleteProject = async (req, res) => {
     }
 
     if (existingProject.image) {
-      const filePath = path.join(process.cwd(), "/portfolio-backend/uploads", existingProject.image);
+      const filePath = path.join(uploadsBasePath, existingProject.image);
       if (fs.existsSync(filePath)) {
         fs.unlinkSync(filePath);
       }

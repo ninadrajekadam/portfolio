@@ -1,8 +1,11 @@
 import multer from "multer";
 import path from "path";
 import fs from "fs";
+import { fileURLToPath } from "url";
 
-const basePath = path.join(process.cwd(), "/portfolio-backend/uploads");
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const basePath = path.resolve(__dirname, "..", "..", "uploads");
 const folders = ["skills", "projects", "profile", "pdf"];
 
 folders.forEach((folder) => {
