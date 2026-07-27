@@ -1,0 +1,53 @@
+@import "../variables", "../mixins";
+
+.footer {
+  padding: $spacing-md 0;
+  background: $bg-tertiary;
+  box-shadow: $shadow-md;
+  font-size: $fs-sm;
+  color: $text-muted;
+  .footer-text {
+    text-align: end;
+    margin-bottom: 0;
+    @include respond-down(md) {
+      text-align: center;
+      margin-bottom: $spacing-sm;
+    }
+  }
+  .footer-rights {
+    margin-bottom: 0;
+    text-align: center;
+    @include respond-down(md) {
+      text-align: center;
+      margin-bottom: $spacing-sm;
+    }
+  }
+	.footer-name {
+		font-weight: $fw-700;
+	}
+  .footer-social {
+    display: flex;
+    // justify-content: end;
+    gap: $spacing-md;
+    @include respond-down(md) {
+      justify-content: center;
+    }
+    .social-link {
+      width: 30px;
+      height: 30px;
+      border: 1px solid $border-color;
+      border-radius: $radius-sm;
+      color: $text-muted;
+      @include flex-center;
+      transition: $transition;
+      &:hover {
+        color: $primary;
+        border-color: $primary;
+        transform: translateY(-3px);
+      }
+    }
+  }
+  .row > * {
+    margin-bottom: 0;
+  }
+} 
