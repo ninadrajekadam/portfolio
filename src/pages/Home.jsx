@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Header from "../components/Header";
 import Hero from "../components/Hero";
@@ -9,14 +9,9 @@ import Projects from "../components/Projects";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
 import "../assets/scss/pages/Home.scss";
-import { incrementProfileView } from "../app/api";
 
 const Home = () => {
 	const [headerHeight, setHeaderHeight] = useState(0);
-
-	 useEffect(() => {
-    incrementProfileView();
-  }, []);
 
 	return (
 		<>
