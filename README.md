@@ -73,15 +73,6 @@ Currently expanding my expertise in:
 - Postman
 - Figma
 
-### Libraries
-
-- AOS
-- Swiper.js
-- Chart.js
-- Owl Carousel
-- Lottie
-- jQuery
-
 ---
 
 ## 💼 Professional Experience
@@ -126,37 +117,6 @@ Personal portfolio built using React and Vite showcasing experience, projects, a
 - Vite
 - SCSS
 - JavaScript
-
----
-
-### HRMS Application
-
-A Full Stack Employee Management System with authentication, attendance, leave management, and profile management.
-
-**Tech Stack**
-
-- React
-- Node.js
-- Express
-- MongoDB
-
----
-
-### Expense Manager
-
-Track daily expenses with category-wise reports and dashboard.
-
-**Tech Stack**
-
-- React
-- Node.js
-- MongoDB
-
----
-
-### TrackMint
-
-Personal finance tracking application with reports and analytics.
 
 ---
 
