@@ -4,7 +4,7 @@ Welcome to my personal portfolio repository! This project showcases my professio
 
 ## 🌐 Live Demo
 
-🔗 Portfolio: https://your-portfolio-link.com
+🔗 Portfolio: https://ninadkadam.vercel.app/
 
 ---
 

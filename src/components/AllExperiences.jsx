@@ -71,7 +71,7 @@ const AllExperiences = () => {
 						<Col xl={3} lg={3} md={6} sm={12} xs={12}>
 							<div className="overview-item">
 								<h4 className="overview-value">{experiences.length}</h4>
-								<p className="overview-desc">Organizations</p>
+								<p className="overview-desc">Organizations Worked With</p>
 							</div>
 						</Col>
 						<Col xl={3} lg={3} md={6} sm={12} xs={12}>
@@ -83,7 +83,7 @@ const AllExperiences = () => {
 						<Col xl={3} lg={3} md={6} sm={12} xs={12}>
 							<div className="overview-item">
 								<h4 className="overview-value">{ongoingProjects}</h4>
-								<p className="overview-desc">Projects Ongoing</p>
+								<p className="overview-desc">Active Projects</p>
 							</div>
 						</Col>
 					</Row>

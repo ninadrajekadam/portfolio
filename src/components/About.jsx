@@ -1,6 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "../assets/scss/components/About.scss";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
+import "../assets/scss/components/About.scss";
+import totalExperience from "../utils/totalExperience.js";
+import projects from "../utils/projects.js";
 
 const About = () => {
 	return (
@@ -9,11 +11,11 @@ const About = () => {
 			<p className="section-description">Hello! I'm a passionate software developer with a love for creating innovative solutions. I have experience in various programming languages and frameworks. I enjoy working on both front-end and back-end development, and I'm always eager to learn new technologies. In my free time, I like to contribute to open-source projects and explore the latest trends in the tech industry.</p>
 			<div className="about-options">
 				<div className="about-option">
-					<h4 className="option-title">8+</h4>
+					<h4 className="option-title">{totalExperience.formatted}</h4>
 					<p className="option-description">Years of Experience</p>
 				</div>
 				<div className="about-option">
-					<h4 className="option-title">9+</h4>
+					<h4 className="option-title">{projects.length}+</h4>
 					<p className="option-description">Projects Completed</p>
 				</div>
 			</div>
