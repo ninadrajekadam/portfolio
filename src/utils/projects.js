@@ -1,12 +1,22 @@
-import portfolio from "../assets/images/projects/portfolio.png";
-import ihh from "../assets/images/projects/ihh-logo.png";
-import skillsignal from "../assets/images/projects/skillsignal.png";
-import axisbank from "../assets/images/projects/axis-bank.jpg";
-import aide from "../assets/images/projects/aide.jpg";
-import sure from "../assets/images/projects/sure.jpg";
-import docmode from "../assets/images/projects/docmode.jpg";
-import inutrimon from "../assets/images/projects/inutrimon.jpg";
-import ekosh from "../assets/images/projects/ekosh-finance.jpg";
+import portfolio from "../assets/images/projects/portfolio.webp";
+import ihh from "../assets/images/projects/ihh-logo.webp";
+import skillsignal from "../assets/images/projects/skillsignal.webp";
+import axisbank from "../assets/images/projects/axis-bank.webp";
+import aide from "../assets/images/projects/aide.webp";
+import sure from "../assets/images/projects/sure.webp";
+import docmode from "../assets/images/projects/docmode.webp";
+import inutrimon from "../assets/images/projects/inutrimon.webp";
+import ekosh from "../assets/images/projects/ekosh-finance.webp";
+
+import portfoliopng from "../assets/images/projects/portfolio.png";
+import ihhpng from "../assets/images/projects/ihh-logo.png";
+import skillsignalpng from "../assets/images/projects/skillsignal.png";
+import axisbankpng from "../assets/images/projects/axis-bank.jpg";
+import aidepng from "../assets/images/projects/aide.jpg";
+import surepng from "../assets/images/projects/sure.jpg";
+import docmodepng from "../assets/images/projects/docmode.jpg";
+import inutrimonpng from "../assets/images/projects/inutrimon.jpg";
+import ekoshpng from "../assets/images/projects/ekosh-finance.jpg";
 
 const projects = [
 	{
@@ -16,6 +26,7 @@ const projects = [
 		"usedSkills": [ "HTML5", "CSS3", "JavaScript", "Deployment" ],
 		"projectUrl": "",
 		"image": ihh,
+		"imagepng": ihhpng,
 		"projectStatus": "Ongoing"
 	},
 	{
@@ -25,6 +36,7 @@ const projects = [
 		"usedSkills": [ "HTML5", "CSS3", "SCSS", "JavaScript", "Pug", "Grunt" ],
 		"projectUrl": "https://www.axis.bank.in/",
 		"image": axisbank,
+		"imagepng": axisbankpng,
 		"projectStatus": "Ongoing"
 	},
 	{
@@ -34,6 +46,7 @@ const projects = [
 		"usedSkills": [ "HTML5", "CSS3", "jQuery", "Bootstrap", "RestAPI" ],
 		"projectUrl": "https://app.skillsignal.com/SkillSignal/authentication/login",
 		"image": skillsignal,
+		"imagepng": skillsignalpng,
 		"projectStatus": "Completed"
 	},
 	{
@@ -43,6 +56,7 @@ const projects = [
 		"usedSkills": [ "ReactJs", "Bootstrap", "SCSS" ],
 		"projectUrl": "https://ninadkadam-tech.vercel.app/",
 		"image": portfolio,
+		"imagepng": portfoliopng,
 		"projectStatus": "Completed",
 	},
 	{
@@ -52,6 +66,7 @@ const projects = [
 		"usedSkills": [ "HTML5", "CSS3", "jQuery", "Bootstrap", "RestAPI" ],
 		"projectUrl": "https://aide.docmode.org/",
 		"image": aide,
+		"imagepng": aidepng,
 		"projectStatus": "Completed"
 	},
 	{
@@ -61,6 +76,7 @@ const projects = [
 		"usedSkills": [ "HTML5", "CSS3", "jQuery", "Bootstrap", "RestAPI" ],
 		"projectUrl": "https://sure.docmode.org/",
 		"image": sure,
+		"imagepng": surepng,
 		"projectStatus": "Completed"
 	},
 	{
@@ -70,6 +86,7 @@ const projects = [
 		"usedSkills": [ "HTML5", "CSS3", "jQuery", "Bootstrap", "RestAPI" ],
 		"projectUrl": "https://docmode.com/",
 		"image": docmode,
+		"imagepng": docmodepng,
 		"projectStatus": "Completed"
 	},
 	{
@@ -79,6 +96,7 @@ const projects = [
 		"usedSkills": [ "HTML5", "CSS3", "jQuery", "Bootstrap", "RestAPI" ],
 		"projectUrl": "https://inutrimon.com/",
 		"image": inutrimon,
+		"imagepng": inutrimonpng,
 		"projectStatus": "Completed"
 	},
 	{
@@ -88,6 +106,7 @@ const projects = [
 		"usedSkills": [ "HTML5", "CSS3", "jQuery", "Bootstrap", "RestAPI" ],
 		"projectUrl": "https://ekosh.in/",
 		"image": ekosh,
+		"imagepng": ekoshpng,
 		"projectStatus": "Completed"
 	}
 ];

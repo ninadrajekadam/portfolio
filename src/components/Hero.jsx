@@ -4,7 +4,8 @@ import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { faFacebook, faGithub, faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import "../assets/scss/components/Hero.scss";
 import cv from "../assets/images/Ninad-Kadam-CV.pdf";
-import profile from "../assets/images/ninad-kadam.png";
+import profile from "../assets/images/ninad-kadam.webp";
+import profilepng from "../assets/images/ninad-kadam.png";
 import totalExperience from "../utils/totalExperience.js";
 
 const Hero = ({ headerHeight }) => {
@@ -33,7 +34,11 @@ const Hero = ({ headerHeight }) => {
 							</div>
 						</Col>
 						<Col xl={6} lg={6} md={6} sm={6} xs={12} className="hero-image-wrapper">
-							<img src={profile} alt="hero" className="hero-img" />
+							<picture>
+								<source srcSet={profile} type="image/webp" />
+								<source srcSet={profilepng} type="image/png" />
+								<img src={profilepng} alt="hero" className="hero-img" width="600px" height="600px" />
+							</picture>
 							<div className="experience-badge">
 								<span className="exp-number">{totalExperience.formatted}</span>
 								<span className="exp-text">Years of Experience</span>
