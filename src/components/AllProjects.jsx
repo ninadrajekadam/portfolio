@@ -60,7 +60,11 @@ const AllProjects = () => {
 										(<span className="project-status unknown"></span>)
 									}
 									<div className="project-image">
-										<img src={project.image} alt={project.projectName} onClick={() => setZoomImage(project.image)} style={{ cursor: "zoom-in" }} />
+										<picture>
+											<source srcSet={project.image} type="image/webp" />
+											<source srcSet={project.imagepng} type="image/png" />
+											<img src={project.imagepng} alt={project.projectName} onClick={() => setZoomImage(project.imagepng)} style={{ cursor: "zoom-in" }} width="200px" height={project.projectName === "IHH Websites" ? "auto" : "100px"} />
+										</picture>
 									</div>
 									<div className="project-details">
 										{

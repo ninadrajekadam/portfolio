@@ -44,7 +44,7 @@ const Projects = () => {
 									<picture>
 										<source srcSet={project.image} type="image/webp" />
 										<source srcSet={project.imagepng} type="image/png" />
-										<img src={project.imagepng} alt={project.projectName} onClick={() => setZoomImage(project.imagepng)} style={{ cursor: "zoom-in" }} width="200px" height={project.projectName === "IHH Websites" ? "100%" : "100px"} objectFit="contain" />
+										<img src={project.imagepng} alt={project.projectName} onClick={() => setZoomImage(project.imagepng)} style={{ cursor: "zoom-in" }} width="200px" height={project.projectName === "IHH Websites" ? "100%" : "100px"} />
 									</picture>
 								</div>
 								<div className="project-details">

@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useLoader } from "./hooks/useLoader";
 import { setLoaderHandlers } from "./app/loaderHandler";
-import { ToastContainer } from "react-toastify";
 import Home from "./pages/Home";
 import PageNotFound from "./pages/PageNotFound";
 import AllExperiences from "./components/AllExperiences";
@@ -30,7 +29,6 @@ const App = () => {
   return (
     <>
       { loadingCount > 0 && (<div className="global-loader"><div className="spinner"></div></div>) }
-      <ToastContainer position="top-right" autoClose={2000} theme="dark" hideProgressBar={false} newestOnTop closeOnClick />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/experiences" element={<AllExperiences />} />
