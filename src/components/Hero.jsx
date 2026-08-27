@@ -13,8 +13,8 @@ const Hero = ({ headerHeight }) => {
 			<section className="hero-section" style={{ marginTop: `${headerHeight}px` }} id="home">
 				<Container>
 					<div className="hero-text">
-						<h4 className="name">NINAD KADAM</h4>
-						<p className="role">Senior Software Developer</p>
+						<h1 className="name">NINAD KADAM</h1>
+						<h2 className="role">Senior Software Developer</h2>
 					</div>
 					<Row className="align-items-center">
 						<Col xl={6} lg={6} md={6} sm={6} xs={12}>

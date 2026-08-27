@@ -33,7 +33,7 @@ const Projects = () => {
 		<>
 			<section className="projects-section">
 				<div className="title-wrapper">
-					<h3 className="section-title"><FontAwesomeIcon icon={faFolderClosed} /> Projects</h3>
+					<h2 className="section-title"><FontAwesomeIcon icon={faFolderClosed} /> Projects</h2>
 					{ projects.length > 3 && (<Button as={Link} to="/projects" className="btn-link-arrow view-all mt-2">View All <FontAwesomeIcon icon={faArrowUpRightFromSquare} /></Button>) }
 				</div>
 				<div className="projects-list">

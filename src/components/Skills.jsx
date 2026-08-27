@@ -23,7 +23,7 @@ const Skills = () => {
 	return (
 		<>
 			<section className="skills-section">
-				<h3 className="section-title"><FontAwesomeIcon icon={faCode} /> Tech Stacks</h3>
+				<h2 className="section-title"><FontAwesomeIcon icon={faCode} /> Tech Stacks</h2>
 				<ul className="skills-list">
 					{
 						skills.map((skill, index) => (

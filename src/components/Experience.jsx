@@ -11,7 +11,7 @@ const Experience = () => {
 		<>
 			<section className="experience-section">
 				<div className="title-wrapper">
-					<h3 className="section-title"><FontAwesomeIcon icon={faBriefcase} /> Experience</h3>
+					<h2 className="section-title"><FontAwesomeIcon icon={faBriefcase} /> Experience</h2>
 					{ experiences.length > 3 && (<Button as={Link} to="/experiences" className="btn-link-arrow view-all">View All <FontAwesomeIcon icon={faArrowUpRightFromSquare} /></Button>) }
 				</div>
 				<ul className="experience-list">

@@ -19,7 +19,7 @@ const Contact = () => {
 
   return (
     <section className="contact-section" id="contact">
-      <h3 className="section-title"><FontAwesomeIcon icon={faAddressCard} /> Get in Touch</h3>
+      <h2 className="section-title"><FontAwesomeIcon icon={faAddressCard} /> Get in Touch</h2>
       <div className="contact-wrapper">
         <Row>
           {/* <Col xl={6} lg={6} md={12}>
