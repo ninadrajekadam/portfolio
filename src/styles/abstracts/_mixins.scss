@@ -1,0 +1,443 @@
+@use "variables" as *;
+
+@mixin respond-min($breakpoint) {
+  @if $breakpoint == xs {
+    @media (min-width: $breakpoint-xs) {
+      @content;
+    }
+  }
+
+  @else if $breakpoint == sm {
+    @media (min-width: $breakpoint-sm) {
+      @content;
+    }
+  }
+
+  @else if $breakpoint == md {
+    @media (min-width: $breakpoint-md) {
+      @content;
+    }
+  }
+
+  @else if $breakpoint == lg {
+    @media (min-width: $breakpoint-lg) {
+      @content;
+    }
+  }
+
+  @else if $breakpoint == xl {
+    @media (min-width: $breakpoint-xl) {
+      @content;
+    }
+  }
+
+  @else if $breakpoint == xxl or $breakpoint == 2xl {
+    @media (min-width: $breakpoint-2xl) {
+      @content;
+    }
+  }
+
+  @else if $breakpoint == 3xl {
+    @media (min-width: $breakpoint-3xl) {
+      @content;
+    }
+  }
+
+  @else if $breakpoint == 4xl {
+    @media (min-width: $breakpoint-4xl) {
+      @content;
+    }
+  }
+}
+
+@mixin respond-max($breakpoint) {
+  @if $breakpoint == xs {
+    @media (max-width: ($breakpoint-xs - 1px)) {
+      @content;
+    }
+  }
+
+  @else if $breakpoint == sm {
+    @media (max-width: ($breakpoint-sm - 1px)) {
+      @content;
+    }
+  }
+
+  @else if $breakpoint == md {
+    @media (max-width: ($breakpoint-md - 1px)) {
+      @content;
+    }
+  }
+
+  @else if $breakpoint == lg {
+    @media (max-width: ($breakpoint-lg - 1px)) {
+      @content;
+    }
+  }
+
+  @else if $breakpoint == xl {
+    @media (max-width: ($breakpoint-xl - 1px)) {
+      @content;
+    }
+  }
+
+  @else if $breakpoint == xxl or $breakpoint == 2xl {
+    @media (max-width: ($breakpoint-2xl - 1px)) {
+      @content;
+    }
+  }
+
+  @else if $breakpoint == 3xl {
+    @media (max-width: ($breakpoint-3xl - 1px)) {
+      @content;
+    }
+  }
+
+  @else if $breakpoint == 4xl {
+    @media (max-width: ($breakpoint-4xl - 1px)) {
+      @content;
+    }
+  }
+}
+
+// container
+@mixin container {
+  width: 100%;
+  max-width: $container-max-width;
+  margin-inline: auto;
+  padding-inline: $container-padding;
+}
+
+// section
+@mixin section {
+  padding-block: $section-padding-y;
+  @include respond-max(md) {
+    padding-block: $section-padding-y-mobile;
+  }
+}
+
+// flex
+@mixin flex($direction: row, $align: center, $justify: flex-start, $gap: 0) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align;
+  justify-content: $justify;
+  gap: $gap;
+}
+
+// grid
+@mixin grid($columns: repeat(3, 1fr), $gap: $spacing-6) {
+  display: grid;
+  grid-template-columns: $columns;
+  gap: $gap;
+}
+// center
+@mixin center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// card
+@mixin card {
+  background: var(--card-gradient);
+  border: $card-border-width solid var(--color-border);
+  border-radius: $radius-lg;
+  box-shadow: var(--card-shadow);
+  transition: transform $transition-base,border-color $transition-base,box-shadow $transition-base,background-color $transition-base;
+  &:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-border-hover);
+    box-shadow: var(--card-shadow-hover);
+    @include respond-max(lg) {
+      transform: translateY(0);
+    }
+  }
+}
+
+// card with image and content
+@mixin card-with-image($image-height: 220px, $content-padding: $card-padding) {
+  @include card;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  &__image {
+    display: block;
+    width: 100%;
+    height: $image-height;
+    // object-fit: cover;
+  }
+  &__content {
+    flex: 1;
+    padding: $content-padding;
+  }
+  &__title {
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+  }
+  &__desc {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-regular;
+    color: var(--color-text-secondary);
+  }
+}
+
+// glass
+@mixin glass($color: var(--header-color), $background: var(--header-bg), $border: var(--header-border)) {
+  color: $color;
+  background: $background;
+  border: 1px solid $border;
+  backdrop-filter: blur($header-blur);
+  -webkit-backdrop-filter: blur($header-blur);
+}
+
+// gradient text
+@mixin gradient-text {
+  background: var(--gradient-text);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+// primary button
+@mixin button-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-2;
+  min-height: $button-height;
+  padding: 0 $button-padding-x;
+  border: 1px solid transparent;
+  border-radius: $button-border-radius;
+  background: var(--button-primary-bg);
+  color: var(--button-primary-text);
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color $transition-base, transform $transition-base, box-shadow $transition-base;
+  &:hover {
+    background: var(--button-primary-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--button-shadow-hover);
+    @include respond-max(lg) {
+      transform: translateY(0);
+    }
+  }
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// secondary button
+@mixin button-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-2;
+  min-height: $button-height;
+  padding: 0 $button-padding-x;
+  border: 1px solid var(--button-secondary-border);
+  border-radius: $button-border-radius;
+  background: var(--button-secondary-bg);
+  color: var(--button-secondary-text);
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color $transition-base, color $transition-base, transform $transition-base;
+  &:hover {
+    background: var(--color-primary);
+    color: var(--button-primary-text);
+    transform: translateY(-2px);
+    @include respond-max(lg) {
+      transform: translateY(0);
+    }
+  }
+}
+
+// primary link
+@mixin link-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-2;
+  color: var(--color-primary);
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color $transition-base, transform $transition-base, box-shadow $transition-base;
+  &:hover {
+    color: var(--color-primary-hover);
+    transform: translateY(-2px);
+    @include respond-max(lg) {
+      transform: translateY(0);
+    }
+  }
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// secondary link
+@mixin link-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-2;
+  color: var(--color-secondary);
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color $transition-base, color $transition-base, transform $transition-base;
+  &:hover {
+    color: var(--color-accent);
+    transform: translateY(-2px);
+    @include respond-max(lg) {
+      transform: translateY(0);
+    }
+  }
+}
+
+// icon box
+@mixin icon-box($size: 40px, $radius: $radius-md) {
+  width: $size;
+  height: $size;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 $size;
+  border-radius: $radius;
+  background: var(--icon-bg);
+  color: var(--icon-color);
+  transition: background-color $transition-base, color $transition-base, transform $transition-base;
+  &:hover {
+    background: var(--color-primary);
+    color: var(--button-primary-text);
+    transform: translateY(-2px);
+    @include respond-max(lg) {
+      transform: translateY(0);
+    }
+  }
+}
+
+// section heading
+@mixin section-heading {
+  margin-bottom: $spacing-6;
+  .section-label {
+    display: block;
+    color: var(--color-primary);
+    font-size: $font-size-md;
+    font-weight: $font-weight-semibold;
+    letter-spacing: 0.04em;
+    margin-bottom: $spacing-2;
+  }
+  .section-title {
+    margin: 0;
+    color: var(--color-text-primary);
+    font-size: clamp(28px, 3vw, 32px);
+    font-weight: $font-weight-bold;
+    line-height: $line-height-tight;
+    margin-bottom: $spacing-2;
+  }
+  .section-description {
+    max-width: 650px;
+    color: var(--color-text-muted);
+    font-size: $font-size-sm;
+    line-height: $line-height-relaxed;
+  }
+}
+
+// text truncate
+@mixin truncate($lines: 2) {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lines;
+}
+
+// visually hidden
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// focus visible
+@mixin focus-visible {
+  &:focus-visible {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 3px;
+  }
+}
+
+// absolute center
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// absolute fill
+@mixin absolute-fill {
+  position: absolute;
+  inset: 0;
+}
+
+// hover lift
+@mixin hover-lift($distance: 4px) {
+  transition: transform $transition-base, box-shadow $transition-base;
+  &:hover {
+    transform: translateY(-$distance);
+  }
+}
+
+// blue glow
+@mixin blue-glow {
+  box-shadow: var(--hero-shadow);
+}
+
+// gradient border
+@mixin gradient-border {
+  position: relative;
+  border: 1px solid transparent;
+  background: linear-gradient(var(--color-bg-secondary), var(--color-bg-secondary)) padding-box, var(--gradient-primary) border-box;
+}
+
+// responsive font
+@mixin fluid-font($min, $preferred, $max) {
+  font-size: clamp($min, $preferred, $max);
+}
+
+// smooth scroll
+@mixin smooth-scroll {
+  scroll-behavior: smooth;
+  @media (prefers-reduced-motion: reduce) {
+    scroll-behavior: auto;
+  }
+}
+
+// reduced motion
+@mixin reduced-motion {
+  @media (prefers-reduced-motion: reduce) {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@mixin portfolio-enter($delay: 0ms) {
+  animation: portfolio-enter 650ms cubic-bezier(0.22, 1, 0.36, 1) $delay both;
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}

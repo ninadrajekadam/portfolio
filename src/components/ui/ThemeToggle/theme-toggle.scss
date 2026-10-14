@@ -1,0 +1,40 @@
+@use "../../../styles/abstracts/variables" as *;
+@use "../../../styles/abstracts/mixins" as *;
+
+.theme-switch {
+  @include icon-box($size: 40px, $radius: $radius-full);
+  position: relative;
+
+  .theme-switch-icon {
+    position: absolute;
+    transition: opacity $transition-base, transform $transition-slow;
+  }
+
+  .theme-switch-icon-moon {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+  }
+
+  .theme-switch-icon-sun {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.5);
+  }
+
+  &[data-theme="dark"] {
+    .theme-switch-icon-moon {
+      opacity: 0;
+      transform: rotate(90deg) scale(0.5);
+    }
+
+    .theme-switch-icon-sun {
+      opacity: 1;
+      transform: rotate(0) scale(1);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-switch .theme-switch-icon {
+    transition: none;
+  }
+}

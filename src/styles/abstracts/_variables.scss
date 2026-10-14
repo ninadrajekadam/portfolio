@@ -1,0 +1,102 @@
+// breakpoints
+$breakpoint-xs: 375px;
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1025px;
+$breakpoint-2xl: 1201px;
+$breakpoint-3xl: 1367px;
+$breakpoint-4xl: 1400px;
+
+// container
+$container-max-width: 1240px;
+$container-padding: 24px;
+
+// typography
+$font-family: "Montserrat", sans-serif;
+
+$font-size-xs: 12px;
+$font-size-sm: 14px;
+$font-size-base: 16px;
+$font-size-md: 18px;
+$font-size-lg: 20px;
+$font-size-xl: 24px;
+$font-size-2xl: 32px;
+$font-size-3xl: 40px;
+$font-size-4xl: 48px;
+$font-size-5xl: 60px;
+
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-extrabold: 800;
+
+$line-height-tight: 1.15;
+$line-height-normal: 1.5;
+$line-height-relaxed: 1.7;
+
+// spacing
+$spacing-1: 4px;
+$spacing-2: 8px;
+$spacing-3: 12px;
+$spacing-4: 16px;
+$spacing-5: 20px;
+$spacing-6: 24px;
+$spacing-7: 28px;
+$spacing-8: 32px;
+$spacing-10: 40px;
+$spacing-12: 48px;
+$spacing-14: 56px;
+$spacing-16: 64px;
+$spacing-20: 80px;
+$spacing-24: 96px;
+
+// border radius
+$radius-sm: 6px;
+$radius-md: 10px;
+$radius-lg: 14px;
+$radius-xl: 18px;
+$radius-2xl: 24px;
+$radius-3xl: 36px;
+$radius-4xl: 48px;
+$radius-full: 9999px;
+
+// shadows
+$shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+$shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+$shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.16);
+
+// transitions
+$transition-fast: 150ms ease;
+$transition-base: 250ms ease;
+$transition-slow: 400ms ease;
+$transition-theme: background-color 250ms ease, border-color 250ms ease, color 250ms ease, box-shadow 250ms ease;
+
+// z-index
+$z-header: 1000;
+$z-dropdown: 1100;
+$z-modal: 1200;
+$z-toast: 1300;
+
+// section spacing
+$section-padding-y: 60px;
+$section-padding-y-mobile: 40px;
+
+// header
+$header-height: 72px;
+$header-blur: 16px;
+
+// cards
+$card-padding: 16px;
+$card-border-width: 1px;
+
+// buttons
+$button-height: 40px;
+$button-padding-x: 16px;
+$button-border-radius: $radius-full;
+
+// form controls
+$input-height: 46px;
+$input-padding-x: 16px;
+$input-border-radius: $radius-md;

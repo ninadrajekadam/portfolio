@@ -1,0 +1,147 @@
+@use "variables" as *;
+
+// light theme
+:root, [data-theme="light"] {
+  // backgrounds
+  --color-bg: #f7f9fc;
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #eef2f7;
+  --color-surface: #ffffff;
+  --color-card: #ffffff;
+  --color-card-hover: #f1f5fa;
+
+  // Text
+  --color-text: #0f172a;
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #334155;
+  --color-text-muted: #5b6b81;
+
+  // borders
+  --color-border: #dbe4ef;
+  --color-border-light: #e8eef5;
+  --color-border-hover: #1d4ed8;
+
+  // brand
+  --color-primary: #1d4ed8;
+  --color-primary-hover: #1e40af;
+  --color-secondary: #4f46e5;
+  --color-accent: #7c3aed;
+
+  // gradient
+  --gradient-primary: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 55%, var(--color-accent) 100%);
+  --gradient-text: linear-gradient(90deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+
+  // header
+  --header-color: rgba(15, 23, 42, 0.92);
+  --header-bg: rgba(255, 255, 255, 0.88);
+  --header-border: rgba(15, 23, 42, 0.08);
+  --header-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+
+  // buttons
+  --button-primary-bg: #1d4ed8;
+  --button-primary-hover: #1e40af;
+  --button-primary-text: #ffffff;
+  --button-secondary-bg: transparent;
+  --button-secondary-border: #1d4ed8;
+  --button-secondary-text: #1e40af;
+
+  // icons
+  --icon-bg: rgba(29, 78, 216, 0.09);
+  --icon-color: #1d4ed8;
+
+  // cards
+  --card-gradient: linear-gradient(145deg, #ffffff, #f9fbfe);
+  --card-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+  --card-shadow-hover: 0 14px 34px rgba(15, 23, 42, 0.1), 0 0 24px rgba(29, 78, 216, 0.08);
+  --button-shadow-hover: 0 8px 20px rgba(29, 78, 216, 0.24);
+  --focus-ring: #1d4ed8;
+  --timeline-marker-ring: rgba(29, 78, 216, 0.2);
+  --timeline-accent-ring: rgba(124, 58, 237, 0.2);
+  --hero-shadow: 0 0 30px rgba(29, 78, 216, 0.16);
+
+  // hero
+  --hero-glow: radial-gradient(circle, rgba(29, 78, 216, 0.12), transparent 65%);
+  --hero-shape: linear-gradient(135deg, rgba(29, 78, 216, 0.16), rgba(79, 70, 229, 0.12), rgba(124, 58, 237, 0.1));
+
+  // scrollbar
+  --scrollbar-track: #f1f5f9;
+  --scrollbar-thumb: #cbd5e1;
+  --scrollbar-thumb-hover: #1d4ed8;
+}
+
+// dark theme
+[data-theme="dark"] {
+  --color-bg: #07111f;
+  --color-bg-primary: #07111f;
+  --color-bg-secondary: #0b1728;
+  --color-surface: #0d1b2e;
+  --color-card: #0d1b2e;
+  --color-card-hover: #11243d;
+
+  // text
+  --color-text: #f8fafc;
+  --color-text-primary: #f8fafc;
+  --color-text-secondary: #cbd5e1;
+  --color-text-muted: #94a3b8;
+
+  // borders
+  --color-border: #1e3a5f;
+  --color-border-light: #243b5a;
+  --color-border-hover: #2563eb;
+
+  // brand
+  --color-primary: #60a5fa;
+  --color-primary-hover: #93c5fd;
+  --color-secondary: #a5b4fc;
+  --color-accent: #a78bfa;
+
+  // gradient
+  --gradient-primary: linear-gradient(135deg, #2563eb 0%, #4f46e5 55%, #8b5cf6 100%);
+  --gradient-text: linear-gradient(90deg, #60a5fa, #a5b4fc, #a78bfa);
+
+  // header
+  --header-color: rgba(7, 17, 31, .3);
+  --header-bg: rgba(7, 17, 31, 0.82);
+  --header-border: rgba(96, 165, 250, 0.18);
+  --header-shadow: 0 4px 16px rgba(0, 0, 0, 0.24);
+
+  // buttons
+  --button-primary-bg: #2563eb;
+  --button-primary-hover: #3b82f6;
+  --button-primary-text: #ffffff;
+  --button-secondary-bg: transparent;
+  --button-secondary-border: #2563eb;
+  --button-secondary-text: #dbeafe;
+
+  // icons
+  --icon-bg: rgba(37, 99, 235, 0.15);
+  --icon-color: #60a5fa;
+
+  // cards
+  --card-gradient: linear-gradient(145deg, rgba(15, 31, 52, 0.96), rgba(9, 24, 42, 0.96));
+  --card-shadow: 0 12px 35px rgba(0, 0, 0, 0.18);
+  --card-shadow-hover: 0 16px 38px rgba(0, 0, 0, 0.28), 0 0 24px rgba(96, 165, 250, 0.12);
+  --button-shadow-hover: 0 8px 20px rgba(37, 99, 235, 0.32);
+  --focus-ring: #60a5fa;
+  --timeline-marker-ring: rgba(96, 165, 250, 0.28);
+  --timeline-accent-ring: rgba(167, 139, 250, 0.3);
+  --hero-shadow: 0 0 30px rgba(37, 99, 235, 0.28);
+
+  // hero
+  --hero-glow: radial-gradient(circle, rgba(37, 99, 235, 0.25), transparent 65%);
+  --hero-shape:  linear-gradient( 135deg, rgba(37, 99, 235, 0.65), rgba(79, 70, 229, 0.55), rgba(139, 92, 246, 0.5));
+
+  // scrollbar
+  --scrollbar-track: #07111f;
+  --scrollbar-thumb: #1e3a5f;
+  --scrollbar-thumb-hover: #2563eb;
+}
+
+// global theme transitions
+html {
+  transition: background-color 250ms ease, color 250ms ease;
+}
+
+body, button, input, textarea, select, header, section, footer, .card, .navbar, .modal {
+  transition: $transition-theme;
+}

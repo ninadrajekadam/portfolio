@@ -1,0 +1,73 @@
+@use "../../styles/abstracts/variables" as *;
+@use "../../styles/abstracts/mixins" as *;
+
+.projects {
+	@include section;
+	border-top: 1px solid var(--color-border-light);
+	border-bottom: 1px solid var(--color-border-light);
+	overflow: hidden;
+	.header-flex {
+		@include flex(row, center, space-between, $spacing-4);
+	}
+	.section-heading {
+		@include section-heading;
+		@include portfolio-enter;
+	}
+	&__carousel {
+		@for $index from 1 through 9 {
+			.carousel__slide:nth-child(#{$index}) .projects__card {
+				@include portfolio-enter($index * 70ms);
+			}
+		}
+	}
+	&__card {
+		@include card-with-image(180px);
+		box-shadow: var(--card-shadow);
+		height: 100%;
+		&__content {
+			display: flex;
+			flex: 1;
+			flex-direction: column;
+		}
+		&:hover {
+			transform: translateY(0);
+		}
+	}
+	&__card__desc {
+		line-height: $line-height-normal;
+		margin-bottom: $spacing-3;
+	}
+	&__card__image--contain {
+		padding: $spacing-4;
+		background: var(--color-surface);
+		object-fit: contain;
+	}
+	&__card__type {
+		width: fit-content;
+		font-size: $font-size-xs;
+		font-weight: $font-weight-semibold;
+		color: var(--icon-color);
+		background: var(--icon-bg);
+		border-radius: $radius-2xl;
+		padding: $spacing-1 $spacing-3;
+		margin-bottom: $spacing-3;
+	}
+	&__card__tech {
+		@include flex(row, center, unset, $spacing-2);
+		flex-wrap: wrap;
+		margin-bottom: $spacing-4;
+	}
+	&__card__tech-item {
+		font-size: $font-size-xs;
+		font-weight: $font-weight-regular;
+		color: var(--color-text-primary);
+		background: var(--button-primary-hover);
+		border-radius: $radius-lg;
+		padding: $spacing-1 $spacing-3;
+	}
+	&__card__link {
+		font-size: $font-size-xs;
+		font-weight: $font-weight-medium;
+		color: var(--color-accent);
+	}
+}

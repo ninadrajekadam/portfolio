@@ -1,0 +1,75 @@
+@use "../../../styles/abstracts/variables" as *;
+@use "../../../styles/abstracts/mixins" as *;
+
+.back-to-top {
+	position: fixed;
+	z-index: 1050;
+	right: $spacing-6;
+	bottom: $spacing-6;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 48px;
+	height: 48px;
+	border: 1px solid var(--header-border);
+	border-radius: $radius-full;
+	background: var(--button-primary-bg);
+	color: var(--button-primary-text);
+	box-shadow: var(--card-shadow);
+	cursor: pointer;
+	opacity: 0;
+	pointer-events: none;
+	transform: translateY($spacing-3);
+	transition: opacity $transition-base, transform $transition-base, background-color $transition-base;
+	&:hover {
+		background: var(--button-primary-hover);
+	}
+	&:focus-visible {
+		outline: 3px solid var(--focus-ring);
+		outline-offset: 3px;
+	}
+	&--visible {
+		opacity: 1;
+		pointer-events: auto;
+		transform: translateY(0);
+		&:hover,
+		&:focus-visible {
+			transform: translateY(-3px);
+			background: var(--button-primary-hover);
+			.back-to-top__icon {
+				animation: back-to-top-arrow 500ms ease-in-out infinite;
+			}
+		}
+	}
+}
+
+@keyframes back-to-top-arrow {
+	0%, 100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-3px);
+	}
+}
+
+@include respond-max(sm) {
+	.back-to-top {
+		right: $spacing-4;
+		bottom: $spacing-4;
+		width: 44px;
+		height: 44px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.back-to-top {
+		transition: none;
+		&--visible:hover,
+		&--visible:focus-visible {
+			transform: none;
+			.back-to-top__icon {
+				animation: none;
+			}
+		}
+	}
+}

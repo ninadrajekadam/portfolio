@@ -1,0 +1,122 @@
+@use "../../../styles/abstracts/variables" as *;
+@use "../../../styles/abstracts/mixins" as *;
+
+.carousel {
+	width: 100%;
+
+	&__viewport {
+		overflow: hidden;
+		touch-action: pan-y;
+
+		&:focus-visible {
+			outline: 2px solid var(--focus-ring);
+			outline-offset: 4px;
+		}
+	}
+
+	&__track {
+		display: flex;
+		gap: $spacing-4;
+		align-items: stretch;
+		transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+		will-change: transform;
+	}
+
+	&__slide {
+		flex: 0 0 calc((100% - 3 * #{$spacing-4}) / 4);
+		min-width: 0;
+	}
+
+	&__navigation {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: $spacing-4;
+		margin-top: $spacing-4;
+	}
+
+	&__pagination,
+	&__controls {
+		display: flex;
+		align-items: center;
+		gap: $spacing-2;
+	}
+
+	&__dot {
+		position: relative;
+		width: $spacing-2;
+		height: $spacing-2;
+		padding: 0;
+		border: 0;
+		border-radius: $radius-full;
+		background: var(--color-border-light);
+		cursor: pointer;
+		transition: width 350ms cubic-bezier(0.22, 1, 0.36, 1), background-color $transition-base, transform $transition-base;
+		&[aria-current="true"] {
+			width: $spacing-5;
+			background: var(--button-primary-bg);
+		}
+		&:hover {
+			transform: scale(1.15);
+		}
+		&:focus-visible {
+			outline: 2px solid var(--focus-ring);
+			outline-offset: 3px;
+		}
+	}
+
+	&__control {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 42px;
+		height: 42px;
+		border: 1px solid var(--color-border-light);
+		border-radius: $radius-full;
+		background: var(--color-surface);
+		color: var(--color-text-primary);
+		cursor: pointer;
+		transition: background-color $transition-base, color $transition-base, border-color $transition-base, transform $transition-base;
+
+		&:not(:disabled) {
+			background: var(--button-primary-bg);
+			border-color: var(--button-primary-bg);
+			color: var(--button-primary-text);
+			transform: translateY(-2px);
+		}
+
+		&:focus-visible {
+			outline: 2px solid var(--focus-ring);
+			outline-offset: 3px;
+		}
+
+		&:disabled {
+			opacity: 0.4;
+			cursor: not-allowed;
+		}
+	}
+
+	@include respond-max(3xl) {
+		&__slide {
+			flex-basis: calc((100% - #{$spacing-8}) / 3);
+		}
+	}
+	@include respond-max(lg) {
+		&__slide {
+			flex-basis: calc((100% - #{$spacing-4}) / 2);
+		}
+	}
+	@include respond-max(sm) {
+		&__slide {
+			flex-basis: 100%;
+		}
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.carousel__track,
+	.carousel__dot,
+	.carousel__control {
+		transition: none;
+	}
+}

@@ -1,0 +1,66 @@
+@use "../../styles/abstracts/variables" as *;
+@use "../../styles/abstracts/mixins" as *;
+
+.expertise {
+	@include section;
+	.section-heading {
+		@include section-heading;
+		@include portfolio-enter;
+	}
+	&__flex > * {
+		@include portfolio-enter;
+		@for $index from 1 through 4 {
+			&:nth-child(#{$index}) {
+				animation-delay: $index * 90ms;
+			}
+		}
+		@include respond-max(lg) {
+			padding-bottom: $spacing-4;
+			&:nth-child(3),
+			&:nth-child(4) {
+				padding-bottom: 0;
+			}
+		}
+		@include respond-max(md) {
+			&:nth-child(3) {
+				padding-bottom: $spacing-4;
+			}
+		}
+	}
+	&__item {
+		height: 100%;
+		background: var(--color-surface);
+		border: 1px solid var(--color-border-light);
+		border-left: $spacing-1 solid var(--color-accent);
+		border-radius: $radius-lg;
+		box-shadow: var(--card-shadow);
+		padding: $spacing-4;
+	}
+	&__heading {
+		@include flex(row, center, unset, $spacing-3);
+		margin-bottom: $spacing-4;
+	}
+	&__icon {
+		width: 50px;
+		height: 50px;
+		@include center;
+		font-size: $font-size-lg;
+		background: var(--hero-shape);
+		border-radius: $radius-full;
+	}
+	&__title {
+		margin: 0;
+		font-size: $font-size-base;
+		font-weight: $font-weight-semibold;
+	}
+	&__list {
+		padding-left: $spacing-4;
+		margin-bottom: 0;
+	}
+	&__list-item {
+		font-size: $font-size-sm;
+		font-weight: $font-weight-medium;
+		color: var(--color-text-secondary);
+		margin-bottom: $spacing-1;
+	}
+}

@@ -1,0 +1,69 @@
+@use "../../styles/abstracts/variables" as *;
+@use "../../styles/abstracts/mixins" as *;
+
+.impact {
+	color: var(--color-text);
+	background: var(--color-surface);
+	box-shadow: var(--card-shadow);
+	border-radius: $radius-xl;
+	padding: $spacing-5;
+	&__flex {
+		@include flex(row, center, space-between, $spacing-6);
+		@include respond-max(md) {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: $spacing-6;
+		}
+	}
+	&__item {
+		width: 100%;
+		position: relative;
+		@include flex(row, center, flex-start, $spacing-3);
+		flex: 1;
+		@include portfolio-enter;
+		@for $index from 1 through 4 {
+			&:nth-child(#{$index}) {
+				animation-delay: $index * 90ms;
+			}
+		}
+		&:not(:last-child)::after {
+			content: "";
+			position: absolute;
+			right: 0;
+			top: 50%;
+			transform: translateY(-50%);
+			display: block;
+			width: 1px;
+			height: 100%;
+			background: var(--color-border);
+			@include respond-max(md) {
+				display: none;
+			}
+		}
+	}
+	&__item-icon {
+		width: 48px;
+		height: 48px;
+		background: var(--icon-bg);
+		color: var(--icon-color);
+		border-radius: $radius-lg;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: $font-size-lg;
+	}
+	&__item-content {
+		display: flex;
+		flex-direction: column;
+	}
+	&__item-title {
+		font-size: $font-size-md;
+		font-weight: $font-weight-semibold;
+		margin-bottom: $spacing-1;
+	}
+	&__item-text {
+		font-size: $font-size-xs;
+		font-weight: $font-weight-medium;
+		color: var(--color-text-muted);
+	}
+}

@@ -1,13 +1,11 @@
-import { BrowserRouter } from 'react-router-dom';
-import { createRoot } from 'react-dom/client';
-import "./assets/scss/main.scss";
-import App from './App.jsx';
-import { LoaderProvider } from "./context/LoaderProvider";
+import { BrowserRouter } from 'react-router-dom'
+import { createRoot } from 'react-dom/client'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import './styles/main.scss'
+import App from './App.jsx'
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
-    <LoaderProvider>
-      <App />
-    </LoaderProvider>
+    <App />
   </BrowserRouter>
 )

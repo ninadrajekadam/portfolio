@@ -1,0 +1,154 @@
+@use "../../styles/abstracts/variables" as *;
+@use "../../styles/abstracts/mixins" as *;
+
+.about {
+	@include section;
+	color: var(--color-text);
+	background: var(--color-surface);
+	.section-heading {
+		@include section-heading;
+		@include portfolio-enter;
+		margin-bottom: 0;
+		@include respond-max(lg) {
+			margin-bottom: $spacing-4;
+		}
+	}
+	&__title {
+		font-size: $font-size-lg;
+		font-weight: $font-weight-semibold;
+		color: var(--color-primary);
+	}
+	&__description {
+		font-size: $font-size-sm;
+		font-weight: $font-weight-medium;
+		color: var(--color-text-secondary);
+	}
+	&__flex {
+		display: flex;
+		gap: $spacing-3;
+		@include respond-max(lg) {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: $spacing-3;
+		}
+	}
+	&__flex > .about__item {
+		@include portfolio-enter;
+		&:nth-child(2) {
+			animation-delay: 100ms;
+		}
+		&:nth-child(3) {
+			animation-delay: 200ms;
+		}
+	}
+	&__item {
+		width: 100%;
+		max-width: 30%;
+		@include respond-max(lg) {
+			max-width: 100%;
+			margin-bottom: $spacing-4;
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+		&:first-child {
+			max-width: 50%;
+			@include respond-max(lg) {
+				max-width: 100%;
+			}
+		}
+		&:last-child {
+			max-width: 20%;
+			@include respond-max(lg) {
+				max-width: 100%;
+			}
+		}
+	}
+	&__content {
+		@include flex(row, center, space-between, $spacing-3);
+		margin-bottom: $spacing-4;
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+	&__content-icon {
+		@include center;
+		width: 48px;
+		height: 48px;
+		font-size: $font-size-md;
+		color: var(--color-text-secondary);
+		background: var(--hero-shape);
+		border-radius: $radius-full;
+	}
+	&__content-text {
+		width: calc(100% - 60px);
+	}
+	&__content-title {
+		font-size: $font-size-sm;
+		font-weight: $font-weight-semibold;
+		color: var(--color-text-primary);
+		margin-bottom: 0;
+	}
+	&__content-desc {
+		font-size: $font-size-xs;
+		font-weight: $font-weight-medium;
+		color: var(--color-text-secondary);
+	}
+	&__current {
+		background: var(--color-bg);
+		border: 1px solid var(--color-border);
+		border-radius: $radius-lg;
+		box-shadow: var(--card-shadow);
+		padding: $spacing-4;
+	}
+	&__current-heading {
+		font-size: $font-size-base;
+		font-weight: $font-weight-semibold;
+		color: var(--color-text-primary);
+		margin-bottom: $spacing-3;
+	}
+	&__current-item {
+		@include flex(row, center, unset, $spacing-3);
+		margin-bottom: $spacing-3;
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+	&__current-icon {
+		@include center;
+		width: 40px;
+		height: 40px;
+		padding: $spacing-2;
+		background: var(--icon-bg);
+		border: 1px solid var(--color-border-light);
+		border-radius: $radius-sm;
+	}
+	&__current-img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		background-color: var(--icon-color);
+		mask-position: center;
+		mask-repeat: no-repeat;
+		mask-size: contain;
+		-webkit-mask-position: center;
+		-webkit-mask-repeat: no-repeat;
+		-webkit-mask-size: contain;
+		&--nextjs {
+			mask-image: url("../../assets/icons/nextjs.svg");
+			-webkit-mask-image: url("../../assets/icons/nextjs.svg");
+		}
+		&--nestjs {
+			mask-image: url("../../assets/icons/nestjs.svg");
+			-webkit-mask-image: url("../../assets/icons/nestjs.svg");
+		}
+		&--react {
+			mask-image: url("../../assets/icons/react.svg");
+			-webkit-mask-image: url("../../assets/icons/react.svg");
+		}
+	}
+	&__current-title {
+		font-size: $font-size-sm;
+		font-weight: $font-weight-medium;
+	}
+}

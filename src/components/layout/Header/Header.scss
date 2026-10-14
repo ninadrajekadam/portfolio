@@ -1,0 +1,122 @@
+@use "../../../styles/abstracts/variables" as *;
+@use "../../../styles/abstracts/mixins" as *;
+
+.navbar {
+	@include portfolio-enter(60ms);
+	background-color: var(--header-bg);
+	box-shadow: var(--header-shadow);
+	padding-block: $spacing-3;
+	.header-container {
+		display: flex;
+		align-items: center;
+	}
+	.navbar-brand {
+		flex-shrink: 0;
+		font-size: $font-size-xl;
+		font-weight: $font-weight-bold;
+		color: var(--color-primary);
+		.header-logo {
+			width: auto;
+			height: 40px;
+		}
+	}
+	.navbar-collapse {
+		flex-grow: 1;
+		justify-content: center;
+	}
+	.nav-link {
+		position: relative;
+		font-weight: $font-weight-medium;
+		color: var(--color-text-primary);
+		&.active {
+			font-weight: $font-weight-semibold;
+			color: var(--color-primary);
+		}
+		&:hover {
+			color: var(--color-primary-hover);
+		}
+	}
+	.header-controls {
+		display: flex;
+		flex-shrink: 0;
+		align-items: center;
+		gap: $spacing-2;
+	}
+	.btn-cv {
+		@include button-primary;
+		gap: $spacing-2;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.navbar .nav-link::after {
+		transition: none;
+	}
+}
+
+@include respond-max(lg) {
+	.navbar {
+		.header-container {
+			flex-wrap: wrap;
+		}
+		.navbar-brand {
+			margin-right: auto;
+			font-size: $font-size-lg;
+		}
+		.navbar-collapse {
+			order: 3;
+			flex-basis: 100%;
+			padding-top: $spacing-2;
+		}
+		.navbar-nav {
+			width: 100%;
+			padding-block: $spacing-2;
+			border-top: $card-border-width solid var(--header-border);
+		}
+		.nav-link {
+			padding: $spacing-2 $spacing-1;
+		}
+		.header-controls {
+			order: 2;
+		}
+		.navbar-toggler {
+			padding: $spacing-1;
+			border-color: var(--header-border);
+			box-shadow: 0 0 0 $card-border-width var(--header-border);
+		}
+	}
+}
+
+@include respond-max(sm) {
+	.navbar {
+		.header-container {
+			padding-inline: $spacing-3;
+		}
+		.navbar-brand {
+			font-size: $font-size-md;
+		}
+		.header-controls {
+			gap: $spacing-2;
+		}
+		.btn-cv {
+			min-height: $button-height;
+			min-width: $button-height;
+			padding-inline: $spacing-2;
+		}
+		.btn-cv-label {
+			display: none;
+		}
+	}
+}
+
+@include respond-min(lg) {
+	.navbar {
+		.navbar-nav {
+			align-items: center;
+			gap: 4px;
+		}
+		.header-controls {
+			margin-left: $spacing-4;
+		}
+	}
+}

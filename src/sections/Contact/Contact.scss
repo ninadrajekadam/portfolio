@@ -1,0 +1,79 @@
+@use "../../styles/abstracts/variables" as *;
+@use "../../styles/abstracts/mixins" as *;
+
+.contact {
+	@include section;
+	background: var(--color-card-hover);
+	.section-heading {
+		@include section-heading;
+		@include portfolio-enter;
+	}
+	&__grid-item {
+		@include portfolio-enter;
+		@for $index from 1 through 4 {
+			&:nth-child(#{$index}) {
+				animation-delay: $index * 90ms;
+			}
+		}
+	}
+	&__image {
+		@include portfolio-enter(220ms);
+	}
+	&__grid {
+		position: relative;
+		overflow: hidden;
+		display: grid;
+		grid-template-columns: repeat(2, minmax(min(100%, 220px), 1fr));
+		gap: $spacing-6 $spacing-4;
+	}
+	&__grid-item {
+		display: flex;
+		align-items: flex-start;
+		gap: $spacing-3;
+		min-width: 0;
+		.icon {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			flex: 0 0 36px;
+			width: 36px;
+			height: 36px;
+			border-radius: $radius-full;
+			background: var(--icon-bg);
+			color: var(--icon-color);
+		}
+		.info {
+			min-width: 0;
+		}
+		.info-title {
+			margin: 0 0 $spacing-1;
+			color: var(--color-text-primary);
+			font-size: $font-size-sm;
+			font-weight: $font-weight-semibold;
+		}
+		.info-text {
+			display: block;
+			margin: 0;
+			overflow-wrap: anywhere;
+			color: var(--color-text-secondary);
+			font-size: $font-size-xs;
+			font-weight: $font-weight-medium;
+			line-height: $line-height-normal;
+			text-decoration: none;
+			transition: color $transition-base;
+			&:is(a):hover {
+				color: var(--color-primary);
+			}
+		}
+	}
+	&__image {
+		width: 100%;
+		height: auto;
+	}
+	@include respond-max(md) {
+		&__grid {
+			gap: $spacing-5 $spacing-4;
+			grid-template-columns: repeat(1, minmax(min(100%, 220px), 1fr));
+		}
+	}
+}

@@ -1,0 +1,227 @@
+@use "../../styles/abstracts/variables" as *;
+@use "../../styles/abstracts/mixins" as *;
+
+.experience {
+	@include section;
+	background: var(--color-card);
+	.section-heading {
+		@include section-heading;
+		@include portfolio-enter;
+	}
+	&__timeline {
+		position: relative;
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: $spacing-6;
+		list-style: none;
+		margin: 0;
+		padding: $spacing-10 0 0;
+		isolation: isolate;
+		&::before {
+			position: absolute;
+			z-index: -1;
+			top: 19px;
+			right: 16.666%;
+			left: 16.666%;
+			height: 3px;
+			border-radius: $radius-full;
+			background: var(--gradient-primary);
+			content: "";
+			transform: scaleX(0);
+			transform-origin: left;
+			animation: experience-line-in 900ms 150ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+		}
+	}
+	&__timeline-item {
+		position: relative;
+		min-width: 0;
+		padding-top: $spacing-6;
+		&::before {
+			position: absolute;
+			z-index: 1;
+			top: -32px;
+			left: 50%;
+			width: 22px;
+			height: 22px;
+			border: 5px solid var(--color-card);
+			border-radius: $radius-full;
+			background: var(--color-primary);
+			box-shadow: 0 0 0 3px var(--timeline-marker-ring);
+			content: "";
+			transform: translateX(-50%) scale(0);
+			animation: experience-marker-in 450ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+		}
+		&:first-child::before {
+			background: var(--color-accent);
+			box-shadow: 0 0 0 4px var(--timeline-accent-ring);
+		}
+		&:nth-child(1)::before {
+			animation-delay: 250ms;
+		}
+		&:nth-child(2)::before {
+			animation-delay: 420ms;
+		}
+		&:nth-child(3)::before {
+			animation-delay: 590ms;
+		}
+	}
+	&__card {
+		position: relative;
+		height: 100%;
+		padding: $spacing-6;
+		border: 1px solid var(--color-border-light);
+		border-left: $spacing-1 solid var(--color-accent);
+		border-radius: $radius-lg;
+		background: var(--card-gradient);
+		box-shadow: var(--card-shadow);
+		opacity: 0;
+		animation: experience-card-in 600ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+		transition: transform $transition-base, border-color $transition-base, box-shadow $transition-base;
+		&:hover {
+			border-color: var(--color-border-hover);
+			box-shadow: var(--card-shadow-hover);
+		}
+	}
+	&__marker--present {
+		position: absolute;
+		top: $spacing-7;
+		right: $spacing-6;
+		font-size: $font-size-xs;
+		color: #40ab00;
+	}
+	&__timeline-item:nth-child(1) &__card {
+		animation-delay: 180ms;
+	}
+	&__timeline-item:nth-child(2) &__card {
+		animation-delay: 340ms;
+	}
+	&__timeline-item:nth-child(3) &__card {
+		animation-delay: 500ms;
+	}
+	&__duration {
+		display: inline-flex;
+		margin: 0 0 $spacing-2;
+		padding: $spacing-1 $spacing-3;
+		background: var(--icon-bg);
+		border: 1px solid var(--color-border-light);
+		border-radius: $radius-full;
+		color: var(--icon-color);
+		font-size: $font-size-xs;
+		font-weight: $font-weight-semibold;
+	}
+	&__job-title {
+		margin-bottom: $spacing-2;
+		color: var(--color-text-primary);
+		font-size: $font-size-lg;
+		font-weight: $font-weight-bold;
+		line-height: $line-height-tight;
+	}
+	&__company {
+		margin-bottom: $spacing-4;
+		color: var(--color-text-secondary);
+		font-size: $font-size-sm;
+		font-weight: $font-weight-semibold;
+	}
+	&__desc {
+		list-style-type: disc;
+		margin: 0;
+		padding-left: $spacing-4;
+		color: var(--color-text-secondary);
+	}
+	&__desc-item {
+		padding-left: $spacing-1;
+		font-size: $font-size-xs;
+		font-weight: $font-weight-medium;
+		line-height: $line-height-normal;
+	}
+	@include respond-max(lg) {
+		&__timeline {
+			display: block;
+			padding: 0 0 0 $spacing-10;
+			&::before {
+				top: $spacing-6;
+				bottom: $spacing-2;
+				left: 11px;
+				right: auto;
+				width: 3px;
+				height: auto;
+				transform: scaleY(0);
+				transform-origin: top;
+				animation-name: experience-line-in-vertical;
+			}
+		}
+		&__timeline-item {
+			margin-bottom: $spacing-5;
+			padding: 0;
+			&::before {
+				top: $spacing-6;
+				left: -$spacing-10 + 1px;
+				transform: scale(0);
+				animation-name: experience-marker-in-vertical;
+			}
+		}
+		&__timeline-item:nth-child(1)::before {
+			animation-delay: 250ms;
+		}
+		&__timeline-item:nth-child(2)::before {
+			animation-delay: 420ms;
+		}
+		&__timeline-item:nth-child(3)::before {
+			animation-delay: 590ms;
+		}
+		&__timeline {
+			gap: 0;
+		}
+		&__card {
+			padding: $spacing-5;
+		}
+		&__job-title {
+			font-size: $font-size-md;
+		}
+	}
+	@include respond-max(sm) {
+		&__card {
+			padding: $spacing-5;
+		}
+	}
+}
+
+@keyframes experience-line-in {
+	to {
+		transform: scaleX(1);
+	}
+}
+@keyframes experience-line-in-vertical {
+	to {
+		transform: scaleY(1);
+	}
+}
+@keyframes experience-marker-in {
+	to {
+		transform: translateX(-50%) scale(1);
+	}
+}
+@keyframes experience-marker-in-vertical {
+	to {
+		transform: scale(1);
+	}
+}
+@keyframes experience-card-in {
+	from {
+		opacity: 0;
+		transform: translateY(18px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+@media (prefers-reduced-motion: reduce) {
+	.experience__timeline::before,
+	.experience__timeline-item::before,
+	.experience__card {
+		animation: none;
+		opacity: 1;
+		transition: none;
+	}
+}

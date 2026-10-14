@@ -1,267 +1,73 @@
-# 💼 Ninad Kadam - Developer Portfolio
+# Ninad Kadam — Portfolio
 
-Welcome to my personal portfolio repository! This project showcases my professional experience, technical skills, projects, and achievements as a **Senior Software Developer** with nearly **8 years of experience** in Frontend and Full Stack Development.
+🔗 **Live portfolio:** [ninadkadam.vercel.app](https://ninadkadam.vercel.app/)
 
-## 🌐 Live Demo
+A responsive personal portfolio for **Ninad Kadam**, Senior Software Engineer. It presents his professional experience, technical expertise, selected projects, and contact links in a single-page site.
 
-🔗 Portfolio: https://ninadkadam.vercel.app/
+## Features
 
----
+- Responsive layout built with React, React Bootstrap, and Sass.
+- Light and dark themes with a persistent theme preference.
+- Hero, About, Expertise, Projects, Experience, Contact, and Impact sections.
+- Project carousel with responsive controls and keyboard support.
+- Below-the-fold sections are lazy-loaded as they approach the viewport.
+- Smooth section navigation that does not add anchor fragments to the URL.
+- Active navigation state tracks the current section while scrolling.
+- Subtle entrance and interaction animations, with reduced-motion support.
+- Portfolio and experience details maintained in local data files.
 
-## 👨‍💻 About Me
+## Tech stack
 
-Hi, I'm **Ninad Kadam**, a Senior Software Developer passionate about building modern, scalable, and high-performance web applications.
-
-I have worked on enterprise-level Banking, Healthcare, and Finance applications, focusing on responsive UI development, accessibility (WCAG), performance optimization, and reusable component architecture.
-
-Currently expanding my expertise in:
-
-- React.js
-- Node.js
-- Express.js
-- MongoDB
-- REST APIs
-- Full Stack Development
-
----
-
-## 🚀 Features
-
-- Responsive Design
-- Modern UI/UX
-- Dark Theme
-- Smooth Animations
-- Project Showcase
-- Experience Timeline
-- Skills Section
-- Education
-- Contact Form
-- Download Resume
-- Mobile Friendly
-- SEO Optimized
-- Fast Loading
-- Accessibility Friendly (WCAG)
-
----
-
-## 🛠️ Tech Stack
-
-### Frontend
-
-- HTML5
-- CSS3
-- SCSS / SASS
-- Bootstrap
-- JavaScript (ES6+)
-- React.js
+- React and React DOM
 - Vite
+- React Bootstrap and Bootstrap
+- Sass
+- Font Awesome icons
+- ESLint
 
-### Backend
+## Getting started
 
-- Node.js
-- Express.js
-
-### Database
-
-- MongoDB
-
-### Tools
-
-- Git
-- GitHub
-- VS Code
-- Postman
-- Figma
-
----
-
-## 💼 Professional Experience
-
-### Senior Software Developer
-
-**Idealake Information Technologies Pvt. Ltd.**
-
-**June 2024 – Present**
-
-- Leading frontend development for enterprise applications
-- Developing scalable and reusable UI components
-- Improving website performance and accessibility
-- Working on React and Node.js applications
-- Conducting code reviews and mentoring junior developers
-- Collaborating with cross-functional teams
-
----
-
-### Software Developer
-
-Worked on multiple Banking, Healthcare, and Enterprise applications involving:
-
-- HTML5
-- CSS3
-- JavaScript
-- Bootstrap
-- SCSS
-- jQuery
-
----
-
-## 🚀 Featured Projects
-
-### Portfolio Website
-
-Personal portfolio built using React and Vite showcasing experience, projects, and skills.
-
-**Tech Stack**
-
-- React
-- Vite
-- SCSS
-- JavaScript
-
----
-
-## 🏢 Enterprise Projects
-
-- Axis Bank
-- HDFC Bank
-- IHH Healthcare
-- Parkway Shenton
-- Mount Elizabeth
-- PCC Singapore
-
-Worked on:
-
-- Website Maintenance
-- Accessibility Improvements
-- Performance Optimization
-- GTM Integration
-- Responsive Development
-- UI Enhancements
-
----
-
-## 📸 Screenshots
-
-> Add screenshots inside the `/screenshots` folder.
-
-```
-screenshots/
-│── home.png
-│── about.png
-│── projects.png
-│── contact.png
-```
-
----
-
-## 📂 Folder Structure
-
-```
-portfolio
-│
-├── public
-├── src
-│   ├── assets
-│   ├── components
-│   ├── pages
-│   ├── data
-│   ├── styles
-│   └── App.jsx
-│
-├── package.json
-└── README.md
-```
-
----
-
-## ⚙️ Installation
-
-Clone the repository
-
-```bash
-git clone https://github.com/ninadrajekadam/portfolio.git
-```
-
-Navigate to the project
-
-```bash
-cd portfolio
-```
-
-Install dependencies
+Install a compatible Node.js version and npm, then run:
 
 ```bash
 npm install
-```
-
-Start the development server
-
-```bash
 npm run dev
 ```
 
-Build for production
+Vite prints the local development URL in the terminal.
 
-```bash
-npm run build
+## Available scripts
+
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Start the Vite development server. |
+| `npm run build` | Create an optimized production build in `dist/`. |
+| `npm run preview` | Preview the production build locally. |
+| `npm run lint` | Run ESLint across the project. |
+
+## Project structure
+
+```text
+src/
+├── assets/                 # Images, icons, and downloadable CV
+├── components/
+│   ├── layout/             # Header and footer
+│   └── ui/                 # Carousel, lazy sections, theme toggle, utilities
+├── data/                   # Project and experience content
+├── pages/Home/             # Single-page portfolio composition
+├── sections/               # Hero, About, Expertise, Projects, Experience, Contact
+├── styles/                 # Global styles, Sass tokens, theme, and mixins
+└── utils/                  # Shared section navigation helper
 ```
 
-Preview production build
+## Updating portfolio content
 
-```bash
-npm run preview
-```
+- Edit project titles, descriptions, technologies, images, and links in `src/data/projectData.js`.
+- Edit roles, employers, date ranges, and responsibilities in `src/data/experienceData.js`. The experience total is derived from these date ranges.
+- Replace images or the CV in `src/assets/` and update the corresponding imports where needed.
+- Update section content in the matching component under `src/sections/`.
+- Adjust theme colors, design tokens, and shared Sass mixins in `src/styles/abstracts/`.
 
----
+## Production build
 
-## 📈 Future Improvements
-
-- Admin Panel
-- Blog Section
-- Project CMS
-- Theme Customization
-- Visitor Analytics
-- Multi-language Support
-- Email Notifications
-
----
-
-## 📬 Contact
-
-**Ninad Kadam**
-
-📧 Email: your-email@example.com
-
-💼 LinkedIn: https://linkedin.com/in/your-profile
-
-🐙 GitHub: https://github.com/ninadrajekadam
-
-🌐 Portfolio: https://your-portfolio-link.com
-
----
-
-## 🤝 Contributing
-
-Contributions, issues, and feature requests are welcome.
-
-Feel free to fork this repository and submit a pull request.
-
----
-
-## ⭐ Support
-
-If you like this project, please consider giving it a ⭐ on GitHub.
-
-It helps and motivates me to keep building more awesome projects.
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License.
-
----
-
-## 🙌 Thanks for Visiting
-
-Thank you for checking out my portfolio! Feel free to connect with me for collaboration, freelance opportunities, or exciting development projects.
+Run `npm run build` to generate the production site in `dist/`. Use `npm run preview` to serve that build locally before deployment.
