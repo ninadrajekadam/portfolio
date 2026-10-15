@@ -6,7 +6,8 @@ import ThemeToggle from '../../ui/ThemeToggle/ThemeToggle';
 import scrollToSection from '../../../utils/scrollToSection';
 import './Header.scss';
 import cv from '../../../assets/cv/Ninad-Kadam-CV.pdf';
-import logo from '../../../assets/images/profile/Ninad_Kadam_Tech_Brand_logo.webp';
+import logo190 from '../../../assets/images/profile/Ninad_Kadam_Tech_Brand_logo-190.webp';
+import logo380 from '../../../assets/images/profile/Ninad_Kadam_Tech_Brand_logo-380.webp';
 
 const Header = () => {
 	const [activeTab, setActiveTab] = useState('#home');
@@ -75,7 +76,7 @@ const Header = () => {
 		<Navbar expand="lg" variant={theme} fixed="top" collapseOnSelect>
 			<Container className="header-container">
 				<Navbar.Brand href="#home" onClick={(event) => navigateToSection(event, 'home')}>
-					<img src={logo} alt="Ninad Kadam" className="header-logo" />
+					<img src={logo190} srcSet={`${logo190} 190w, ${logo380} 380w`} sizes="190px" alt="Ninad Kadam" className="header-logo" width="190" height="40" fetchPriority="high" />
 				</Navbar.Brand>
 				<Navbar.Collapse id="menubar">
 					<Nav activeKey={activeTab} onSelect={(key) => key && setActiveTab(key)} aria-label="Primary navigation">

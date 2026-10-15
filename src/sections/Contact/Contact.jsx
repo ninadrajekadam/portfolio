@@ -1,6 +1,6 @@
 import { Col, Container, Row } from "react-bootstrap";
 import "./Contact.scss";
-import hero from "../../assets/images/code-laptop-icon.webp";
+import hero from "../../assets/images/code-laptop-icon-600.webp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope, faLocation } from "@fortawesome/free-solid-svg-icons";
@@ -49,7 +49,7 @@ const Contact = () => {
 							</div>
 						</Col>
 						<Col xl={3} lg={3} md={12} sm={12} xs={12} className="contact__flex-item">
-							<img className="contact__image" src={hero} alt="Laptop displaying code" loading="lazy" decoding="async" />
+							<img className="contact__image" src={hero} alt="Laptop displaying code" loading="lazy" decoding="async" width="600" height="300" />
 						</Col>
 					</Row>
 				</Container>

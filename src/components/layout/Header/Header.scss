@@ -18,6 +18,8 @@
 		.header-logo {
 			width: auto;
 			height: 40px;
+			filter: var(--header-logo-filter);
+			transition: filter $transition-base;
 		}
 	}
 	.navbar-collapse {
