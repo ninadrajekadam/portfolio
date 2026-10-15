@@ -30,7 +30,7 @@ const Footer = () => {
 								{
 									footerLinks.map((link, index) => (
 										<li className="footer__social-item" key={index}>
-											<a href={link.url} className="footer__social-link" aria-label={link.label}><FontAwesomeIcon icon={link.icon} aria-hidden="true" /></a>
+											<a href={link.url} className="footer__social-link" target="_blank" rel="noopener noreferrer" aria-label={link.label}><FontAwesomeIcon icon={link.icon} aria-hidden="true" /></a>
 										</li>
 									))
 								}
