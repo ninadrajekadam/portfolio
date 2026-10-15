@@ -8,8 +8,8 @@ import "./Footer.scss";
 
 const Footer = () => {
 	const footerLinks = [
-		{ icon: faGithub, url: "https://github.com/ninad-kadam", label: "GitHub profile" },
-		{ icon: faLinkedin, url: "https://www.linkedin.com/in/ninad-kadam/", label: "LinkedIn profile" },
+		{ icon: faGithub, url: "https://github.com/ninadrajekadam", label: "GitHub profile" },
+		{ icon: faLinkedin, url: "https://in.linkedin.com/in/ninadrajekadam", label: "LinkedIn profile" },
 		{ icon: faEnvelope, url: "mailto:tech.ninadkadam@gmail.com", label: "Send email" },
 	];
 	return (
