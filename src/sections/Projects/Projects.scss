@@ -60,8 +60,8 @@
 	&__card__tech-item {
 		font-size: $font-size-xs;
 		font-weight: $font-weight-regular;
-		color: var(--color-text-primary);
-		background: var(--button-primary-hover);
+		color: var(--button-primary-text);
+		background: var(--button-primary-bg);
 		border-radius: $radius-lg;
 		padding: $spacing-1 $spacing-3;
 	}
