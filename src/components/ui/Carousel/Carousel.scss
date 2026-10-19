@@ -23,7 +23,7 @@
 	}
 
 	&__slide {
-		flex: 0 0 calc((100% - 3 * #{$spacing-4}) / 4);
+		flex: 0 0 calc((100% - 3 * #{$spacing-4}) / 3);
 		min-width: 0;
 	}
 

@@ -54,8 +54,11 @@
 			color: var(--color-secondary);
 		}
 		&-separator {
-			margin-inline: $spacing-1;
+			margin-inline: $spacing-2;
 			font-size: 0.35em;
+			@include respond-max(lg) {
+				margin-inline: 6px;
+			}
 		}
 	}
 	&__about {
