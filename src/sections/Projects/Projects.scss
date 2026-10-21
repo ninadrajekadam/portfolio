@@ -3,8 +3,9 @@
 
 .projects {
 	@include section;
-	border-top: 1px solid var(--color-border-light);
-	border-bottom: 1px solid var(--color-border-light);
+	background: var(--color-card-hover);
+	border-top: 1px solid var(--color-border);
+	border-bottom: 1px solid var(--color-border);
 	overflow: hidden;
 	.header-flex {
 		@include flex(row, center, space-between, $spacing-4);
@@ -22,12 +23,14 @@
 	}
 	&__card {
 		@include card-with-image(180px);
-		box-shadow: var(--card-shadow);
+		// box-shadow: var(--card-shadow);
 		height: 100%;
 		&__content {
 			display: flex;
 			flex: 1;
 			flex-direction: column;
+    	background: var(--color-card);
+			border-top: 1px solid var(--color-border);
 		}
 		&:hover {
 			transform: translateY(0);

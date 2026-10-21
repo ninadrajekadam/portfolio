@@ -7,7 +7,7 @@
 	&__viewport {
 		overflow: hidden;
 		touch-action: pan-y;
-
+		padding-bottom: $spacing-2;
 		&:focus-visible {
 			outline: 2px solid var(--focus-ring);
 			outline-offset: 4px;
@@ -23,7 +23,7 @@
 	}
 
 	&__slide {
-		flex: 0 0 calc((100% - 3 * #{$spacing-4}) / 3);
+		flex: 0 0 calc((100% - 3 * #{$spacing-4}) / 4);
 		min-width: 0;
 	}
 
@@ -77,7 +77,7 @@
 		color: var(--color-text-primary);
 		cursor: pointer;
 		transition: background-color $transition-base, color $transition-base, border-color $transition-base, transform $transition-base;
-
+		
 		&:not(:disabled) {
 			background: var(--button-primary-bg);
 			border-color: var(--button-primary-bg);

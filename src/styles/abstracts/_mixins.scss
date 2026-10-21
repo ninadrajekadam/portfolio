@@ -140,15 +140,15 @@
 
 // card
 @mixin card {
-  background: var(--card-gradient);
+  // background: var(--card-gradient);
   border: $card-border-width solid var(--color-border);
   border-radius: $radius-lg;
-  box-shadow: var(--card-shadow);
+  box-shadow: $shadow-sm;
   transition: transform $transition-base,border-color $transition-base,box-shadow $transition-base,background-color $transition-base;
   &:hover {
     transform: translateY(-4px);
     border-color: var(--color-border-hover);
-    box-shadow: var(--card-shadow-hover);
+    // box-shadow: var(--card-shadow-hover);
     @include respond-max(lg) {
       transform: translateY(0);
     }
